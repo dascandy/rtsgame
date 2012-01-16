@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/crusader/!svn/ver/71/trunk/rtsgame/bullet
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/LICENSE
+END
+heightfield128x128.raw
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/heightfield128x128.raw
+END
+VERSION
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/VERSION
+END
+AUTHORS
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/AUTHORS
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/ChangeLog
+END
+convex0.bin
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/convex0.bin
+END
+Bullet_User_Manual.pdf
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/Bullet_User_Manual.pdf
+END
+bullet.pc.in
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/bullet.pc.in
+END
+config.h.in
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/config.h.in
+END
+configure.ac
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/configure.ac
+END
+test1.oec
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/test1.oec
+END
+acinclude.m4
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/acinclude.m4
+END
+INSTALL
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/INSTALL
+END
+bullet.pc.cmake
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/bullet.pc.cmake
+END
+BulletLicense.txt
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/BulletLicense.txt
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/Makefile.am
+END
+autogen.sh
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/autogen.sh
+END
+BspDemo.bsp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/BspDemo.bsp
+END
+jenga.dae
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/jenga.dae
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/CMakeLists.txt
+END
+install-sh
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/install-sh
+END

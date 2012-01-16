@@ -1,0 +1,77 @@
+10
+
+dir
+76
+https://svn.quokforge.org/svn/crusader/trunk/rtsgame/bullet/src/BulletDynamics
+https://svn.quokforge.org/svn/crusader
+
+
+
+2011-01-15T15:57:34.108429Z
+17
+candy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2c0b586f-d9b3-467f-acfa-1edfb71ddc92
+
+ConstraintSolver
+dir
+
+Vehicle
+dir
+
+Dynamics
+dir
+
+ibmsdk
+dir
+
+Character
+dir
+
+CMakeLists.txt
+file
+
+
+
+
+2012-01-16T11:28:58.461655Z
+e340e216b2843f60f2382142072e7a23
+2011-01-15T15:57:34.108429Z
+17
+candy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4213
+

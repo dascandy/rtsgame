@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/crusader/!svn/ver/71/trunk/rtsgame/bullet/src/BulletCollision
+END
+Doxyfile
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletCollision/Doxyfile
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletCollision/CMakeLists.txt
+END

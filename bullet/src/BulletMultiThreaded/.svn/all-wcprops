@@ -1,0 +1,257 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded
+END
+btGpu3DGridBroadphaseSharedCode.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btGpu3DGridBroadphaseSharedCode.h
+END
+SequentialThreadSupport.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SequentialThreadSupport.cpp
+END
+SpuDoubleBuffer.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuDoubleBuffer.h
+END
+btGpu3DGridBroadphase.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btGpu3DGridBroadphase.cpp
+END
+SpuSync.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuSync.h
+END
+SpuCollisionTaskProcess.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuCollisionTaskProcess.h
+END
+btThreadSupportInterface.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btThreadSupportInterface.cpp
+END
+HeapManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/HeapManager.h
+END
+SpuFakeDma.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuFakeDma.cpp
+END
+SpuCollisionObjectWrapper.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuCollisionObjectWrapper.h
+END
+SpuGatheringCollisionDispatcher.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuGatheringCollisionDispatcher.cpp
+END
+SpuContactManifoldCollisionAlgorithm.h
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuContactManifoldCollisionAlgorithm.h
+END
+PlatformDefinitions.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/PlatformDefinitions.h
+END
+TrbDynBody.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/TrbDynBody.h
+END
+SpuLibspe2Support.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuLibspe2Support.cpp
+END
+btParallelConstraintSolver.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btParallelConstraintSolver.h
+END
+btGpu3DGridBroadphaseSharedTypes.h
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btGpu3DGridBroadphaseSharedTypes.h
+END
+TrbStateVec.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/TrbStateVec.h
+END
+Win32ThreadSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/Win32ThreadSupport.h
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/CMakeLists.txt
+END
+PosixThreadSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/PosixThreadSupport.h
+END
+Makefile.original
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/Makefile.original
+END
+SpuSampleTaskProcess.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuSampleTaskProcess.h
+END
+btGpuUtilsSharedDefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btGpuUtilsSharedDefs.h
+END
+SequentialThreadSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SequentialThreadSupport.h
+END
+SpuCollisionTaskProcess.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuCollisionTaskProcess.cpp
+END
+btGpu3DGridBroadphaseSharedDefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btGpu3DGridBroadphaseSharedDefs.h
+END
+SpuCollisionObjectWrapper.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuCollisionObjectWrapper.cpp
+END
+vectormath2bullet.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/vectormath2bullet.h
+END
+btGpu3DGridBroadphase.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btGpu3DGridBroadphase.h
+END
+btThreadSupportInterface.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btThreadSupportInterface.h
+END
+SpuContactManifoldCollisionAlgorithm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuContactManifoldCollisionAlgorithm.cpp
+END
+btParallelConstraintSolver.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btParallelConstraintSolver.cpp
+END
+btGpuDefines.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btGpuDefines.h
+END
+SpuFakeDma.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuFakeDma.h
+END
+Win32ThreadSupport.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/Win32ThreadSupport.cpp
+END
+PosixThreadSupport.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/PosixThreadSupport.cpp
+END
+SpuGatheringCollisionDispatcher.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuGatheringCollisionDispatcher.h
+END
+btGpuUtilsSharedCode.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/btGpuUtilsSharedCode.h
+END
+SpuLibspe2Support.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuLibspe2Support.h
+END
+SpuSampleTaskProcess.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/SpuSampleTaskProcess.cpp
+END
+PpuAddressSpace.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/crusader/!svn/ver/53/trunk/rtsgame/bullet/src/BulletMultiThreaded/PpuAddressSpace.h
+END

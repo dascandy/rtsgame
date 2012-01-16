@@ -1,0 +1,7 @@
+"uniform mat4 mat_ivp;\n"
+"vec3 worldPosition(vec2 xyPos, float d)\n"
+"{\n"
+"    vec4 interm = mat_ivp * vec4(xyPos * d, d, 1);\n"
+"    return interm.xyz / interm.w;\n"
+"}\n"
+"\n"
