@@ -1,46 +1,0 @@
-10
-
-dir
-76
-https://svn.quokforge.org/svn/crusader/trunk/rtsgame/bullet/msvc/2008/src
-https://svn.quokforge.org/svn/crusader
-
-
-
-2011-01-17T00:21:59.032436Z
-30
-candy
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2c0b586f-d9b3-467f-acfa-1edfb71ddc92
-
-BulletDynamics
-dir
-
-BulletSoftBody
-dir
-
-BulletCollision
-dir
-
-BulletMultiThreaded
-dir
-
-LinearMath
-dir
-
-MiniCL
-dir
-
