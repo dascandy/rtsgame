@@ -1,0 +1,14 @@
+lib
+obj
+bin
+
+*.o
+*.obj
+*.exe
+*.lib
+*.a
+*.so
+*.pc
+*.pic_o
+
+
