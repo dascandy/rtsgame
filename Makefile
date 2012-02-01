@@ -1,8 +1,10 @@
 
 MKDIR=mkdir -p
-LIBS=GLEW
+LIBS=GLEW SDL
 GLEWDIR=$(shell ls -d external/glew-*)
 GLEWSOURCES=$(shell find $(GLEWDIR)/ -name \*.c -type f; find $(GLEWDIR)/ -name \*.h -type f)
+SDLDIR=$(shell ls -d external/SDL-*)
+SDLSOURCES=$(shell find $(SDLDIR)/ -name \*.c -type f; find $(SDLDIR)/ -name \*.h -type f)
 
 LIB_DEP=$(patsubst %,lib/lib%.so,$(LIBS))
 
@@ -14,12 +16,10 @@ clean:
 bin/game: $(LIB_DEP)
 	
 
-lib/libGLEW.so: $(GLEWDIR)/lib/libGLEW.so
-	$(MKDIR) lib
-	cp $(GLEWDIR)/lib/libGLEW.so lib/libGLEW.so
+lib/libGLEW.so: $(GLEWSOURCES)
+	external/build_glew.sh
 
-$(GLEWDIR)/lib/libGLEW.so: $(GLEWSOURCES)
-	$(MAKE) -C $(GLEWDIR)/
-
+lib/libSDL.so: $(SDLSOURCES)
+	external/build_sdl.sh
 
 
