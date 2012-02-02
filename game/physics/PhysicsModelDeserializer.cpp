@@ -95,7 +95,7 @@ ConstraintTemplate *PhysicsModelDeserializer::parseConstraint(std::string type, 
 	}
 	else
 	{
-		TODO("Create constraint type %s", type);
+		TODO("Create constraint type %s", type.c_str());
 		return NULL;
 	}
 }

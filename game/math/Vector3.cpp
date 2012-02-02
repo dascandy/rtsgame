@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "stringutil.h"
+#include <stdlib.h>
 
 Vector3 Vector3::parse(const std::string &arg)
 {

@@ -2,9 +2,11 @@
 #include "ResourceFile.h"
 #include <SDL.h>
 #include "Scene.h"
-#include "windows.h"
 #include "debug.h"
 #include "profile.h"
+
+#ifdef _MSC_VER
+#include <windows.h>
 
 int main(int, char *[])
 {
@@ -19,7 +21,6 @@ int main(int, char *[])
 	ResourceFile::Instance(resdir);
 	try
 	{
-//		Scene::Instance().load();
 		Game().run();
 	}
 	catch(std::exception &e) 
@@ -31,7 +32,30 @@ int main(int, char *[])
 		rval = rv;
 	}
 	profile_fini();
-//	Scene::Instance().save();
 	return rval;
 }
+#else
+int main(int, char *[])
+{
+	profile_init();
+
+	int rval = 0;
+	ResourceFile::Instance("./");
+	try
+	{
+		Game().run();
+	}
+	catch(std::exception &e) 
+	{
+		printf("FATAL exception %s\n", e.what());
+	}
+	catch(int rv)
+	{
+		rval = rv;
+	}
+	profile_fini();
+	return rval;
+}
+#endif
+
 

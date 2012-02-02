@@ -1,8 +1,8 @@
 #include "Matrix.h"
 #include "Vector3.h"
 #include "Quaternion.h"
-#include <windows.h>
 #include <math.h>
+#include <debug.h>
 
 Matrix::Matrix()
 {

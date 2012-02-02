@@ -8,11 +8,18 @@ extern unsigned long long profile_ents[256];
 extern int profile_count[256];
 extern bool profile_enabled;
 
+#ifdef _MSC_VER
 inline unsigned long long rdtsc() {
    __asm {
       RDTSC
    }
 }
+#else
+inline unsigned long long rdtsc() {
+	// TODO
+	return 0;
+}
+#endif
 
 inline void profile_reg(int id, const char *name) { profile_name[id] = name; }
 inline void profile_enter(int id) { if (!profile_enabled) return; profile_ents[id] -= rdtsc(); profile_count[id]++; }

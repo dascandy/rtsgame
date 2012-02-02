@@ -4,6 +4,8 @@
 #include "Model.h"
 #include "debug.h"
 #include "profile.h"
+#include <stdlib.h>
+#include <string.h>
 
 static const char *particleVshader = 
 "#version 330\n"

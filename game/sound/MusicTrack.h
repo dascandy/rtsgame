@@ -22,10 +22,14 @@ private:
 
 	std::string name;
 
-	static size_t MusicTrack::read(void *ptr, size_t size, size_t nmemb, void *datasource);
-	static int MusicTrack::seek(void *datasource, long long offset, int whence);
-	static int MusicTrack::close(void *datasource);
-	static long MusicTrack::tell(void *datasource);
+	static size_t read(void *ptr, size_t size, size_t nmemb, void *datasource);
+#ifdef _MSC_VER
+	static int seek(void *datasource, long long offset, int whence);
+#else
+	static int seek(void *datasource, long int offset, int whence);
+#endif
+	static int close(void *datasource);
+	static long tell(void *datasource);
 };
 
 #endif

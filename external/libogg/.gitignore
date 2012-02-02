@@ -1,0 +1,13 @@
+Makefile
+config.h
+config.log
+config.status
+include/ogg/config_types.h
+libtool
+src/.deps/
+src/.libs/
+src/libogg.la
+src/test_bitwise
+src/test_framing
+stamp-h1
+

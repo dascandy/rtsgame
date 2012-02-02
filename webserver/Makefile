@@ -1,8 +1,13 @@
 
 LD=g++
+CPP=g++
 
-all: server
+all: webserver.so
 
-server: main.o Webserver.o Html.o
-	$(LD) -o $@ $^ -lpthread
+webserver.so: main.o Webserver.o Html.o
+	$(LD) -shared -o $@ $^
+
+%.o: %.cpp
+	$(CPP) -fPIC -DPIC -o $@ -c $<
+
 

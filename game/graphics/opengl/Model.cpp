@@ -1,7 +1,7 @@
 #include "Model.h"
 #include "ResourceFile.h"
 #include "stream.h"
-#include <gl/glew.h>
+#include <GL/glew.h>
 #include <string.h>
 #include <fstream>
 #include <vector>

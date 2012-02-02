@@ -8,7 +8,6 @@
 #include <GL/glew.h>
 #include <SDL.h>
 #include <SDL_scancode.h>
-#include <windows.h> // only for DebugBreak()
 #include "Texture.h"
 #include "ParticleEngine.h"
 #include "InputCallback.h"

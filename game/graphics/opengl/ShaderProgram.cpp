@@ -1,11 +1,11 @@
 #include "ShaderProgram.h"
 #include "Matrix.h"
 #include <GL/glew.h>
-#include <windows.h>
 #include <stdio.h>
 #include "GameState.h"
 #include "Vector3.h"
 #include "Color.h"
+#include <debug.h>
 
 static inline void compileShader(int prog, int &shader, const char *source, int type)
 {

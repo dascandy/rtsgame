@@ -1,6 +1,8 @@
 #ifndef CONSTRAINTTEMPLATE_H
 #define CONSTRAINTTEMPLATE_H
 
+#include <stddef.h>
+
 class btTypedConstraint;
 class Object;
 

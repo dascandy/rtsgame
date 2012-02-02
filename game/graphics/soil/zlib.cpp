@@ -3,7 +3,7 @@
 #include <exception>
 #include <cstring>
 #include <cassert>
-
+#include <cstdlib>
 #define ZFAST_BITS  9
 #define ZFAST_MASK  ((1 << ZFAST_BITS) - 1)
 

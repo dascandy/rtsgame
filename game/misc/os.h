@@ -3,7 +3,7 @@
 
 typedef unsigned int msec_t;
 msec_t get_msec();
-void sleep(msec_t time); 
+//void sleep(msec_t time); 
 
 #endif
 

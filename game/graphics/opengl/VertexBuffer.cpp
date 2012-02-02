@@ -1,5 +1,4 @@
 #include "VertexBuffer.h"
-#include <windows.h>
 #include <stdio.h>
 #include "swap.h"
 

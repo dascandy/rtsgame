@@ -1,7 +1,6 @@
 #include "Texture3d.h"
 #include <GL/glew.h>
 #include <stdlib.h>
-#include <windows.h>
 #include <stdio.h>
 #include "swap.h"
 

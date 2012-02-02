@@ -14,7 +14,8 @@ public:
 	ShaderCompileException(const std::string &errors)
 		: errors(errors)
 	{}
-	const char *what() const { return errors.c_str(); }
+	~ShaderCompileException() throw() {}
+	const char *what() const throw() { return errors.c_str(); }
 private:
 	const std::string errors;
 };

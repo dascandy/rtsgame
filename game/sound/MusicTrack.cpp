@@ -1,8 +1,9 @@
 #include "MusicTrack.h"
-#include "vorbis\vorbisfile.h"
+#include "vorbis/vorbisfile.h"
 #include "stream.h"
 #include "ResourceFile.h"
 #include "debug.h"
+#include <stdlib.h>
 
 struct MusicTrack::Data
 {

@@ -54,7 +54,7 @@ bool SoundPositionalRepeatInstance::mix(signed short *data, int samples)
 
 bool SoundMovingRepeatInstance::mix(signed short *, int )
 {
-	TODO("make " __FUNCTION__);
+	TODO("make %s", __FUNCTION__);
 	return false;
 }
 

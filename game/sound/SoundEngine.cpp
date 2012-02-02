@@ -3,7 +3,6 @@
 #include <SDL_audio.h>
 #include "SoundInstance.h"
 #include "Vector3.h"
-#include "Movie.h"
 #include "debug.h"
 #include "SoundFragment.h"
 
@@ -39,12 +38,6 @@ void SoundEngine::DoMixAudio(void *baseptr, unsigned char *stream, int len)
 void SoundEngine::MixAudio(signed short *stream, int samples)
 {
 	memset(stream, 0, samples * 4);
-	if (activeMovie)
-	{
-		//TODO: add fade out to music
-		activeMovie->mix(stream, samples);
-		return;
-	}
 
 	track.mix(stream, samples);
 	for (size_t index = 0; index < sounds.size(); ++index)
@@ -58,13 +51,6 @@ void SoundEngine::MixAudio(signed short *stream, int samples)
 			index--;
 		}
 	}
-}
-
-void SoundEngine::SetMovie(Movie *movie)
-{
-    SDL_LockAudio();
-	activeMovie = movie;
-    SDL_UnlockAudio();
 }
 
 void SoundEngine::SetMusicTrack(const std::string &name)

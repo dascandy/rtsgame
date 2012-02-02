@@ -2,8 +2,7 @@
 #include "Window.h"
 #include "Texture.h"
 #include <GL/glew.h>
-#include <windows.h>
-
+#include "debug.h"
 static const unsigned int buffers[] = 
 {
 	GL_COLOR_ATTACHMENT0,

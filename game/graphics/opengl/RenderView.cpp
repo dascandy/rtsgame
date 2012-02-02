@@ -2,7 +2,6 @@
 #include "Matrix.h"
 #include "ShaderProgram.h"
 #include <GL/glew.h>
-#include "windows.h"
 
 void RenderView::Set(ShaderProgram &prog, const std::string &postfix)
 {

@@ -1,10 +1,9 @@
 #include "debug.h"
 #include <stdarg.h>
-#include "windows.h"
 
 // To prevent compiler warning C4121 to tell us "while(0) is constant" in macros
 int zero = 0;
-
+/*
 const char *basename(const char *name)
 {
 	const char *lastBackslash = name;
@@ -16,7 +15,7 @@ const char *basename(const char *name)
 	}
 	return lastBackslash + 1;
 }
-
+*/
 void Log(const char *text, ...)
 {
 	char target[256];
@@ -26,6 +25,8 @@ void Log(const char *text, ...)
 	va_end(args);
 
 	printf("%s", target);
+#ifdef _MSC_VER
 	OutputDebugStringA(target);
+#endif
 }
 

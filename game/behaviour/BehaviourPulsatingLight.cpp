@@ -43,7 +43,7 @@ void BehaviourPulsatingLight::UpdateFrame()
 	step++;
 	for (std::vector<PointLight *>::iterator it = obj->pointLights.begin(); it != obj->pointLights.end(); ++it)
 	{
-		(*it)->brightness = std::max(sin(2 * PI * step / totalsteps) * 0.6f + 0.4f, 0.0f);
+		(*it)->brightness = std::max((float)sin(2 * PI * step / totalsteps) * 0.6f + 0.4f, 0.0f);
 	}
 }
 
