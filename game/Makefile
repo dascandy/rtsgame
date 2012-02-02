@@ -1,5 +1,4 @@
 
-LDFLAGS=-L../lib/ -lSDL -lGLEW -lwebserver -logg -lvorbis -lPNG
 CCFLAGS=-MMD -MP $(INCLUDES)
 CC=g++
 LD=g++
@@ -39,7 +38,7 @@ INCLUDES=\
 -include $(TARGET).conf
 
 $(TARGET): $(OBJECTS) Makefile
-	@echo LD $@
+	@echo LD $@ $(LDFLAGS)
 	@$(LD) $(LDFLAGS) -o $@ $(filter %.o,$^)
 
 %.o: %.cpp Makefile
