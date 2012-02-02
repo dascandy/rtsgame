@@ -39,7 +39,7 @@ INCLUDES=\
 
 $(TARGET): $(OBJECTS) Makefile
 	@echo LD $@ $(LDFLAGS)
-	@$(LD) $(LDFLAGS) -o $@ $(filter %.o,$^)
+	@$(LD) -o $@ $(filter %.o,$^) $(LDFLAGS)
 
 %.o: %.cpp Makefile
 	@echo CC $@
