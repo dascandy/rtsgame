@@ -1,5 +1,5 @@
 #include "FragmentDeserializer.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include "ResourceFile.h"
 #include "stream.h"
 

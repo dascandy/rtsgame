@@ -1,4 +1,4 @@
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include "stream.h"
 #include "ResourceFile.h"
 #include <BulletCollision/CollisionShapes/btCylinderShape.h>

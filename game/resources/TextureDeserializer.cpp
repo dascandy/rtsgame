@@ -1,5 +1,5 @@
 #include "TextureDeserializer.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include "Texture.h"
 #include "debug.h"
 #include "stream.h"

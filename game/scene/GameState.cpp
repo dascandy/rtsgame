@@ -1,6 +1,6 @@
 #include "GameState.h"
 #include "ShaderProgram.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include "Scene.h"
 #include "Physics.h"
 #include "Object.h"

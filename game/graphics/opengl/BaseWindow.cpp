@@ -1,6 +1,6 @@
 #include "BaseWindow.h"
 #include <GL/glew.h>
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <stdio.h>
 
 BaseWindow::BaseWindow(int width, int height, bool fullscreen)
@@ -31,7 +31,8 @@ BaseWindow::BaseWindow(int width, int height, bool fullscreen)
 	}
 
 	context = SDL_GL_CreateContext(surface);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_SHARE_CONTEXT, (intptr_t)context);
+	// this patch doesn't appear to be in the sdl 1.3 mainline
+//	SDL_GL_SetAttribute(SDL_GL_CONTEXT_SHARE_CONTEXT, (intptr_t)context);
 
 	glewInit();
 }

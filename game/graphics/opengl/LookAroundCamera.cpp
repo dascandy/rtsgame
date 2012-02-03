@@ -1,5 +1,5 @@
 #include "LookAroundCamera.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <stdio.h>
 #include <math.h>
 #include "Scene.h"

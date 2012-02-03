@@ -1,6 +1,6 @@
 #include "SoundEngine.h"
-#include <SDL.h>
-#include <SDL_audio.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_audio.h>
 #include "SoundInstance.h"
 #include "Vector3.h"
 #include "debug.h"

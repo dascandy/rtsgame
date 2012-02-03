@@ -1,6 +1,6 @@
 #include "Game.h"
 #include "ResourceFile.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include "Scene.h"
 #include "debug.h"
 #include "profile.h"

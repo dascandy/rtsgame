@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <GL/glew.h>
-#include <SDL.h>
-#include <SDL_scancode.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_scancode.h>
 #include "Texture.h"
 #include "ParticleEngine.h"
 #include "InputCallback.h"

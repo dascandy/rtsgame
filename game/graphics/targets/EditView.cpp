@@ -4,7 +4,7 @@
 #include "Model.h"
 #include "Matrix.h"
 #include "Object.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <utility>
 #include <math.h>
 #include "debug.h"
