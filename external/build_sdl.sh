@@ -1,9 +1,9 @@
 #!/bin/bash
 
 cd external/SDL-*
-./configure
+./configure --prefix=$PWD/../../build
 make
-mkdir -p ../../lib
-cp build/.libs/libSDL.so ../../lib
+make install
+touch ../sdl_built
 cd ../../
 

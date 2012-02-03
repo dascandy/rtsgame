@@ -1,9 +1,9 @@
 #!/bin/bash
 
-cd external/libogg
-./configure
+cd external/libogg-*
+./configure --prefix=$PWD/../../build
 make
-mkdir -p ../../lib
-cp src/.libs/libogg.so ../../lib
+make install
+touch ../ogg_built
 cd ../../
 

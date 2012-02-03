@@ -1,9 +1,9 @@
 #!/bin/bash
 
 cd external/libpng-*
-./configure
+./configure --prefix=$PWD/../../build
 make
-mkdir -p ../../lib
-cp .libs/libpng15.so ../../lib/libPNG.so
+make install
+touch ../png_built
 cd ../../
 

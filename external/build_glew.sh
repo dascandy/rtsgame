@@ -1,8 +1,8 @@
 #!/bin/bash
 
 cd external/glew-*
-make
-mkdir ../../lib
-cp lib/libGLEW.so ../../lib
+GLEW_DEST=$PWD/../../build make 
+GLEW_DEST=$PWD/../../build make install
+touch ../glew_built
 cd ../../
 
