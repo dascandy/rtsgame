@@ -1,0 +1,17 @@
+.deps
+.libs
+Makefile
+*.la
+config.h
+config.status
+Doxyfile
+libtool
+stamp-h1
+libpng-config
+libpng.vers
+libpng15-config
+pnglibconf.dfn
+pnglibconf.h
+pnglibconf.out
+scripts/vers.out
+

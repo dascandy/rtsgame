@@ -1,0 +1,10 @@
+.deps
+.libs
+Makefile
+*.la
+config.h
+config.status
+Doxyfile
+libtool
+stamp-h1
+
