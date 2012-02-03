@@ -1,5 +1,5 @@
 build
-
+webserver.log
 *.o
 *.obj
 *.exe
