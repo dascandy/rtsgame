@@ -308,7 +308,7 @@ pdfdir = ${docdir}
 # pkg-config stuff, note that libpng.pc is always required in order
 # to get the correct library
 pkgconfigdir = ${libdir}/pkgconfig
-prefix = /usr/local
+prefix = /home/pebi/projects/rtsgame/rtsgame/external/libpng-1.5.8/../../build
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin

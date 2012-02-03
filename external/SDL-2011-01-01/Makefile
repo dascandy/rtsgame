@@ -3,7 +3,7 @@
 top_builddir = .
 srcdir  = .
 objects = build
-prefix = /usr/local
+prefix = /home/pebi/projects/rtsgame/rtsgame/external/SDL-2011-01-01/../../build
 exec_prefix = ${prefix}
 bindir	= ${exec_prefix}/bin
 libdir  = ${exec_prefix}/lib

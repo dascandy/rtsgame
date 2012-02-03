@@ -14,14 +14,14 @@ struct mem_block {
 	int index;
 };
 
-static void read_mem_block(png_structp png_ptr, png_bytep buffer, png_size_t length) {
-	mem_block *mb = (mem_block *)pngptr->io_ptr;
+static void read_mem_block(png_structp pngptr, png_bytep buffer, png_size_t length) {
+	mem_block *mb = (mem_block *)png_get_mem_ptr(pngptr);
 	memcpy(buffer, mb->data + mb->index, length);
 	mb->index += length;
 }
 
-static void write_mem_block(png_structp png_ptr, png_bytep buffer, png_size_t length) {
-	mem_block *mb = (mem_block *)pngptr->io_ptr;
+static void write_mem_block(png_structp pngptr, png_bytep buffer, png_size_t length) {
+	mem_block *mb = (mem_block *)png_get_mem_ptr(pngptr);
 	memcpy(mb->data + mb->index, buffer, length);
 	mb->index += length;
 }
@@ -29,11 +29,11 @@ static void write_mem_block(png_structp png_ptr, png_bytep buffer, png_size_t le
 void read_png_file(char *compressed, char *&uncompressed, int &x, int &y)
 {
 	mem_block block(compressed);
-        png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+        png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
 
         if (!png_ptr) throw 1;
 
-        info_ptr = png_create_info_struct(png_ptr);
+        png_infop info_ptr = png_create_info_struct(png_ptr);
         if (!info_ptr) throw 1;
 
         png_set_read_fn(png_ptr, &block, read_mem_block);
@@ -45,46 +45,44 @@ void read_png_file(char *compressed, char *&uncompressed, int &x, int &y)
 
         png_read_update_info(png_ptr, info_ptr);
 
-	uncompressed = malloc(x * y * 4);
-        row_pointers = (png_bytep*) malloc(sizeof(png_bytep) * height);
-        for (yp=0; yp<height; yp++)
+	uncompressed = (char *)malloc(x * y * 4);
+        png_bytep* row_pointers = (png_bytep*) malloc(sizeof(png_bytep) * y);
+        for (int yp=0; yp<y; yp++)
                 row_pointers[yp] = (png_byte*) (uncompressed + 4 * x * yp);
-        free(row_pointers);
 
         png_read_image(png_ptr, row_pointers);
 
-        fclose(fp);
+        free(row_pointers);
 }
 
 void write_png_file(char* uncompressed, char *&compressed, int x, int y)
 {
-	compressed = malloc(x * y * 4 + 4096);
+	compressed = (char *)malloc(x * y * 4 + 4096);
 	mem_block block(compressed);
 	
-        png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+        png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
         if (!png_ptr) throw 1;
 
-        info_ptr = png_create_info_struct(png_ptr);
+        png_infop info_ptr = png_create_info_struct(png_ptr);
         if (!info_ptr) throw 1;
 
-        png_set_write_fn(png_ptr, &block, write_mem_block);
+        png_set_write_fn(png_ptr, &block, write_mem_block, 0);
 
-        png_set_IHDR(png_ptr, info_ptr, width, height,
-                     bit_depth, color_type, PNG_INTERLACE_NONE,
+        png_set_IHDR(png_ptr, info_ptr, x, y,
+                     8, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
                      PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
 
         png_write_info(png_ptr, info_ptr);
 
-        row_pointers = (png_bytep*) malloc(sizeof(png_bytep) * height);
-        for (yp=0; yp<height; yp++)
+        png_bytep * row_pointers = (png_bytep*) malloc(sizeof(png_bytep) * y);
+        for (int yp=0; yp<y; yp++)
                 row_pointers[yp] = (png_byte*) (uncompressed + 4 * x * yp);
-        free(row_pointers);
 
         png_write_image(png_ptr, row_pointers);
 
-        png_write_end(png_ptr, NULL);
+        free(row_pointers);
 
-        fclose(fp);
+        png_write_end(png_ptr, NULL);
 }
 
 

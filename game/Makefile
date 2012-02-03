@@ -7,11 +7,13 @@ OBJECTS=$(patsubst %.cpp,%.o,$(shell find ./ | grep cpp$))
 DEPFILES=$(patsubst %.o,%.d,$(OBJECTS))
 UNMATCHED=$(filter-out $(OBJECTS) $(DEPFILES),$(shell find ./ | grep \\.d$) $(shell find ./ | grep \\.o$))
 INCLUDES=\
+	-I../build/include \
 	-I../external/glew-1.7.0/include \
 	-I../external/libpng-1.5.8 \
 	-I../external/SDL-2011-01-01/include \
-	-I../external/libvorbis/include \
-	-I../external/libogg/include \
+	-I../external/libvorbis-1.32/include \
+	-I../external/libogg-1.30/include \
+	-I../external/bullet-2.79/src \
 	-I../webserver \
 	-Isfx \
 	-Iphysics \
@@ -33,7 +35,6 @@ INCLUDES=\
 	-Iresources \
 	-Iscene \
 	-Igraphics/shaderfuncs \
-	-I../external/bullet/src \
 
 -include $(TARGET).conf
 

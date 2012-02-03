@@ -1,6 +1,6 @@
 #!/bin/sh
 
-prefix=/usr/local
+prefix=/home/pebi/projects/rtsgame/rtsgame/external/SDL-2011-01-01/../../build
 exec_prefix=${prefix}
 exec_prefix_set=no
 libdir=${exec_prefix}/lib
