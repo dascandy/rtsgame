@@ -1,14 +1,10 @@
 #ifndef Scene_H
 #define Scene_H
 
-#include "Vector3.h"
 #include <vector>
 #include <map>
 #include <set>
-#include "PointLight.h"
-#include "SpotLight.h"
 #include "Renderable.h"
-#include "ParticleEngine.h"
 
 class Object;
 class Ground;
@@ -21,17 +17,21 @@ public:
 
 	void AddObject(Object *);
 	void RemoveObject(Object *);
+/*
 	void AddParticles(ParticleEngine::Particle *part, unsigned int num);
 	void MoveObject(Object *, const Vector3 &location);
 	void GetLights(const Vector3 &location, std::vector<PointLight *> &pointLights, std::vector<SpotLight *> &spotLights);
 	void GetObjectsNear(const Vector3 &location, std::vector<Object *> &objects, float distance);
+*/
 	void Draw(ShaderProgram &prog);
+/*
 	void DrawStatic(ShaderProgram &prog);
 	void DrawDynamicNormal(ShaderProgram &prog);
 	void DrawDynamicEffect(ShaderProgram &prog);
 	void DrawParticles(ShaderProgram &prog);
+*/
 	void DrawPick(ShaderProgram &prog, std::vector<Object *> &objs);
-	void Update(const Vector3 &location);
+	void Update();
 	void Save();
 	void Load();
 	void SetGround(Ground *ground);
@@ -40,9 +40,9 @@ private:
 
 	std::vector<Object *> activeObjects;
 	std::vector<Object *> objects;
-	ParticleEngine pe;
 };
 
+/*
 class OnlyStatic : public Renderable {
 	Scene &scene;
 public:
@@ -69,6 +69,7 @@ public:
 		scene.DrawParticles(prog);
 	}
 };
+*/
 
 #endif
 

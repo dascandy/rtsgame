@@ -1,11 +1,10 @@
 #include "ShaderProgram.h"
-#include "Matrix.h"
 #include <GL/glew.h>
 #include <stdio.h>
-#include "GameState.h"
-#include "Vector3.h"
 #include "Color.h"
 #include <debug.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 static inline void compileShader(int prog, int &shader, const char *source, int type)
 {

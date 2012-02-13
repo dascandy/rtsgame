@@ -16,13 +16,15 @@ public:
 };
 
 class Div {
+protected:
+	int x, y, w, h;
+	Div(int x, int y, int w, int h);
 public:
 	virtual std::string toString() = 0;
 };
 
 class ImageDiv : public Div {
 private:
-	int x, y, w, h;
 	std::string imageUrl;
 public:
 	ImageDiv(int x, int y, int w, int h, std::string imageUrl);
@@ -30,11 +32,16 @@ public:
 };
 
 class DocumentDiv : public Div {
-public:
-	int x, y, w, h;
+private:
 	std::string fileUrl;
 public:
 	DocumentDiv(int x, int y, int w, int h, std::string fileUrl);
+	std::string toString();
+};
+
+class DirlistDiv : public Div {
+public:
+	DirlistDiv(int x, int y, int w, int h);
 	std::string toString();
 };
 

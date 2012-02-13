@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "ResourceFile.h"
 #include <SDL/SDL.h>
 #include "Scene.h"
 #include "debug.h"
@@ -8,9 +7,9 @@
 #ifdef _MSC_VER
 #include <windows.h>
 
-int main(int, char *[])
+int main(int, char *argv[])
 {
-	profile_init();
+	profile_init(argv[0]);
 	char cwd[1024];
 	int chars = GetCurrentDirectory(1023, cwd);
 	cwd[chars] = 0;
@@ -35,24 +34,24 @@ int main(int, char *[])
 	return rval;
 }
 #else
-int main(int, char *[])
+int main(int, char *argv[])
 {
-	profile_init();
+	profile_init(argv[0]);
 
 	int rval = 0;
-	ResourceFile::Instance("./");
-	try
-	{
+//	ResourceFile::Instance("/home/pebi/projects/rtsgame/rtsgame/game/res/");
+//	try
+//	{
 		Game().run();
-	}
-	catch(std::exception &e) 
-	{
-		printf("FATAL exception %s\n", e.what());
-	}
-	catch(int rv)
-	{
-		rval = rv;
-	}
+//	}
+//	catch(std::exception &e) 
+//	{
+//		printf("FATAL exception %s\n", e.what());
+//	}
+//	catch(int rv)
+//	{
+//		rval = rv;
+//	}
 	profile_fini();
 	return rval;
 }

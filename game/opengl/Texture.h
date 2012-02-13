@@ -1,6 +1,7 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
+#include <map>
 #include <string>
 #include <GL/glew.h>
 
@@ -29,6 +30,8 @@ protected:
 	bool mipmap;
 	int format;
 	friend class Texture3d;
+public:
+	static std::map<int, Texture *> textures;
 };
 
 void swap(Texture &a, Texture &b);

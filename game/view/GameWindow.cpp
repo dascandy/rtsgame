@@ -1,4 +1,4 @@
-#include "Window.h"
+#include "GameWindow.h"
 #include "Scene.h"
 #include "Object.h"
 #include "Model.h"
@@ -9,36 +9,31 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_scancode.h>
 #include "Texture.h"
-#include "ParticleEngine.h"
 #include "InputCallback.h"
-#include "HDRRenderEngine.h"
-#include "GameState.h"
 #include "profile.h"
 #include "debug.h"
 
 extern int num_tris;
 
-Window::Window(int width, int height, bool fullscreen)
+GameWindow::GameWindow(int width, int height, bool fullscreen)
 : BaseWindow(width, height, fullscreen)
 , callback(0)
 , rt(width, height)
+, menu(rt)
+, gameView(rt)
 , isActive(true)
-, gview(rt)
-#ifndef NO_EDITING
-, editmode(false)
-, eview(rt)
-#endif
+, inMenu(true)
 {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_CULL_FACE);
 }
 
-Window::~Window()
+GameWindow::~GameWindow()
 {
 }
 
-void Window::Resized(int width, int height)
+void GameWindow::Resized(int width, int height)
 {
 	this->width = width;
 	this->height = height;
@@ -46,41 +41,30 @@ void Window::Resized(int width, int height)
 	rt.height = height;
 }
 
-void Window::Draw()
+void GameWindow::Draw()
 {
-#ifndef NO_EDITING
-	if (editmode)
-		eview.Run();
+	if (inMenu) 
+		menu.run();
 	else
-#endif
-		gview.Run();
+		gameView.run();
 
 	SDL_GL_SwapWindow(surface);
 	profile_print();
 }
 
-void Window::Run()
+void GameWindow::run()
 {
 	SDL_Event event;
 
-	while (!GameState::Instance().ended)
+	while (true)
 	{
-		InputCallback *callback = &gview;
-#ifndef NO_EDITING
-		if (editmode)
-			callback = &eview;
-#endif
+		InputCallback *callback = &gameView;
 
 		while (SDL_PollEvent(&event))
 		{
 			switch(event.type)
 			{
 			case SDL_KEYDOWN:
-#ifndef NO_EDITING
-				if (event.key.keysym.scancode == SDL_SCANCODE_E &&
-					event.key.keysym.mod == (KMOD_LSHIFT | KMOD_LCTRL))
-					editmode = !editmode;
-#endif
 				if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 					throw 0;
 				callback->KeyDown(event.key.keysym.scancode);
@@ -132,9 +116,6 @@ void Window::Run()
 			}
 		}
 
-		// run this too when inactive, to avoid a huge burst of data when it does
-		GameState::Instance().Update(isActive);
-		
 		if (isActive)
 		{
 			Draw();

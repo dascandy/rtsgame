@@ -21,11 +21,8 @@ INCLUDES=\
 	-Ibehaviour \
 	-Ilights \
 	-Icontrol \
-	-Igraphics/targets \
 	-Igraphics/soil \
-	-Igraphics/editui \
-	-Igraphics/film \
-	-Igraphics/opengl \
+	-Iopengl \
 	-Ipng \
 	-Imath \
 	-Ianimation \
@@ -35,6 +32,8 @@ INCLUDES=\
 	-Iresources \
 	-Iscene \
 	-Igraphics/shaderfuncs \
+	-Iview \
+	-Idevil \
 
 -include $(TARGET).conf
 

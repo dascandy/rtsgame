@@ -3,10 +3,15 @@
 
 #include <stdio.h>
 
+#define PROFILE_COUNT 100
+
 extern const char *profile_name[256];
-extern unsigned long long profile_ents[256];
-extern int profile_count[256];
+extern unsigned long long profile_ents[256 * PROFILE_COUNT];
+extern unsigned long long *profile_entsp;
+extern int profile_count[256 * PROFILE_COUNT];
+extern int *profile_countp;
 extern bool profile_enabled;
+extern int profile_current;
 
 #ifdef _MSC_VER
 inline unsigned long long rdtsc() {
@@ -37,9 +42,10 @@ private:
 	bool first;
 };
 
-void profile_init();
+void profile_init(const char *fname);
 void profile_print();
 void profile_fini();
+void profile_next();
 
 #endif
 

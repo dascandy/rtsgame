@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Window.h"
+#include "GameWindow.h"
 
 class Game
 {
@@ -9,7 +9,7 @@ public:
 	Game();
 	void run();
 private:
-	Window window;
+	GameWindow window;
 };
 
 #endif

@@ -6,10 +6,13 @@
 #include "ShaderProgram.h"
 #include "swap.h"
 
+std::map<int, Texture *> Texture::textures;
+
 void ReadHdrFile(std::string name, float *buffer);
 
 Texture::Texture(int w, int h, int format)
-: w(w)
+: textureId(0)
+, w(w)
 , h(h)
 , mipmap(false)
 , format(format)
@@ -20,14 +23,17 @@ Texture::Texture(int w, int h, int format)
 
 Texture::~Texture()
 {
+	textures[textureId] = 0;
 	glDeleteTextures( 1, &textureId );
 }
 
 void Texture::Reload()
 {
+	textures[textureId] = 0;
 	glDeleteTextures( 1, &textureId );
 	glGenTextures( 1, &textureId );
 	glBindTexture( type, textureId );
+	textures[textureId] = this;
 	glTexParameterf( type, GL_TEXTURE_WRAP_S, GL_REPEAT );
 	glTexParameterf( type, GL_TEXTURE_WRAP_T, GL_REPEAT );
 

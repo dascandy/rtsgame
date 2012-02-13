@@ -34,9 +34,6 @@ static const float PI = 3.1415926535f;
 
 void BehaviourFan::UpdateFrame()
 {
-#ifndef NO_EDITING
-	if (obj->selected) return;
-#endif
 	TODO_W("make sound a derived property");
 	if (currentRotation * 4 / fullRotationFrames !=
 		(currentRotation+1)*4/fullRotationFrames)
