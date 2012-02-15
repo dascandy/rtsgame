@@ -1,5 +1,6 @@
 #include "os.h"
 #include <stdio.h>
+#include "ResourceManager.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -8,15 +9,30 @@ msec_t get_msec()
 {
 	return GetTickCount();
 }
-/*
-void sleep(msec_t time) 
+
+void delay(msec_t time) 
 {
 	Sleep((DWORD)time);
 }
-*/
+
+void platInit() {
+        char cwd[1024];
+        int chars = GetCurrentDirectory(1023, cwd);
+        cwd[chars] = 0;
+
+        char resdir[1024];
+        sprintf(resdir, "%s\\res\\", cwd);
+        ResourceManager::Instance().setRootDir(resdir);
+}
+
+void Fatal(const char *error) {
+	MessageBox(0, error, "Fatal error!", 0);
+}
+
 #else
 #include <sys/time.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 msec_t get_msec()
 {
@@ -25,11 +41,20 @@ msec_t get_msec()
 	msec_t ctime = (msec_t)(tv.tv_sec * 1000) + tv.tv_usec / 1000;
 	return ctime;
 }
-/*
-void sleep(msec_t time) 
+
+void delay(msec_t time) 
 {
 	usleep(time*1000);
 }
-*/
+
+void platInit() {
+        ResourceManager::Instance().setRootDir("/home/pebi/projects/rtsgame/rtsgame/game/res/");
+}
+
+void Fatal(const char *error) {
+	printf(0, error, "Fatal error!", 0);
+	abort();
+}
+
 #endif
 

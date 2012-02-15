@@ -5,9 +5,9 @@
 #include <string>
 #include <vector>
 #include <stdlib.h>
+#include <glm.h>
 class Object;
 class Behaviour;
-class Vector3;
 class Bone;
 
 class trigger {
@@ -59,7 +59,7 @@ class Behaviour
 public:
 	Behaviour(Object *obj) : obj(obj) {}
 	virtual ~Behaviour() {}
-	virtual void TryUpdateFrame(const Vector3 &) {}
+	virtual void TryUpdateFrame(const glm::vec3 &) {}
 	virtual void HandleCollision(Bone *, Bone *) {}
 	void DefineTrigger(void (Behaviour::*func)())
 	{
@@ -79,7 +79,7 @@ class ActiveBehaviour : public Behaviour
 {
 public:
 	ActiveBehaviour(Object *obj, float range);
-	virtual void TryUpdateFrame(const Vector3 &location);
+	virtual void TryUpdateFrame(const glm::vec3 &location);
 	virtual void UpdateFrame() = 0;
 	virtual void OutOfRange() {}
 protected:

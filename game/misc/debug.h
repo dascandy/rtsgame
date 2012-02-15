@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <string>
+#include <os.h>
 
 #ifdef _MSC_VER
 // including windows.h breaks my code due to it containing evil defines
@@ -11,11 +13,12 @@ extern "C" void Log(const char *fmt, ...);
 
 #define FLPREFIX "%s(%d): "
 #else
-inline void DebugBreak() {}
 extern "C" void Log(const char *fmt, ...);
 
 #define FLPREFIX "%s:%d: "
 #endif
+
+inline void Log(const std::string &log) { Log(log.c_str()); }
 
 extern int zero;
 #ifdef _MSC_VER

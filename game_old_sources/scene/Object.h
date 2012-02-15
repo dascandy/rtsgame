@@ -2,10 +2,10 @@
 #define OBJECT_H
 
 #include "Renderable.h"
-#include <glm/glm.hpp>
+#include "glm.h"
 #include <vector>
 //#include "Physics.h"
-//#include "Behaviour.h"
+class Behaviour;
 class Bone;
 class IFrustum;
 class ObjectType;
@@ -28,7 +28,7 @@ public:
 protected:
 	ObjectType &objectType;
 public:
-//	Behaviour *behaviour;
+	Behaviour *behaviour;
 	bool isStatic;
 	std::vector<Bone *> bones;
 /*

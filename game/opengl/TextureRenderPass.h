@@ -12,7 +12,6 @@ class TextureRenderPass : public GpuRenderPass
 {
 public:
 	TextureRenderPass(ShaderProgram program, Renderable &input, RenderTarget &target, RenderView &view);
-	void DrawPick(std::vector<Object *> &objs);
 	void DoRun();
 private:
 	Renderable &input;

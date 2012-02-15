@@ -36,7 +36,6 @@ void profile_init(const char *fname)
 
 void profile_fini() 
 {
-	profile_print();
 	fclose(out);
 	for (int i = 0; i < 256; i++) 
 	{

@@ -3,9 +3,8 @@
 
 #include <string>
 #include <exception>
+#include <glm/glm.hpp>
 
-class Matrix;
-class Vector3;
 class Color;
 
 class ShaderCompileException : public std::exception
@@ -25,11 +24,11 @@ class ShaderProgram
 public:
 	ShaderProgram(const char *vsh, const char *gsh, const char *fsh, const char **invars, const char **varyings = 0);
 	ShaderProgram(const ShaderProgram &other);
-	void Set(const char *name, const Matrix &mat, bool invert = false);
+//	void Set(const char *name, const Matrix &mat, bool invert = false);
 	void Set(const char *name, int value);
 	void Set(const char *name, unsigned int value);
 	void Set(const char *name, float value);
-	void Set(const char *name, const Vector3 &value);
+	void Set(const char *name, const glm::vec3 &value);
 	void Set(const char *name, const Color &value);
 	bool SetTexture(const char *name, int value);
 	~ShaderProgram();

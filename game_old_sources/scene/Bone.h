@@ -1,8 +1,7 @@
 #ifndef BONE_H
 #define BONE_H
 
-#include "Vector3.h"
-#include "Quaternion.h"
+#include "glm.h"
 #include "Object.h"
 #include "Behaviour.h"
 
@@ -11,16 +10,14 @@ class btRigidBody;
 class Bone
 {
 public:
-	Vector3 translation;
-	Quaternion rotation;
-	Matrix transformation;
+	glm::vec3 translation;
+	glm::quat rotation;
 	btRigidBody *body;
 	Object *obj;
 	float mass;
-	Bone(const Vector3 &location, const Quaternion &rotation, Object *obj, float mass)
+	Bone(const glm::vec3 &location, const glm::quat &rotation, Object *obj, float mass)
 		: translation(location)
 		, rotation(rotation)
-		, transformation(location, rotation)
 		, body(0)
 		, obj(obj)
 		, mass(mass)
@@ -29,7 +26,6 @@ public:
 	Bone(Bone &other, Object *newObj)
 		: translation(other.translation)
 		, rotation(other.rotation)
-		, transformation(translation, rotation)
 		, body(0)
 		, obj(newObj)
 		, mass(other.mass)

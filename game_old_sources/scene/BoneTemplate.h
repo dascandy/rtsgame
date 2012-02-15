@@ -1,23 +1,22 @@
 #ifndef BONETEMPLATE_H
 #define BONETEMPLATE_H
 
-#include "Vector3.h"
-#include "Quaternion.h"
+#include <glm.h>
 
 class btCollisionShape;
 
 class BoneTemplate
 {
 public:
-	Vector3 translation;
-	Quaternion rotation;
+	vec3 translation;
+	quat rotation;
 private:
 	btCollisionShape *shape;
 	float mass;
 	float masssd;
 	friend class Physics;
 public:
-	BoneTemplate(const Vector3 &location, const Quaternion &rotation, btCollisionShape *shape, float mass, float masssd)
+	BoneTemplate(const vec3 &location, const quat &rotation, btCollisionShape *shape, float mass, float masssd)
 	: translation(location)
 	, rotation(rotation)
 	, shape(shape)

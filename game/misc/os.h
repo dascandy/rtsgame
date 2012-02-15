@@ -3,7 +3,9 @@
 
 typedef unsigned int msec_t;
 msec_t get_msec();
-//void sleep(msec_t time); 
+void delay(msec_t time); 
+void platInit();
+void Fatal(const char *error);
 
 #endif
 

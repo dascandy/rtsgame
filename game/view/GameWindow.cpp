@@ -1,17 +1,7 @@
 #include "GameWindow.h"
-#include "Scene.h"
-#include "Object.h"
-#include "Model.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <GL/glew.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_scancode.h>
-#include "Texture.h"
-#include "InputCallback.h"
 #include "profile.h"
-#include "debug.h"
 
 extern int num_tris;
 
@@ -49,7 +39,6 @@ void GameWindow::Draw()
 		gameView.run();
 
 	SDL_GL_SwapWindow(surface);
-	profile_print();
 }
 
 void GameWindow::run()

@@ -10,9 +10,9 @@ ActiveBehaviour::ActiveBehaviour(Object *obj, float range)
 {
 }
 
-void ActiveBehaviour::TryUpdateFrame(const Vector3 &location)
+void ActiveBehaviour::TryUpdateFrame(const glm::vec3 &location)
 {
-	if ((obj->bones[0]->translation - location).len() < range)
+	if (length(obj->bones[0]->translation - location) < range)
 	{
 		UpdateFrame();
 		wasInRange = true;

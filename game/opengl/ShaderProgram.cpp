@@ -21,7 +21,7 @@ static inline void compileShader(int prog, int &shader, const char *source, int 
 		std::string errors;
 		errors.reserve(length);
 		glGetShaderInfoLog(shader, length, NULL, &errors[0]);
-		DebugBreak();
+		Fatal(errors.c_str());
 		throw ShaderCompileException(errors);
 	}
 }
@@ -64,7 +64,7 @@ ShaderProgram::ShaderProgram(const char *vsh, const char *gsh, const char *fsh, 
 		std::string errors;
 		errors.reserve(length);
 		glGetProgramInfoLog(prog, length, NULL, &errors[0]);
-		DebugBreak();
+		Fatal(errors.c_str());
 		throw ShaderCompileException(errors);
 	}
 }
@@ -91,7 +91,7 @@ ShaderProgram::~ShaderProgram()
 		delete usage;
 	}
 }
-
+/*
 void ShaderProgram::Set(const char *name, const Matrix &mat, bool invert)
 {
 	int uniform = glGetUniformLocation(prog, name);
@@ -109,7 +109,7 @@ void ShaderProgram::Set(const char *name, const Matrix &mat, bool invert)
 		glUniformMatrix4fv(uniform, 1, GL_FALSE, mat.matrix);
 	}
 }
-
+*/
 void ShaderProgram::Set(const char *name, int value)
 {
 	int uniform = glGetUniformLocation(prog, name);
@@ -147,7 +147,7 @@ void ShaderProgram::Set(const char *name, float value)
 	glUniform1f(uniform, value);
 }
 
-void ShaderProgram::Set(const char *name, const Vector3 &value)
+void ShaderProgram::Set(const char *name, const glm::vec3 &value)
 {
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
@@ -168,7 +168,7 @@ void ShaderProgram::Set(const char *name, const Color &value)
 Use::Use(ShaderProgram &prog) 
 {
 	glUseProgram(prog.prog); 
-	GameState::Instance().SetVars(prog);
+//	GameState::Instance().SetVars(prog);
 }
 
 Use::~Use() 
