@@ -1,4 +1,5 @@
 build
+Debug
 webserver.log
 *.o
 *.obj
@@ -12,3 +13,15 @@ webserver.log
 *.lo
 
 
+*.dll
+*.exp
+*.ilk
+*.pdb
+*.htm
+*.dep
+*.user
+*.idb
+*.res
+*.manifest
+*.ncb
+*.suo
