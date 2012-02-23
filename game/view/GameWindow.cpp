@@ -45,7 +45,7 @@ void GameWindow::run()
 {
 	SDL_Event event;
 
-	while (true)
+	for (;;)
 	{
 		InputCallback *callback = &gameView;
 

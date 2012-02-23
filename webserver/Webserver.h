@@ -2,59 +2,40 @@
 #define WEBSERVER_H
 
 #include "Thread.h"
-
 #include <string>
 #include <vector>
 #include <utility>
 #include <map>
+#include "ServerSocket.h"
+#include "Dll.h"
 
-class HttpRequest {
+class HttpRequest;
+class HttpReply;
+
+class WEBSERVERSPEC Webserver {
 public:
-	std::string method, url, httpversion;
-	std::map<std::string, std::string> attributes;
-	std::map<std::string, std::string> arguments;
-	int fd;
-	Thread *t;
-	HttpRequest();
-	void handle();
-	void readFrom(int fd);
-};
-
-class HttpReply {
-public:
-	HttpReply(int code, std::string text, const char *contentType, const char *content);
-	HttpReply();
-	void writeTo(int fd);
-	int statusCode;
-	std::string statusText;
-	const char *contentType;
-	const char *content;
-	int contentLength;
-};
-
-HttpReply defaultReply(int statuscode);
-std::string getMimetype(std::string ext);
-
-class Webserver {
-public:
-	class Callback {
+	class WEBSERVERSPEC Callback {
 	public:
 		virtual void handle(HttpRequest &req) = 0;
 	};
 private:
 	std::vector<std::pair<std::string, Callback *> > urls;
-	int listenfd;
+	ServerSocket server;
 	bool stopped;
 	Thread t;
-	void handleDefault(HttpRequest &req);
 	void run();
 	static void stop();
 	Webserver(int port);
+	static bool matches(const std::string &a, const std::string &b);
 public:
 	void handle(HttpRequest &req);
 	static Webserver &Instance() { static Webserver webserver(1080); return webserver; }
 	void registerUrl(std::string match, Callback *callback);
 };
+
+#include "HttpRequest.h"
+#include "HttpReply.h"
+#include "Html.h"
 
 #endif
 

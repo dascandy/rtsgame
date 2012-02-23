@@ -4,7 +4,7 @@
 #include "profile.h"
 #include "os.h"
 
-int main(int, char *argv[])
+extern "C" int main(int, char *argv[])
 {
 	platInit();
 	int rval = 0;
@@ -24,5 +24,4 @@ int main(int, char *argv[])
 	profile_fini();
 	return rval;
 }
-
 

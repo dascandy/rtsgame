@@ -3,10 +3,11 @@
 
 #include <string>
 #include <vector>
+#include "Dll.h"
 
 class Div;
 
-class HtmlPage {
+class WEBSERVERSPEC HtmlPage {
 private:
 	std::vector<Div *> divs;
 	std::vector<std::string> scripts;
@@ -15,15 +16,15 @@ public:
 	std::string toString();
 };
 
-class Div {
+class WEBSERVERSPEC Div {
 protected:
 	int x, y, w, h;
-	Div(int x, int y, int w, int h);
+	Div(int x, int y, int w, int h) : x(x), y(y), w(w), h(h) {}
 public:
 	virtual std::string toString() = 0;
 };
 
-class ImageDiv : public Div {
+class WEBSERVERSPEC ImageDiv : public Div {
 private:
 	std::string imageUrl;
 public:
@@ -31,7 +32,7 @@ public:
 	std::string toString();
 };
 
-class DocumentDiv : public Div {
+class WEBSERVERSPEC DocumentDiv : public Div {
 private:
 	std::string fileUrl;
 public:
@@ -39,7 +40,7 @@ public:
 	std::string toString();
 };
 
-class DirlistDiv : public Div {
+class WEBSERVERSPEC DirlistDiv : public Div {
 public:
 	DirlistDiv(int x, int y, int w, int h);
 	std::string toString();

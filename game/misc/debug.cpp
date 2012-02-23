@@ -1,6 +1,10 @@
 #include "debug.h"
 #include <stdarg.h>
 
+#ifdef _MSC_VER
+extern "C" void __stdcall OutputDebugStringA(const char *lpOutputString);
+#endif
+
 // To prevent compiler warning C4121 to tell us "while(0) is constant" in macros
 int zero = 0;
 /*

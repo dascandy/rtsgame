@@ -1,6 +1,5 @@
 #include "Html.h"
 #include <stdio.h>
-#include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -19,10 +18,7 @@ std::string HtmlPage::toString() {
 }
 
 ImageDiv::ImageDiv(int x, int y, int w, int h, std::string imageUrl)
-: x(x)
-, y(y)
-, w(w)
-, h(h)
+: Div(x, y, w, h)
 , imageUrl(imageUrl)
 {}
 
@@ -34,18 +30,15 @@ std::string ImageDiv::toString() {
 }
 
 DocumentDiv::DocumentDiv(int x, int y, int w, int h, std::string fileUrl)
-: x(x)
-, y(y)
-, w(w)
-, h(h)
+: Div(x, y, w, h)
 , fileUrl(fileUrl)
 {}
 
 std::string DocumentDiv::toString() {
 	char fileBuffer[65536];
-	int f = open(("htdocs" + fileUrl).c_str(), O_RDONLY);
-	int bytes = read(f, fileBuffer, 65536);
-	close(f);
+	FILE *f = fopen(("htdocs" + fileUrl).c_str(), "rb");
+	int bytes = fread(fileBuffer, 1, 65536, f);
+	fclose(f);
 	fileBuffer[bytes] = 0;
 	char buffer[65536];
 	sprintf(buffer, "<script language=\"javascript\" type=\"text/javascript\" src=\"/editarea/edit_area/edit_area_full.js\"></script>"
@@ -56,4 +49,7 @@ std::string DocumentDiv::toString() {
 	return buffer;
 }
 
+std::string DirlistDiv::toString() {
+	return "";
+}
 

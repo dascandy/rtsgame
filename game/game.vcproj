@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/vmg /MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="lights;math;misc;scene;..\glew\include;physics;graphics/opengl;resources;behaviour;sound;graphics/film;control;graphics/soil;graphics/targets;graphics/shaderfuncs;..\bullet\src;..\SDL\include;..\libvorbis\include;..\libogg\include"
+				AdditionalIncludeDirectories="devil;misc;opengl;resources;view;webhandlers;..\external\glm-0.9.3.1;..\external\glew-1.7.0\include;..\external\SDL-1.3.0-6248\include;..\HAL\;..\webserver"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;NO_EDITING"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -54,7 +54,7 @@
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="3"
-				DisableSpecificWarnings="4996;4512;4355"
+				DisableSpecificWarnings="4996;4512;4355;4201"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -183,94 +183,94 @@
 	</References>
 	<Files>
 		<Filter
-			Name="math"
+			Name="opengl"
 			>
 			<File
-				RelativePath=".\math\Frustum.cpp"
+				RelativePath=".\opengl\BaseWindow.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\math\Frustum.h"
+				RelativePath=".\opengl\BaseWindow.h"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\Model.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\Model.h"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\Renderable.h"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\RenderPass.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\RenderPass.h"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\RenderTarget.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\RenderTarget.h"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\RenderView.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\RenderView.h"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\Resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\ShaderProgram.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\ShaderProgram.h"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\Texture.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\Texture.h"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\TextureRenderPass.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\TextureRenderPass.h"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\VertexBuffer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\VertexBuffer.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="resources"
+			Name="devil"
 			>
 			<File
-				RelativePath=".\resources\ObjectType.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\ObjectType.h"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\ObjectTypeDatabase.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\ObjectTypeDatabase.h"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\outstream.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\outstream.h"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\ResourceFile.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\ResourceFile.h"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\SoundFragmentDatabase.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\SoundFragmentDatabase.h"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\stream.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\stream.h"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\TextureDeserializer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\TextureDeserializer.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="physics"
-			>
-			<File
-				RelativePath=".\physics\Physics.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\physics\Physics.h"
-				>
-			</File>
-			<File
-				RelativePath=".\physics\PhysicsModelDeserializer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\physics\PhysicsModelDeserializer.h"
+				RelativePath=".\devil\DevIL.h"
 				>
 			</File>
 		</Filter>
@@ -290,11 +290,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\misc\glm.h"
+				>
+			</File>
+			<File
 				RelativePath=".\misc\os.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\misc\os.h"
+				>
+			</File>
+			<File
+				RelativePath=".\misc\profile.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\misc\profile.h"
 				>
 			</File>
 			<File
@@ -306,6 +318,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\misc\sdl_error.h"
+				>
+			</File>
+			<File
 				RelativePath=".\misc\stringutil.cpp"
 				>
 			</File>
@@ -313,463 +329,75 @@
 				RelativePath=".\misc\stringutil.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="scene"
-			>
 			<File
-				RelativePath=".\scene\Object.cpp"
+				RelativePath=".\misc\swap.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\scene\Object.h"
-				>
-			</File>
-			<File
-				RelativePath=".\scene\Scene.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\scene\Scene.h"
+				RelativePath=".\misc\swap.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="behaviour"
+			Name="resources"
 			>
 			<File
-				RelativePath=".\behaviour\Behaviour.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\Behaviour.h"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourAlarm.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourAlarm.h"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourCamera.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourCamera.h"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourContactExplosive.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourContactExplosive.h"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourExplosion.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourExplosion.h"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourFan.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourFan.h"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourFullscreenMovie.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourFullscreenMovie.h"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourLift.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourLift.h"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourNone.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourNone.h"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourSpiderbombSource.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourSpiderbombSource.h"
-				>
-			</File>
-			<File
-				RelativePath=".\behaviour\BehaviourType.h"
+				RelativePath=".\resources\ResourceManager.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="sound"
+			Name="view"
 			>
 			<File
-				RelativePath=".\sound\FragmentDeserializer.cpp"
+				RelativePath=".\view\GameView.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\sound\FragmentDeserializer.h"
+				RelativePath=".\view\GameView.h"
 				>
 			</File>
 			<File
-				RelativePath=".\sound\MusicTrack.cpp"
+				RelativePath=".\view\GameWindow.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\sound\MusicTrack.h"
+				RelativePath=".\view\GameWindow.h"
 				>
 			</File>
 			<File
-				RelativePath=".\sound\SoundEngine.cpp"
+				RelativePath=".\view\InputCallback.h"
 				>
 			</File>
 			<File
-				RelativePath=".\sound\SoundEngine.h"
+				RelativePath=".\view\Menu.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\sound\SoundFragment.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\sound\SoundFragment.h"
-				>
-			</File>
-			<File
-				RelativePath=".\sound\SoundInstance.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\sound\SoundInstance.h"
+				RelativePath=".\view\Menu.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="sdl"
+			Name="webhandlers"
 			>
 			<File
-				RelativePath=".\control\InputCallback.h"
+				RelativePath=".\webhandlers\Profile.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\exceptions\sdl_error.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="direct3d"
-			>
-		</Filter>
-		<Filter
-			Name="lights"
-			>
-			<File
-				RelativePath=".\lights\AmbientLight.cpp"
+				RelativePath=".\webhandlers\Profile.h"
 				>
 			</File>
 			<File
-				RelativePath=".\lights\AmbientLight.h"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\lights\Light.h"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\lights\PointLight.cpp"
+				RelativePath=".\webhandlers\Textures.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\lights\PointLight.h"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\lights\SpotLight.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\lights\SpotLight.h"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-			</File>
-		</Filter>
-		<Filter
-			Name="film"
-			>
-			<File
-				RelativePath=".\graphics\film\movie.h"
+				RelativePath=".\webhandlers\Textures.h"
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="control"
-			>
-		</Filter>
-		<Filter
-			Name="sfx"
-			>
-			<File
-				RelativePath=".\sfx\amBxEngine.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\sfx\amBxEngine.h"
-				>
-			</File>
-			<File
-				RelativePath=".\sfx\ScreenEffectEngine.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\sfx\ScreenEffectEngine.h"
-				>
-			</File>
-			<File
-				RelativePath=".\sfx\SfxEngine.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="res"
-			>
-			<Filter
-				Name="directx"
-				>
-				<File
-					RelativePath=".\res\directx\blend.dps"
-					>
-				</File>
-				<File
-					RelativePath=".\res\directx\bloom_downsample.dps"
-					>
-				</File>
-				<File
-					RelativePath=".\res\directx\bloom_hblur.dps"
-					>
-				</File>
-				<File
-					RelativePath=".\res\directx\bloom_vblur.dps"
-					>
-				</File>
-				<File
-					RelativePath=".\res\directx\final.dps"
-					>
-				</File>
-				<File
-					RelativePath=".\res\directx\final.dvs"
-					>
-				</File>
-				<File
-					RelativePath=".\res\directx\geometry.dps"
-					>
-				</File>
-				<File
-					RelativePath=".\res\directx\geometry.dvs"
-					>
-				</File>
-				<File
-					RelativePath=".\res\directx\lbuffer_ambient.dps"
-					>
-				</File>
-				<File
-					RelativePath=".\res\directx\lbuffer_spot.dps"
-					>
-				</File>
-				<File
-					RelativePath=".\res\directx\none.dvs"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="datfiles"
-				>
-			</Filter>
-		</Filter>
-		<File
-			RelativePath=".\res\physics\alarmbox.col"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\alarmdisplay.col"
-			>
-		</File>
-		<File
-			RelativePath=".\animation\AnimationTimeline.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\barrel.col"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\BaseWindow.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\BaseWindow.h"
-			>
-		</File>
-		<File
-			RelativePath=".\behaviour\BehaviourFlame.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\behaviour\BehaviourFlame.h"
-			>
-		</File>
-		<File
-			RelativePath=".\behaviour\BehaviourForcefield.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\behaviour\BehaviourForcefield.h"
-			>
-		</File>
-		<File
-			RelativePath=".\behaviour\BehaviourProjectileGun.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\behaviour\BehaviourProjectileGun.h"
-			>
-		</File>
-		<File
-			RelativePath=".\behaviour\BehaviourPulsatingLight.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\behaviour\BehaviourPulsatingLight.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\soil\bmp.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\scene\Bone.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\scene\Bone.h"
-			>
-		</File>
-		<File
-			RelativePath=".\resources\BoneTemplate.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\resources\BoneTemplate.h"
-			>
-		</File>
-		<File
-			RelativePath=".\control\Camera.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\control\Camera.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\camerabase_half.col"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\camerabase_quarter.col"
-			>
-		</File>
-		<File
-			RelativePath=".\control\CharacterMovement.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\colorbox.col"
-			>
-		</File>
-		<File
-			RelativePath=".\physics\ConstraintTemplate.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\DeferredRenderEngine.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\DeferredRenderEngine.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\targets\EditView.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\targets\EditView.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\FeedbackTransformPass.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\FeedbackTransformPass.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\floor1.col"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\shaderfuncs\funcs.glsl"
-			>
-		</File>
 		<File
 			RelativePath=".\Game.cpp"
 			>
@@ -779,343 +407,7 @@
 			>
 		</File>
 		<File
-			RelativePath=".\scene\GameState.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\scene\GameState.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\targets\GameView.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\targets\GameView.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\directx\geomfuncs.di"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\greenbox.col"
-			>
-		</File>
-		<File
-			RelativePath=".\scene\Ground.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\scene\Ground.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\soil\hdr.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\HDRRenderEngine.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\HDRRenderEngine.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\keycard.col"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\keycardslot.col"
-			>
-		</File>
-		<File
-			RelativePath=".\control\Keymap.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\control\Keymap.h"
-			>
-		</File>
-		<File
-			RelativePath=".\control\Keymap.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\LookAroundCamera.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\LookAroundCamera.h"
-			>
-		</File>
-		<File
 			RelativePath=".\main.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\math\Matrix.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\math\Matrix.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\Model.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\Model.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\directx\movie.dps"
-			>
-		</File>
-		<File
-			RelativePath=".\res\directx\movie.dvs"
-			>
-		</File>
-		<File
-			RelativePath=".\physics\P2PTemplate.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\physics\P2PTemplate.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\ParticleEngine.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\ParticleEngine.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\soil\png.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\PointLightRenderPass.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\PointLightRenderPass.h"
-			>
-		</File>
-		<File
-			RelativePath=".\misc\profile.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\misc\profile.h"
-			>
-		</File>
-		<File
-			RelativePath=".\math\Quaternion.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\math\Quaternion.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\Renderable.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\RenderPass.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\RenderPass.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\RenderTarget.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\RenderTarget.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\RenderView.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\RenderView.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\Resource.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\selection.col"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\SelectionRectangle.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\SelectionRectangle.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\ShaderProgram.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\ShaderProgram.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\directx\shadowmap.dps"
-			>
-		</File>
-		<File
-			RelativePath=".\res\directx\shadowmap.dvs"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\spiderbombsource.col"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\SpotLightRenderPass.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\SpotLightRenderPass.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\stackablebox.col"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\stair.col"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\soil\stb_image_aug.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\soil\stb_image_aug.h"
-			>
-		</File>
-		<File
-			RelativePath=".\misc\swap.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\misc\swap.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\Texture.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\Texture.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\Texture3d.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\Texture3d.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\TextureRenderPass.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\TextureRenderPass.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\thresherbase.col"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\threshercannon.col"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\tinyeye.col"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\turret1.col"
-			>
-		</File>
-		<File
-			RelativePath=".\math\Vector3.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\math\Vector3.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\VertexBuffer.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\VertexBuffer.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\film\vfwavi.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\film\vfwavi.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\wall1.col"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\Window.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\Window.h"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\WireframeWithRaster.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\opengl\WireframeWithRaster.h"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\woodenbox.col"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\shaderfuncs\worldpos.glsl"
-			>
-		</File>
-		<File
-			RelativePath=".\res\physics\yellowbarrier_pole.col"
-			>
-		</File>
-		<File
-			RelativePath=".\graphics\soil\zlib.cpp"
 			>
 		</File>
 	</Files>
