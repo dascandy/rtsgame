@@ -10,8 +10,9 @@ class ClientSocket;
 class WEBSERVERSPEC HttpReply {
 public:
 	HttpReply(int code, std::string text, const char *contentType, Blob content = Blob());
-	HttpReply();
+	HttpReply(ClientSocket *cs);
 	void writeTo(ClientSocket *cs);
+	void readFrom(ClientSocket *cs);
 	static const char *textFor(int statuscode);
 	static HttpReply defaultReply(int statuscode);
 	static const char *getMimetype(std::string ext);

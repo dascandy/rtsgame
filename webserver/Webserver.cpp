@@ -8,6 +8,7 @@
 #include "Blob.h"
 #include "HttpRequest.h"
 #include "HttpReply.h"
+#include "Client.h"
 
 Webserver::Webserver(int port) 
 : server(port)
@@ -26,10 +27,7 @@ void Webserver::run() {
 		std::string addr;
 		unsigned short port;
 		ClientSocket *cs = server.Accept(port, addr);
-		HttpRequest *request = new HttpRequest();
-		request->cs = cs;
-		request->t = new Thread();
-		request->t->start(request, &HttpRequest::handle);
+		Client *c = new Client(cs);
 	}
 }
 
@@ -38,24 +36,23 @@ bool Webserver::matches(const std::string &a, const std::string &b) {
 	return false;
 }
 
-void Webserver::handle(HttpRequest &hr) {
+HttpReply Webserver::handle(HttpRequest &hr) {
 	std::vector<std::pair<std::string, Webserver::Callback *> >::iterator it = urls.begin();
 	for (; it != urls.end(); ++it) {
 		if (matches(it->first, hr.url)) {
 			try {
-				it->second->handle(hr);
+				return it->second->handle(hr);
 			} catch (std::exception &e) {
 				const char *t = e.what();
 				Blob data(strlen(t)+98);
 				sprintf(data.data, "<html><head><title>Exception occurred while processing request</title></head><body>%s</body></html>", t);
-				HttpReply::defaultReply(500).setContent(data).writeTo(hr.cs);
+				return HttpReply::defaultReply(500).setContent(data);
 			} catch (...) {
-				HttpReply::defaultReply(500).writeTo(hr.cs);
+				return HttpReply::defaultReply(500);
 			}
-			return;
 		}
 	}
-	HttpReply::defaultReply(404).writeTo(hr.cs);
+	return HttpReply::defaultReply(404);
 }
 
 void Webserver::registerUrl(std::string match, Webserver::Callback *callback) {

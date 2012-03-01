@@ -16,7 +16,7 @@ class WEBSERVERSPEC Webserver {
 public:
 	class WEBSERVERSPEC Callback {
 	public:
-		virtual void handle(HttpRequest &req) = 0;
+		virtual HttpReply handle(HttpRequest &req) = 0;
 	};
 private:
 	std::vector<std::pair<std::string, Callback *> > urls;
@@ -28,7 +28,7 @@ private:
 	Webserver(int port);
 	static bool matches(const std::string &a, const std::string &b);
 public:
-	void handle(HttpRequest &req);
+	HttpReply handle(HttpRequest &req);
 	static Webserver &Instance() { static Webserver webserver(1080); return webserver; }
 	void registerUrl(std::string match, Callback *callback);
 };

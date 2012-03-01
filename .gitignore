@@ -1,6 +1,8 @@
 build
 Debug
 webserver.log
+HAL.log
+proxywebserver.log
 *.o
 *.obj
 *.exe

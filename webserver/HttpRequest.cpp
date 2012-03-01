@@ -1,9 +1,9 @@
 #include "HttpRequest.h"
-#include "Thread.h"
-#include "ClientSocket.h"
 #include "Webserver.h"
 
-HttpRequest::HttpRequest() {}
+HttpRequest::HttpRequest(ClientSocket *cs) {
+	readFrom(cs);
+}
 
 static std::string readLineFrom(ClientSocket *cs) {
 	char buffer[1024];
@@ -14,7 +14,7 @@ static std::string readLineFrom(ClientSocket *cs) {
 	return std::string(buffer, 0, idx-2);
 }
 
-void HttpRequest::readFrom() {
+void HttpRequest::readFrom(ClientSocket *cs) {
 	std::string requestLine = readLineFrom(cs);
 	int firstSpace = requestLine.find(" ", 0);
 	int secondSpace = requestLine.find(" ", firstSpace+1);
@@ -58,9 +58,21 @@ void HttpRequest::readFrom() {
 	if (url[url.size()-1] == '/') url = url.substr(0, url.size()-1);
 }
 
-void HttpRequest::handle() {
-	readFrom();
-	Webserver::Instance().handle(*this);
-	// TODO: allow reuse here with keepalive
-	delete cs;
+void HttpRequest::writeTo(ClientSocket *cs) {
+	std::string fullUrl = url;
+	bool firstArg = true;
+	for (std::map<std::string, std::string>::iterator it = arguments.begin(); it != arguments.end(); ++it) {
+		fullUrl += (firstArg ? "?" : "&") + it->first;
+		if (it->second.size()) fullUrl += "=" + it->second;
+		firstArg = false;
+	}
+	std::string request;
+	request = method + " " + fullUrl + " " + httpversion + "\r\n";
+	for (std::map<std::string, std::string>::iterator it = attributes.begin(); it != arguments.end(); ++it) {
+		request += it->first + ": " + it->second + "\r\n";
+	}
+	request += "\r\n";
+	cs->write(request.c_str(), request.size());
 }
+
+

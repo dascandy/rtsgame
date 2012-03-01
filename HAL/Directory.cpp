@@ -25,9 +25,12 @@ HALSPEC std::vector<Entry *> Directory::getEntries() {
 	return entries;
 }
 #else
+#include <dirent.h>
+#include <sys/types.h>
+
 std::vector<Entry *> Directory::getEntries() {
 	std::vector<Entry *> entries;
-	DIR *dir = opendir(filename.c_str());
+	DIR *dir = opendir(path.c_str());
 	struct dirent *ent;
 	while ((ent = readdir(dir))) {
 		std::string cPath = path + SEP + ent->d_name;

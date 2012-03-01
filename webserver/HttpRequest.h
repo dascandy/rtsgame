@@ -13,11 +13,10 @@ public:
 	std::string method, url, httpversion;
 	std::map<std::string, std::string> attributes;
 	std::map<std::string, std::string> arguments;
-	ClientSocket *cs;
-	Thread *t;
-	HttpRequest();
-	void handle();
-	void readFrom();
+	HttpRequest(ClientSocket *cs);
+	HttpRequest(std::string method, std::string url, std::string httpversion);
+	void readFrom(ClientSocket *cs);
+	void writeTo(ClientSocket *cs);
 };
 
 #endif

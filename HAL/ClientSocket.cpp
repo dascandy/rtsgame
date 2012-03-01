@@ -6,7 +6,10 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <netdb.h>
 #endif
+#include <string.h>
+
 
 HALSPEC ClientSocket::ClientSocket(SOCK_TYPE fd) 
 : fd(fd) {

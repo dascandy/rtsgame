@@ -1,5 +1,7 @@
 #include "HttpReply.h"
 #include "ClientSocket.h"
+#include <string.h>
+#include <stdio.h>
 
 const char *HttpReply::textFor(int statuscode) {
 	switch(statuscode) {
@@ -118,6 +120,14 @@ HttpReply::HttpReply(int code, std::string text, const char *contentType, Blob c
 {
 }
 
+HttpReply::HttpReply(ClientSocket *cs) {
+	readFrom(cs);
+}
+
+void HttpReply::readFrom(ClientSocket *cs) {
+	
+}
+
 void HttpReply::writeTo(ClientSocket *cs) {
 	char buffer[2048];
 	char linebuffer[255];
@@ -127,7 +137,7 @@ void HttpReply::writeTo(ClientSocket *cs) {
 		strcat(buffer, linebuffer);
 	}
 	if (content.size >= 0) {
-		sprintf(linebuffer, "Content-Length: %d\r\n", content.size);
+		sprintf(linebuffer, "Content-Length: %d\r\n", (unsigned int)content.size);
 		strcat(buffer, linebuffer);
 	}
 	strcat(buffer, "\r\n");

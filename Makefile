@@ -21,6 +21,10 @@ GLMDIR=$(shell ls -d external/glm-*)
 GLMSOURCES=$(shell find $(GLMDIR)/ -name \*.c -type f; find $(GLMDIR)/ -name \*.h -type f; find $(GLMDIR)/ -name \*.cpp -type f)
 webserverDIR=webserver/
 webserverSOURCES=$(shell find $(webserverDIR)/ -name \*.cpp -type f; find $(webserverDIR)/ -name \*.h -type f)
+proxywebserverDIR=proxywebserver/
+proxywebserverSOURCES=$(shell find $(proxywebserverDIR)/ -name \*.cpp -type f; find $(proxywebserverDIR)/ -name \*.h -type f)
+HALDIR=HAL/
+HALSOURCES=$(shell find $(HALDIR)/ -name \*.cpp -type f; find $(HALDIR)/ -name \*.h -type f)
 LIB_DEP=$(patsubst %,lib/lib%.so,$(LIBS))
 
 all: bin/game
@@ -28,7 +32,7 @@ all: bin/game
 clean:
 	$(RM) $(LIB_DEP)
 
-bin/game: $(patsubst %,external/%_built,$(EXTLIBS)) build/lib/libwebserver.so
+bin/game: $(patsubst %,external/%_built,$(EXTLIBS)) build/lib/libwebserver.so build/lib/libHAL.so build/bin/proxywebserver
 	@$(MAKE) -C game/
 	@cp game/game build/bin/game
 
@@ -72,5 +76,15 @@ build/lib/libwebserver.so: $(webserverSOURCES)
 	@echo COMPILE WEBSERVER
 	@$(MAKE) -C webserver/ >webserver.log 2>&1
 	@cp webserver/webserver.so build/lib/libwebserver.so
+
+build/bin/proxywebserver: $(proxywebserverSOURCES)
+	@echo COMPILE PROXYWEBSERVER
+	@$(MAKE) -C proxywebserver/ >proxywebserver.log 2>&1
+	@cp proxywebserver/proxywebserver build/bin/proxywebserver
+
+build/lib/libHAL.so: $(HALSOURCES)
+	@echo COMPILE HAL
+	@$(MAKE) -C HAL/ >HAL.log 2>&1
+	@cp HAL/HAL.so build/lib/libHAL.so
 
 

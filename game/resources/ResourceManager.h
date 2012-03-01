@@ -4,8 +4,10 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <typeinfo>
 #include "QueuedWork.h"
 #include "blob.h"
+#include "debug.h"
 
 class Resource {
 public:
@@ -37,7 +39,7 @@ class Res : public Resource {
 public:
 	bool operator==(const Resource &r) {
 		const Res<T> *t = dynamic_cast<const Res<T> *>(&r);
-		return (t != null && t->h == h);
+		return (t != NULL && t->h == h);
 	}
 	Res(const Res<T> &obj) : h(h) { 
 		inc();
@@ -93,19 +95,7 @@ class QueuedLoad : public Queued {
 	: name(name)
 	, res(res)
 	{}
-	void run() {
-		const char *dirName = T::getDirName();
-		std::vector<BaseTypeHandler *> &rths = ResourceManager::Instance().rths[typeid(T).name()];
-		for (std::vector<BaseTypeHandler *>::iterator it = rths.begin(); it != rths.end(); ++it) {
-			ResourceTypeHandler<T> *rth = (ResourceTypeHandler<T> *)*it;
-			blob b = ResourceManager::Instance().loadblob(dirName + "/" + name + "." + rth->getExt());
-			if (b.size) {
-				QueuedWork::ResourceLoading.push_back(new QueuedOpen(name, b, res, *rth));
-				return;
-			}
-		}
-		Log("Cannot find file to load for resource %s of type %s", name.c_str(), typeid(T).name());
-	}
+	void run();
 };
 
 template <typename T>
@@ -121,7 +111,7 @@ class QueuedOpen : public Queued {
 	, rth(rth)
 	{}
 	void run() {
-		T *obj = rth.load(blob);
+		T *obj = rth.load(data);
 		if (obj)
 			res.h->replaceWith(obj);
 		else
@@ -141,7 +131,7 @@ class ResourceManager {
 			ResourceManager::instance().storages.push_back(this);
 		}
 		void cleanup() {
-			TODO_w("Implement cleanup in resource storage");
+			TODO_W("Implement cleanup in resource storage");
 		}
 	};
 	std::map<std::string, std::vector<BaseTypeHandler *> > rths;
@@ -152,7 +142,7 @@ public:
 	static ResourceManager &instance() { static ResourceManager rm; return rm; }
 	void setRootDir(std::string rootDir) { 
 		this->rootDir = rootDir; 
-		TODO_w("Add inotify stuff here");
+		TODO_W("Add inotify stuff here");
 	}
 	template <typename T>
 	Res<T> getResource(const std::string &name) {
@@ -183,6 +173,20 @@ public:
 	blob loadblob(const std::string &name);
 	void saveblob(const std::string &name, blob &b);
 };
+
+void QueuedLoad::run() {
+	const char *dirName = T::getDirName();
+	std::vector<BaseTypeHandler *> &rths = ResourceManager::Instance().rths[typeid(T).name()];
+	for (std::vector<BaseTypeHandler *>::iterator it = rths.begin(); it != rths.end(); ++it) {
+		ResourceTypeHandler<T> *rth = (ResourceTypeHandler<T> *)*it;
+		blob b = ResourceManager::Instance().loadblob(dirName + "/" + name + "." + rth->getExt());
+		if (b.size) {
+			QueuedWork::ResourceLoading.push_back(new QueuedOpen(name, b, res, *rth));
+			return;
+		}
+	}
+	Log("Cannot find file to load for resource %s of type %s", name.c_str(), typeid(T).name());
+}
 
 #endif
 
