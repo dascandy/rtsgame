@@ -51,9 +51,9 @@ HALSPEC ServerSocket::~ServerSocket() {
 HALSPEC ClientSocket *ServerSocket::Accept(unsigned short &portno, std::string &ipaddr) {
 	struct sockaddr_in addr;
 #ifdef _MSC_VER
-	int addrlen;
+	int addrlen = sizeof(addr);
 #else
-	unsigned int addrlen;
+	unsigned int addrlen = sizeof(addr);
 #endif
 	SOCK_TYPE newfd = accept(sock, (struct sockaddr *)&addr, &addrlen);
 	if (newfd <= 0) return NULL;

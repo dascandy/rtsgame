@@ -27,8 +27,11 @@ void Webserver::run() {
 		std::string addr;
 		unsigned short port;
 		ClientSocket *cs = server.Accept(port, addr);
-		Client *c = new Client(cs);
+		printf("Getting new client at %s:%d %p\n", addr.c_str(), port, cs);
+		if (cs) 
+			Client *c = new Client(cs);
 	}
+	printf("Webserver stopped");
 }
 
 bool Webserver::matches(const std::string &a, const std::string &b) {

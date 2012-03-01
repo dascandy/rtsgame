@@ -20,6 +20,8 @@ HALSPEC Blob::Blob(const Blob &rhs) {
 	delete [] data;
 	data = b.data;
 	size = b.size;
+	b.data = 0;
+	b.size = 0;
 }
 
 HALSPEC Blob &Blob::operator=(const Blob &rhs) {
@@ -27,6 +29,8 @@ HALSPEC Blob &Blob::operator=(const Blob &rhs) {
 	delete [] data;
 	data = b.data;
 	size = b.size;
+	b.data = 0;
+	b.size = 0;
 	return *this;
 }
 

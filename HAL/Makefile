@@ -8,7 +8,7 @@ HAL.so: Blob.o ClientSocket.o Directory.o Entry.o File.o ServerSocket.o Sockets.
 	$(LD) -shared -o $@ $^
 
 %.o: %.cpp
-	$(CPP) -fPIC -DPIC -o $@ -c $<
+	$(CPP) -fPIC -DPIC -o $@ -c $< -g
 
 
 

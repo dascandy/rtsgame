@@ -89,7 +89,7 @@ HttpReply HttpReply::defaultReply(int statuscode) {
 }
 
 static struct extension {
-	std::string ext; 
+	const char *ext; 
 	const char *mimeType;
 } exts[] = {
    "exe", "application/executable",
@@ -106,8 +106,8 @@ static struct extension {
 };
 
 const char *HttpReply::getMimetype(std::string ext) {
-	for (extension *f = exts; f->ext.size(); f++) {
-		if (f->ext == ext) return f->mimeType;
+	for (extension *f = exts; f->ext[0]; f++) {
+		if (strcmp(f->ext, ext.c_str()) == 0) return f->mimeType;
 	}
 	return "application/octet-stream";
 }
