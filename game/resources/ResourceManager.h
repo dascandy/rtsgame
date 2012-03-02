@@ -6,7 +6,7 @@
 #include <vector>
 #include <typeinfo>
 #include "QueuedWork.h"
-#include "blob.h"
+#include "Blob.h"
 #include "debug.h"
 
 class Resource {
@@ -78,13 +78,13 @@ public:
 template <typename T>
 class ResourceTypeHandler : public BaseTypeHandler {
 public:
-	virtual T *load(blob &) = 0;
+	virtual T *load(Blob &) = 0;
 };
 
 template <typename T>
 class ResourceStorer : public BaseTypeHandler {
 public:
-	virtual blob save(T *) = 0;
+	virtual Blob save(T *) = 0;
 };
 
 template <typename T>
@@ -101,10 +101,10 @@ class QueuedLoad : public Queued {
 template <typename T>
 class QueuedOpen : public Queued {
 	std::string name;
-	blob data;
+	Blob data;
 	Res<T> res;
 	ResourceTypeHandler<T> &rth;
-	QueuedOpen(std::string name, blob data, Res<T> res, ResourceTypeHandler<T> &rth)
+	QueuedOpen(std::string name, Blob data, Res<T> res, ResourceTypeHandler<T> &rth)
 	: name(name)
 	, data(data)
 	, res(res)
@@ -139,7 +139,7 @@ class ResourceManager {
 	std::string rootDir;
 	std::vector<ResourceStorageBase *> storages;
 public:
-	static ResourceManager &instance() { static ResourceManager rm; return rm; }
+	static ResourceManager &Instance() { static ResourceManager rm; return rm; }
 	void setRootDir(std::string rootDir) { 
 		this->rootDir = rootDir; 
 		TODO_W("Add inotify stuff here");
@@ -154,7 +154,7 @@ public:
 		return hdl;
 	}
 	template <typename T>
-	blob storeResource(Res<T> *resource) {
+	Blob storeResource(Res<T> *resource) {
 		ResourceStorer *rs = (ResourceStorer *)rss[typeid(T).name()];
 		if (!rs) {
 			Log("Cannot find handler to store resource %s of type %s", name.c_str(), typeid(T).name());
@@ -170,8 +170,8 @@ public:
 	void RegisterResourceStorer(ResourceStorer<T> &rs) {
 		rss[typeid(T).name()] = (void *)&rs;
 	}
-	blob loadblob(const std::string &name);
-	void saveblob(const std::string &name, blob &b);
+	Blob loadblob(const std::string &name);
+	void saveblob(const std::string &name, Blob &b);
 };
 
 void QueuedLoad::run() {
