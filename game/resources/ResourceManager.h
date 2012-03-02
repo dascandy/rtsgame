@@ -5,7 +5,8 @@
 #include <map>
 #include <vector>
 #include "QueuedWork.h"
-#include "blob.h"
+#include "Blob.h"
+#include "debug.h"
 
 class Resource {
 public:
@@ -76,13 +77,13 @@ public:
 template <typename T>
 class ResourceTypeHandler : public BaseTypeHandler {
 public:
-	virtual T *load(blob &) = 0;
+	virtual T *load(Blob &) = 0;
 };
 
 template <typename T>
 class ResourceStorer : public BaseTypeHandler {
 public:
-	virtual blob save(T *) = 0;
+	virtual Blob save(T *) = 0;
 };
 
 template <typename T>
@@ -111,17 +112,17 @@ class QueuedLoad : public Queued {
 template <typename T>
 class QueuedOpen : public Queued {
 	std::string name;
-	blob data;
+	Blob data;
 	Res<T> res;
 	ResourceTypeHandler<T> &rth;
-	QueuedOpen(std::string name, blob data, Res<T> res, ResourceTypeHandler<T> &rth)
+	QueuedOpen(std::string name, Blob data, Res<T> res, ResourceTypeHandler<T> &rth)
 	: name(name)
 	, data(data)
 	, res(res)
 	, rth(rth)
 	{}
 	void run() {
-		T *obj = rth.load(blob);
+		T *obj = rth.load(data);
 		if (obj)
 			res.h->replaceWith(obj);
 		else
@@ -141,7 +142,7 @@ class ResourceManager {
 			ResourceManager::instance().storages.push_back(this);
 		}
 		void cleanup() {
-			TODO_w("Implement cleanup in resource storage");
+			TODO_W("Implement cleanup in resource storage");
 		}
 	};
 	std::map<std::string, std::vector<BaseTypeHandler *> > rths;
@@ -149,10 +150,10 @@ class ResourceManager {
 	std::string rootDir;
 	std::vector<ResourceStorageBase *> storages;
 public:
-	static ResourceManager &instance() { static ResourceManager rm; return rm; }
+	static ResourceManager &Instance() { static ResourceManager rm; return rm; }
 	void setRootDir(std::string rootDir) { 
 		this->rootDir = rootDir; 
-		TODO_w("Add inotify stuff here");
+		TODO_W("Add inotify stuff here");
 	}
 	template <typename T>
 	Res<T> getResource(const std::string &name) {
@@ -164,7 +165,7 @@ public:
 		return hdl;
 	}
 	template <typename T>
-	blob storeResource(Res<T> *resource) {
+	Blob storeResource(Res<T> *resource) {
 		ResourceStorer *rs = (ResourceStorer *)rss[typeid(T).name()];
 		if (!rs) {
 			Log("Cannot find handler to store resource %s of type %s", name.c_str(), typeid(T).name());
@@ -180,8 +181,8 @@ public:
 	void RegisterResourceStorer(ResourceStorer<T> &rs) {
 		rss[typeid(T).name()] = (void *)&rs;
 	}
-	blob loadblob(const std::string &name);
-	void saveblob(const std::string &name, blob &b);
+	Blob loadblob(const std::string &name);
+	void saveblob(const std::string &name, Blob &b);
 };
 
 #endif

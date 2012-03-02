@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/vmg /MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="devil;misc;opengl;resources;view;webhandlers;..\external\glm-0.9.3.1;..\external\glew-1.7.0\include;..\external\SDL-1.3.0-6248\include;..\HAL\;..\webserver"
+				AdditionalIncludeDirectories="misc;opengl;resources;view;webhandlers;..\external\glm-0.9.3.1;..\external\glew-1.7.0\include;..\external\SDL-1.3.0-6248\include;..\HAL\;..\webserver;..\external\devil-1.7.8\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;NO_EDITING"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -54,7 +54,7 @@
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="3"
-				DisableSpecificWarnings="4996;4512;4355;4201"
+				DisableSpecificWarnings="4996;4512;4355;4201;4251"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -267,14 +267,6 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="devil"
-			>
-			<File
-				RelativePath=".\devil\DevIL.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="misc"
 			>
 			<File
@@ -342,7 +334,27 @@
 			Name="resources"
 			>
 			<File
+				RelativePath=".\resources\blob.h"
+				>
+			</File>
+			<File
+				RelativePath=".\resources\QueuedWork.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\resources\QueuedWork.h"
+				>
+			</File>
+			<File
 				RelativePath=".\resources\ResourceManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\resources\TextureHdl.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\resources\TextureHdl.h"
 				>
 			</File>
 		</Filter>

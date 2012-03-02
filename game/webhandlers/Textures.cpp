@@ -1,6 +1,5 @@
 #include "Textures.h"
 #include "Webserver.h"
-#include "DevIL.h"
 #include "Texture.h"
 #include <stdio.h>
 
