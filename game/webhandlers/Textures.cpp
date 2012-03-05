@@ -17,7 +17,7 @@ std::string getTexturesWebsite() {
 
 class TextureWebClient : public Webserver::Callback {
 public:
-        void handle(HttpRequest &hr) {
+    HttpReply handle(HttpRequest &hr) {
 		if (hr.url.size() < 10) {
 			
 		} else {
@@ -33,7 +33,8 @@ public:
 			reply.writeTo(hr.fd);
 			*/
 		}
-        }
+		return HttpReply::defaultReply(500);
+    }
 };
 
 static TextureWebClient &getTwc() { static TextureWebClient twc; return twc; }

@@ -47,7 +47,7 @@
 				RuntimeLibrary="3"
 				WarningLevel="3"
 				DebugInformationFormat="4"
-				DisableSpecificWarnings="4996"
+				DisableSpecificWarnings="4996;4251"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -159,6 +159,14 @@
 	<References>
 	</References>
 	<Files>
+		<File
+			RelativePath=".\Client.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\Client.h"
+			>
+		</File>
 		<File
 			RelativePath=".\DirectoryHandler.cpp"
 			>

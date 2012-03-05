@@ -164,17 +164,18 @@ public:
 	}
 	template <typename T>
 	void RegisterResourceTypeHandler(ResourceTypeHandler<T> &rth) {
-		rths[typeid(T).name()].push_back((void *)&rth);
+		rths[typeid(T).name()].push_back(&rth);
 	}
 	template <typename T>
 	void RegisterResourceStorer(ResourceStorer<T> &rs) {
-		rss[typeid(T).name()] = (void *)&rs;
+		rss[typeid(T).name()] = &rs;
 	}
 	Blob loadblob(const std::string &name);
 	void saveblob(const std::string &name, Blob &b);
 };
 
-void QueuedLoad::run() {
+template <typename T>
+void QueuedLoad<T>::run() {
 	const char *dirName = T::getDirName();
 	std::vector<BaseTypeHandler *> &rths = ResourceManager::Instance().rths[typeid(T).name()];
 	for (std::vector<BaseTypeHandler *>::iterator it = rths.begin(); it != rths.end(); ++it) {
