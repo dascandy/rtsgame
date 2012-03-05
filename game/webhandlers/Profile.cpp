@@ -4,12 +4,13 @@
 
 class ProfileWebClient : public Webserver::Callback {
 public:
-        void handle(HttpRequest &hr) {
+        HttpReply handle(HttpRequest &hr) {
 		if (hr.url == "/profile/overview") {
 			
 		} else if (hr.url.substr(0, 14) == "/profile/graph") {
 			
 		}
+		return HttpReply::defaultReply(501);
         }
 };
 

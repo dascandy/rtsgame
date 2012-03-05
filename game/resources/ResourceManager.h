@@ -128,7 +128,7 @@ class ResourceManager {
 		static ResourceStorage<T> &Instance() { static ResourceStorage<T> inst; return inst; }
 		std::map<std::string, Res<T> > resources;
 		ResourceStorage() {
-			ResourceManager::instance().storages.push_back(this);
+			ResourceManager::Instance().storages.push_back(this);
 		}
 		void cleanup() {
 			TODO_W("Implement cleanup in resource storage");
@@ -148,16 +148,16 @@ public:
 	Res<T> getResource(const std::string &name) {
 		Res<T> hdl = ResourceStorage<T>::Instance().resources[name];
 		if (!hdl.h->loadQueued) {
-			QueuedWork::Background.push_back(new QueuedLoad(name, hdl));
+			QueuedWork::Background.push_back(new QueuedLoad<T>(name, hdl));
 			hdl.h->loadQueued = true;
 		}
 		return hdl;
 	}
 	template <typename T>
 	Blob storeResource(Res<T> *resource) {
-		ResourceStorer *rs = (ResourceStorer *)rss[typeid(T).name()];
+		ResourceStorer<T> *rs = (ResourceStorer<T> *)rss[typeid(T).name()];
 		if (!rs) {
-			Log("Cannot find handler to store resource %s of type %s", name.c_str(), typeid(T).name());
+			Log("Cannot find handler to store resource %p of type %s", resource, typeid(T).name());
 		} else {
 			return rs->save(resource->h->obj);
 		}
@@ -176,13 +176,13 @@ public:
 
 template <typename T>
 void QueuedLoad<T>::run() {
-	const char *dirName = T::getDirName();
+	std::string dirName = T::getDirName();
 	std::vector<BaseTypeHandler *> &rths = ResourceManager::Instance().rths[typeid(T).name()];
 	for (std::vector<BaseTypeHandler *>::iterator it = rths.begin(); it != rths.end(); ++it) {
 		ResourceTypeHandler<T> *rth = (ResourceTypeHandler<T> *)*it;
-		blob b = ResourceManager::Instance().loadblob(dirName + "/" + name + "." + rth->getExt());
+		Blob b = ResourceManager::Instance().loadblob(dirName + "/" + name + "." + rth->getExt());
 		if (b.size) {
-			QueuedWork::ResourceLoading.push_back(new QueuedOpen(name, b, res, *rth));
+			QueuedWork::ResourceLoading.push_back(new QueuedOpen<T>(name, b, res, *rth));
 			return;
 		}
 	}

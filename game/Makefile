@@ -14,6 +14,7 @@ INCLUDES=\
 	-I../external/libvorbis-1.32/include \
 	-I../external/libogg-1.30/include \
 	-I../external/bullet-2.79/src \
+	-I../HAL \
 	-I../webserver \
 	-Isfx \
 	-Iphysics \
@@ -37,6 +38,11 @@ INCLUDES=\
 
 -include $(TARGET).conf
 
+all: $(TARGET) $(TARGET).a
+$(TARGET).a: $(OBJECTS) Makefile
+	@echo AR $@
+	@$(AR) -rcs $@ $(filter %.o,$^)
+
 $(TARGET): $(OBJECTS) Makefile
 	@echo LD $@ $(LDFLAGS)
 	@$(LD) -o $@ $(filter %.o,$^) $(LDFLAGS)
@@ -46,7 +52,7 @@ $(TARGET): $(OBJECTS) Makefile
 	@$(CC) $(CCFLAGS) -c -o $@ $<
 
 clean:
-	@$(RM) $(TARGET) $(OBJECTS) $(DEPFILES) $(UNMATCHED)
+	@$(RM) $(TARGET) $(TARGET).a $(OBJECTS) $(DEPFILES) $(UNMATCHED)
 
 -include $(DEPFILES)
 
