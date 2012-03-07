@@ -16,6 +16,7 @@ private:
 	File(std::string fullPath, size_t size);
 	friend class Entry;
 public:
+	static File *Create(std::string fullPath, Blob newContent);
 	std::string getFullName();
 	size_t getSize() { return size; }
 	const std::string &getExtension() { return ext; }

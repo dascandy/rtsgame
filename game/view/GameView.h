@@ -6,6 +6,8 @@
 #include "Texture.h"
 #include "RenderView.h"
 #include "RenderTarget.h"
+#include "ResourceManager.h"
+#include "TextureRenderPass.h"
 
 class GameView : public InputCallback
 {
@@ -21,6 +23,9 @@ public:
 	virtual void KeyUp(int);
 	void run();
 private:
+	Res<Texture> bgTex;
+	RenderView rv;
+	TextureRenderPass trp;
 };
 
 #endif

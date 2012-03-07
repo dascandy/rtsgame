@@ -21,7 +21,7 @@ Model::Model(int vertexcount, vertex *vertices)
 {
 }
 
-void Model::Draw(ShaderProgram &prog)
+void Model::Draw(Res<ShaderProgram> &prog)
 {
 	vb.Draw(prog);
 }

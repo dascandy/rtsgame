@@ -51,7 +51,8 @@ ShaderProgram::ShaderProgram(const char *vsh, const char *gsh, const char *fsh, 
 		while (varyings[count])
 			count++;
 
-		glTransformFeedbackVaryings(prog, count, varyings, GL_INTERLEAVED_ATTRIBS);
+		if (count)
+			glTransformFeedbackVaryings(prog, count, varyings, GL_INTERLEAVED_ATTRIBS);
 	}
 
 	int ok = false;
@@ -165,14 +166,9 @@ void ShaderProgram::Set(const char *name, const Color &value)
 	glUniform3f(uniform, value.r, value.g, value.b);
 }
 
-Use::Use(ShaderProgram &prog) 
+void ShaderProgram::SetActive() 
 {
-	glUseProgram(prog.prog); 
+	glUseProgram(prog); 
 //	GameState::Instance().SetVars(prog);
-}
-
-Use::~Use() 
-{
-	glUseProgram(0); 
 }
 

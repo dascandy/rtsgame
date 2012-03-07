@@ -34,7 +34,7 @@ public:
 	}
 	~VertexBuffer();
 	void Add(void *objs, size_t count);
-	void Draw(ShaderProgram &);
+	void Draw(Res<ShaderProgram> &);
 	void Read(void *out);
 	void Write(void *in);
 	unsigned int vbo, vao;

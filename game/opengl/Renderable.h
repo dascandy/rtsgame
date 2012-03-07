@@ -1,14 +1,13 @@
 #ifndef RENDERABLE_H
 #define RENDERABLE_H
 
-#include "Resource.h"
-
 class ShaderProgram;
+#include "ResourceManager.h"
 
-class Renderable : public Resource
+class Renderable
 {
 public:
-	virtual void Draw(ShaderProgram &prog) = 0;
+	virtual void Draw(Res<ShaderProgram> &prog) = 0;
 };
 
 #endif

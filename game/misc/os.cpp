@@ -16,13 +16,12 @@ void delay(msec_t time)
 }
 
 void platInit() {
-        char cwd[1024];
-        int chars = GetCurrentDirectory(1023, cwd);
-        cwd[chars] = 0;
-
-        char resdir[1024];
-        sprintf(resdir, "%s\\res\\", cwd);
-        ResourceManager::Instance().setRootDir(resdir);
+	char cwd[1024];
+    int chars = GetCurrentDirectory(1023, cwd);
+    cwd[chars] = 0;
+    char resdir[1024];
+    sprintf(resdir, "%s\\res\\", cwd);
+    ResourceManager::Instance().setRootDir(resdir);
 }
 
 void Fatal(const char *error) {

@@ -17,7 +17,6 @@ HALSPEC Blob::Blob(size_t size, char *content)
 
 HALSPEC Blob::Blob(const Blob &rhs) {
 	Blob &b = const_cast<Blob &>(rhs);
-	delete [] data;
 	data = b.data;
 	size = b.size;
 	b.data = 0;

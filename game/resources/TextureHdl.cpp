@@ -2,6 +2,10 @@
 #include <IL/il.h>
 #include "Texture.h"
 
+#pragma comment(lib, "DevIL.lib")
+#pragma comment(lib, "ILU.lib")
+#pragma comment(lib, "ILUT.lib")
+
 class TextureHandler : public ResourceTypeHandler<Texture>, public ResourceStorer<Texture> {
 private:
 	int devilCode;

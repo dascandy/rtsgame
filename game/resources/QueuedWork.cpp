@@ -1,5 +1,6 @@
 #include "QueuedWork.h"
 
-std::vector<Queued *> QueuedWork::ResourceLoading, QueuedWork::Background, QueuedWork::Polls; 
+std::deque<Queued *> QueuedWork::ResourceLoading, QueuedWork::Background;
+std::vector<Queued *> QueuedWork::Polls; 
 
 

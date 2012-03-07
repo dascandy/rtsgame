@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <GL/glew.h>
+#include "ResourceManager.h"
 
 class ShaderProgram;
 
@@ -12,6 +13,7 @@ public:
 	Texture(int w, int h, int format = GL_RGBA8);
 	virtual ~Texture();
 	virtual void Reload();
+	static const char *getDirName() { return "textures"; }
 	int width() { return w; }
 	int height() { return h; }
 	void SetContent(unsigned char *data);
@@ -19,7 +21,7 @@ public:
 	virtual void SetMipmapped(bool mipmapped);
 	virtual void GenMipmap();
 	virtual void SetAsAttachment(int i);
-	bool Bind(ShaderProgram &prog, const std::string &name);
+	bool Bind(Res<ShaderProgram> &prog, const std::string &name);
 	unsigned int textureId;
 	virtual void swap(Texture &other);
 	unsigned char *read();

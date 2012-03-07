@@ -97,14 +97,14 @@ void Texture::SetAsAttachment(int i)
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, textureId, 0);
 }
 
-bool Texture::Bind(ShaderProgram &prog, const std::string &name)
+bool Texture::Bind(Res<ShaderProgram> &prog, const std::string &name)
 {
-	if (!prog.SetTexture(name.c_str(), prog.curtex))
+	if (!prog->SetTexture(name.c_str(), prog->curtex))
 		return false;
 
-	glActiveTexture(GL_TEXTURE0+prog.curtex);
+	glActiveTexture(GL_TEXTURE0+prog->curtex);
 	glBindTexture(type, textureId);
-	prog.curtex++;
+	prog->curtex++;
 	return true;
 }
 
