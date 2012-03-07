@@ -9,9 +9,12 @@ extern "C" int main(int, char *argv[])
 	platInit();
 	int rval = 0;
 	profile_init(argv[0]);
+#ifdef RELEASE
 	try
 	{
+#endif
 		Game().run();
+#ifdef RELEASE
 	}
 	catch(std::exception &e) 
 	{
@@ -21,6 +24,7 @@ extern "C" int main(int, char *argv[])
 	{
 		rval = rv;
 	}
+#endif
 	profile_fini();
 	return rval;
 }

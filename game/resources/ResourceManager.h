@@ -163,12 +163,13 @@ public:
 		return hdl;
 	}
 	template <typename T>
-	Blob storeResource(Res<T> *resource) {
+	Blob storeResource(T * resource) {
 		ResourceStorer<T> *rs = (ResourceStorer<T> *)rss[typeid(T).name()];
 		if (!rs) {
 			Log("Cannot find handler to store resource %p of type %s", resource, typeid(T).name());
+			return Blob();
 		} else {
-			return rs->save(resource->h->obj);
+			return rs->save(resource);
 		}
 	}
 	template <typename T>

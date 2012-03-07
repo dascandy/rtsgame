@@ -331,10 +331,6 @@
 			Name="resources"
 			>
 			<File
-				RelativePath=".\resources\blob.h"
-				>
-			</File>
-			<File
 				RelativePath=".\resources\QueuedWork.cpp"
 				>
 			</File>
@@ -395,19 +391,19 @@
 			Name="webhandlers"
 			>
 			<File
-				RelativePath=".\webhandlers\Profile.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\webhandlers\Profile.h"
-				>
-			</File>
-			<File
 				RelativePath=".\webhandlers\Textures.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\webhandlers\Textures.h"
+				>
+			</File>
+			<File
+				RelativePath=".\webhandlers\WebProfile.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\webhandlers\WebProfile.h"
 				>
 			</File>
 		</Filter>

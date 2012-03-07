@@ -33,7 +33,7 @@ protected:
 	int format;
 	friend class Texture3d;
 public:
-	static std::map<int, Texture *> textures;
+	static std::map<int, Texture* > textures;
 };
 
 void swap(Texture &a, Texture &b);

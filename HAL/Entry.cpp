@@ -15,6 +15,9 @@ HALSPEC Entry *Entry::Create(std::string path) {
 	while (path[path.size()-1] == SEP) path = path.substr(0, path.size()-1);
 	struct __stat64 data;
 	int statr = _stat64(path.c_str(), &data);
+	if (statr < 0) {
+		return 0;
+	}
 	if (data.st_mode & _S_IFREG) {
 		return new File(path, data.st_size);
 	} else if (data.st_mode & _S_IFDIR) {

@@ -17,7 +17,7 @@ public:
 	const char *getExt() { return ext; }
 };
 
-static TextureHandler _instPng(IL_PNG, "png"), _instJpg(IL_JPG, "jpg"), instJpeg(IL_JPG, "jpeg"), instBmp(IL_BMP, "bmp");
+static TextureHandler _instJpg(IL_JPG, "jpg"), instJpeg(IL_JPG, "jpeg"), instBmp(IL_BMP, "bmp"), _instPng(IL_PNG, "png");
 
 TextureHandler::TextureHandler(int devilCode, const char *ext) 
 : devilCode(devilCode)
@@ -39,28 +39,16 @@ Texture *TextureHandler::load(Blob &b) {
 }
 
 Blob TextureHandler::save(Texture *b) {
-	Blob imagedata;
-	/*
-	ilEnable(IL_FILE_OVERWRITE);
 	ILuint id;
 	ilGenImages(1, &id);
 	ilBindImage(id);
+	int maxSize = b->width() * b->height() * 4 + 5000;
 	unsigned char *buf = b->read();
 	ilTexImage(b->width(), b->height(), 1, 4, IL_RGBA, IL_UNSIGNED_BYTE, buf);
 	delete [] buf;
-	const int maxwidth = 2048;
-	const int maxheight = 2048;
-	static unsigned char data[maxwidth * maxheight * 3];
-	ilSetData(data);
-	imagedata.blob.size = ilSaveL(IL_PNG, data, maxwidth * maxheight * 3);
-	ImageData imagedata;
-	imagedata.type = IL_PNG;
-	unsigned char* savedata = (unsigned char*)malloc(imagedata.blob.size);
-	imagedata.blob.buf.reset(savedata);
-	memcpy(savedata, data, imagedata.blob.size);
+	char *buffer = new char[maxSize];
+	size_t actualSize = ilSaveL(IL_PNG, buffer, maxSize);
 	ilDeleteImages(1, &id);
-*/
-	return imagedata;
+	return Blob(actualSize, buffer);
 }
-
 

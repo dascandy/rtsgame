@@ -20,8 +20,10 @@ void Client::handle() {
 	bool keepalive = false;
 	do {
 		HttpRequest req(cs);
-		if (req.arguments["Connection"] == "Keep-Alive") keepalive = true;
-		Webserver::Instance().handle(req).writeTo(cs);
+//		if (req.arguments["Connection"] == "Keep-Alive") keepalive = true;
+		Webserver::Instance().Queue(&req, cs);
+		Sleep(10000);
 	} while (keepalive);
 	delete this;
 }
+

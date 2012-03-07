@@ -4,6 +4,7 @@
 
 Blob ResourceManager::loadblob(const std::string &name) {
 	Entry *e = Entry::Create(rootDir + "/" + name);
+	if (!e) return Blob();
 	if (e->isDirectory()) {
 		return Blob();
 	}
