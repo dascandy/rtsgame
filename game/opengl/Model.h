@@ -4,6 +4,7 @@
 #include "Renderable.h"
 #include "VertexBuffer.h"
 #include <string>
+#include "ResourceManager.h"
 
 class ShaderProgram;
 class PhysicsModel;
@@ -12,7 +13,7 @@ class stream;
 class Model : public Renderable
 {
 public:
-	void Draw(ShaderProgram &prog);
+	void Draw(Res<ShaderProgram> &prog);
 	static Model &Load(const std::string &name);
 	static Model &Raster();
 	static Model &Square();

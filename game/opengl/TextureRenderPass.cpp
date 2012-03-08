@@ -4,7 +4,7 @@
 #include "Renderable.h"
 #include <GL/glew.h>
 
-TextureRenderPass::TextureRenderPass(ShaderProgram program, Renderable &input, RenderTarget &target, RenderView &view)
+TextureRenderPass::TextureRenderPass(Res<ShaderProgram> program, Renderable &input, RenderTarget &target, RenderView &view)
 : GpuRenderPass(program)
 , input(input)
 , target(target)
@@ -16,7 +16,7 @@ TextureRenderPass::TextureRenderPass(ShaderProgram program, Renderable &input, R
 void TextureRenderPass::DoRun()
 {
 	target.Activate();
-	Use shader(program);
+	program->SetActive();
 	view.Set(program);
 	input.Draw(program);
 }

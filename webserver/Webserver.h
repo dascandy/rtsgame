@@ -6,6 +6,7 @@
 #include <vector>
 #include <utility>
 #include <map>
+#include <deque>
 #include "ServerSocket.h"
 #include "Dll.h"
 
@@ -27,8 +28,12 @@ private:
 	static void stop();
 	Webserver(int port);
 	static bool matches(const std::string &a, const std::string &b);
+	std::deque<std::pair<HttpRequest *, ClientSocket *> > queuedRequests;
 public:
+	static void DoPoll();
+	void Poll();
 	HttpReply handle(HttpRequest &req);
+	void Queue(HttpRequest *req, ClientSocket *cs);
 	static Webserver &Instance() { static Webserver webserver(1080); return webserver; }
 	void registerUrl(std::string match, Callback *callback);
 };

@@ -3,10 +3,11 @@
 
 #include <vector>
 #include "ShaderProgram.h"
+#include "ResourceManager.h"
 #include <map>
 #include <vector>
+#include "Texture.h"
 
-class Texture;
 class Renderable;
 class Object;
 
@@ -24,12 +25,12 @@ protected:
 class GpuRenderPass : public RenderPass
 {
 public:
-	GpuRenderPass(ShaderProgram prog) : program(prog) {}
+	GpuRenderPass(Res<ShaderProgram> prog) : program(prog) {}
 	void Run();
-	void AddTexture(std::string name, Texture &tex);
-//protected:
-	std::vector<std::pair<std::string, Texture *> > textures;
-	ShaderProgram program;
+	void AddTexture(std::string name, Res<Texture> tex);
+protected:
+	std::vector<std::pair<std::string, Res<Texture> > > textures;
+	Res<ShaderProgram> program;
 };
 
 #endif

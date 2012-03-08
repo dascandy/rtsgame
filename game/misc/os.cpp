@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "ResourceManager.h"
 
+static void webinit();
+
 #ifdef _WIN32
 #include <windows.h>
 
@@ -16,13 +18,13 @@ void delay(msec_t time)
 }
 
 void platInit() {
-        char cwd[1024];
-        int chars = GetCurrentDirectory(1023, cwd);
-        cwd[chars] = 0;
-
-        char resdir[1024];
-        sprintf(resdir, "%s\\res\\", cwd);
-        ResourceManager::Instance().setRootDir(resdir);
+	char cwd[1024];
+    int chars = GetCurrentDirectory(1023, cwd);
+    cwd[chars] = 0;
+    char resdir[1024];
+    sprintf(resdir, "%s\\res\\", cwd);
+    ResourceManager::Instance().setRootDir(resdir);
+	webinit();
 }
 
 void Fatal(const char *error) {
@@ -48,7 +50,8 @@ void delay(msec_t time)
 }
 
 void platInit() {
-        ResourceManager::Instance().setRootDir("/home/pebi/projects/rtsgame/rtsgame/game/res/");
+    ResourceManager::Instance().setRootDir("/home/pebi/projects/rtsgame/rtsgame/game/res/");
+	webinit();
 }
 
 void Fatal(const char *error) {
@@ -57,4 +60,20 @@ void Fatal(const char *error) {
 }
 
 #endif
+
+#include "Textures.h"
+#include "WebProfile.h"
+#include "Webserver.h"
+#include "QueuedWork.h"
+
+class QueuedWebserverPoll : public Queued {
+public:
+	void run() { Webserver::Instance().Poll(); }
+};
+
+static void webinit() {
+	web_init_textures();
+	web_init_profile();
+	QueuedWork::Polls.push_back(new QueuedWebserverPoll());
+}
 

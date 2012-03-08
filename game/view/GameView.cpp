@@ -1,4 +1,5 @@
 #include "GameView.h"
+#include "Model.h"
 
 static const char *invecs[] = 
 {
@@ -10,11 +11,15 @@ static const char *invecs[] =
 };
 
 GameView::GameView(RenderTarget &target)
+: bgTex(ResourceManager::Instance().getResource<Texture>("heightmap"))
+, trp(ResourceManager::Instance().getResource<ShaderProgram>("test"), Model::Square(), target, rv)
 {
+	trp.AddTexture("heightmap", bgTex);
 }
 
 void GameView::run()
 {
+	trp.Run();
 }
 
 void GameView::MouseMoveX(int)

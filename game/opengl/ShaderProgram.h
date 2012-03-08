@@ -22,9 +22,11 @@ private:
 class ShaderProgram
 {
 public:
+	static const char *getDirName() { return "shaders"; }
 	ShaderProgram(const char *vsh, const char *gsh, const char *fsh, const char **invars, const char **varyings = 0);
 	ShaderProgram(const ShaderProgram &other);
 //	void Set(const char *name, const Matrix &mat, bool invert = false);
+	void SetActive();
 	void Set(const char *name, int value);
 	void Set(const char *name, unsigned int value);
 	void Set(const char *name, float value);
@@ -38,12 +40,6 @@ private:
 	int vs, fs, gs;
 	int prog;
 	friend class Use;
-};
-
-class Use {
-public:
-	Use(ShaderProgram &prog);
-	~Use();
 };
 
 #endif

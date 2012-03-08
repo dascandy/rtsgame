@@ -2,7 +2,7 @@
 #include "ShaderProgram.h"
 #include <GL/glew.h>
 
-void RenderView::Set(ShaderProgram &prog, const std::string &postfix)
+void RenderView::Set(Res<ShaderProgram> &prog, const std::string &postfix)
 {
 /*	Matrix view = Matrix(location, rotation).Invert();
 	Matrix viewproj = projection * view;

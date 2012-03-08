@@ -59,12 +59,12 @@ void VertexBuffer::Write(void *in)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void VertexBuffer::Draw(ShaderProgram &)
+void VertexBuffer::Draw(Res<ShaderProgram> &)
 {
 	glBindVertexArray(vao);
 	glDrawArrays(type, 0, count);
 	glBindVertexArray(0);
-	num_tris += count;
+	num_tris += count/3;
 }
 
 void swap(VertexBuffer &a, VertexBuffer &b)

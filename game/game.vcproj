@@ -21,6 +21,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
+			UseOfMFC="0"
 			CharacterSet="2"
 			>
 			<Tool
@@ -42,7 +43,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/vmg /MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="misc;opengl;resources;view;webhandlers;..\external\glm-0.9.3.1;..\external\glew-1.7.0\include;..\external\SDL-1.3.0-6248\include;..\HAL\;..\webserver;..\external\devil-1.7.8\include"
+				AdditionalIncludeDirectories="misc;opengl;resources;view;webhandlers;..\external\glm-0.9.3.1;..\external\glew-1.7.0\include;..\external\SDL-1.3.0-6248\include;..\HAL\;..\webserver;..\external\devil-1.7.8\include\windows"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;NO_EDITING"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -68,9 +69,9 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:msvcrt.lib"
-				AdditionalDependencies="opengl32.lib glu32.lib"
+				AdditionalDependencies="opengl32.lib glu32.lib DevIL.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;C:\Program Files (x86)\Microsoft DirectX SDK (February 2010)\Lib\x86&quot;;&quot;$(SolutionDir)$(ConfigurationName)&quot;"
+				AdditionalLibraryDirectories="&quot;C:\Program Files (x86)\Microsoft DirectX SDK (February 2010)\Lib\x86&quot;;&quot;$(SolutionDir)$(ConfigurationName)&quot;;&quot;$(SolutionDir)\external\devil-1.7.8\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				RandomizedBaseAddress="1"
@@ -230,10 +231,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\opengl\Resource.h"
-				>
-			</File>
-			<File
 				RelativePath=".\opengl\ShaderProgram.cpp"
 				>
 			</File>
@@ -334,10 +331,6 @@
 			Name="resources"
 			>
 			<File
-				RelativePath=".\resources\blob.h"
-				>
-			</File>
-			<File
 				RelativePath=".\resources\QueuedWork.cpp"
 				>
 			</File>
@@ -346,15 +339,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ResourceManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\resources\ResourceManager.h"
 				>
 			</File>
 			<File
-				RelativePath=".\resources\TextureHdl.cpp"
+				RelativePath=".\ShaderHdl.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\resources\TextureHdl.h"
+				RelativePath=".\resources\TextureHdl.cpp"
 				>
 			</File>
 		</Filter>
@@ -394,19 +391,19 @@
 			Name="webhandlers"
 			>
 			<File
-				RelativePath=".\webhandlers\Profile.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\webhandlers\Profile.h"
-				>
-			</File>
-			<File
 				RelativePath=".\webhandlers\Textures.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\webhandlers\Textures.h"
+				>
+			</File>
+			<File
+				RelativePath=".\webhandlers\WebProfile.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\webhandlers\WebProfile.h"
 				>
 			</File>
 		</Filter>

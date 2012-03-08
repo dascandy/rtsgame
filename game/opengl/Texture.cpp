@@ -6,7 +6,7 @@
 #include "ShaderProgram.h"
 #include "swap.h"
 
-std::map<int, Texture *> Texture::textures;
+std::map<int, Texture* > Texture::textures;
 
 void ReadHdrFile(std::string name, float *buffer);
 
@@ -23,13 +23,15 @@ Texture::Texture(int w, int h, int format)
 
 Texture::~Texture()
 {
-	textures[textureId] = 0;
+	textures.erase(textureId);
 	glDeleteTextures( 1, &textureId );
 }
 
 void Texture::Reload()
 {
-	textures[textureId] = 0;
+	if (textureId)
+		textures.erase(textureId);
+
 	glDeleteTextures( 1, &textureId );
 	glGenTextures( 1, &textureId );
 	glBindTexture( type, textureId );
@@ -97,14 +99,14 @@ void Texture::SetAsAttachment(int i)
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, textureId, 0);
 }
 
-bool Texture::Bind(ShaderProgram &prog, const std::string &name)
+bool Texture::Bind(Res<ShaderProgram> &prog, const std::string &name)
 {
-	if (!prog.SetTexture(name.c_str(), prog.curtex))
+	if (!prog->SetTexture(name.c_str(), prog->curtex))
 		return false;
 
-	glActiveTexture(GL_TEXTURE0+prog.curtex);
+	glActiveTexture(GL_TEXTURE0+prog->curtex);
 	glBindTexture(type, textureId);
-	prog.curtex++;
+	prog->curtex++;
 	return true;
 }
 

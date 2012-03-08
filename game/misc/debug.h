@@ -13,7 +13,7 @@ extern "C" void Log(const char *fmt, ...);
 
 inline const char *basename(const char *n) {
 	while (strchr(n, '\\')) {
-		n = strchr(n, '\\');
+		n = strchr(n, '\\')+1;
 	}
 	return n;
 }

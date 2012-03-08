@@ -21,13 +21,12 @@ class Res : public Resource {
 	struct Handle {
 		Handle() : obj(0), usageCount(1), loadQueued(false) {}
 		~Handle() { delete obj; }
+		void replaceWith(T *obj) { this->obj = obj; }	// TODO: multithread safety something
 		T *obj;
 		int usageCount;
 		bool loadQueued;
 	};
 	friend class ResourceManager;
-	Res() : h(new Handle()) { }
-	Handle *h;
 	void dec() {
 		h->usageCount--; 
 		if (h->usageCount == 0) 
@@ -37,22 +36,27 @@ class Res : public Resource {
 		h->usageCount++;
 	}
 public:
+	Handle *h;
 	bool operator==(const Resource &r) {
 		const Res<T> *t = dynamic_cast<const Res<T> *>(&r);
 		return (t != NULL && t->h == h);
 	}
-	Res(const Res<T> &obj) : h(h) { 
+	Res() : h(new Handle()) { }
+	Res(const Res<T> &obj) : h(obj.h) { 
 		inc();
 	}
 	Res<T> &operator=(const Res<T> &o) {
 		dec();
 		h = o.h;
 		inc();
+		return *this;
 	}
 	~Res() { 
 		dec();
 	}
 	bool isLoaded() { return !!h->obj; }
+	T *operator->() { return h->obj; }
+	T *operator*() { return h->obj; }
 };
 
 class ResourceQueue {
@@ -91,6 +95,7 @@ template <typename T>
 class QueuedLoad : public Queued {
 	std::string name;
 	Res<T> res;
+public:
 	QueuedLoad(std::string name, Res<T> res)
 	: name(name)
 	, res(res)
@@ -104,6 +109,7 @@ class QueuedOpen : public Queued {
 	Blob data;
 	Res<T> res;
 	ResourceTypeHandler<T> &rth;
+public:
 	QueuedOpen(std::string name, Blob data, Res<T> res, ResourceTypeHandler<T> &rth)
 	: name(name)
 	, data(data)
@@ -112,9 +118,10 @@ class QueuedOpen : public Queued {
 	{}
 	void run() {
 		T *obj = rth.load(data);
-		if (obj)
+		if (obj) {
 			res.h->replaceWith(obj);
-		else
+			res.h->loadQueued = false;
+		} else
 			Log("Couldn't load new resource for %s of type %s, input is corrupt", name, typeid(T).name());
 	}
 };
@@ -134,8 +141,10 @@ class ResourceManager {
 			TODO_W("Implement cleanup in resource storage");
 		}
 	};
+public:
 	std::map<std::string, std::vector<BaseTypeHandler *> > rths;
 	std::map<std::string, BaseTypeHandler *> rss;
+private:
 	std::string rootDir;
 	std::vector<ResourceStorageBase *> storages;
 public:
@@ -154,12 +163,13 @@ public:
 		return hdl;
 	}
 	template <typename T>
-	Blob storeResource(Res<T> *resource) {
+	Blob storeResource(T * resource) {
 		ResourceStorer<T> *rs = (ResourceStorer<T> *)rss[typeid(T).name()];
 		if (!rs) {
 			Log("Cannot find handler to store resource %p of type %s", resource, typeid(T).name());
+			return Blob();
 		} else {
-			return rs->save(resource->h->obj);
+			return rs->save(resource);
 		}
 	}
 	template <typename T>
