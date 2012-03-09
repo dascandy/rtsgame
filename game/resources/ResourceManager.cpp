@@ -12,6 +12,6 @@ Blob ResourceManager::loadblob(const std::string &name) {
 }
 
 void ResourceManager::saveblob(const std::string &name, Blob &b) {
-	delete File::Create(rootDir + "/" + name, b);
+	File::Store(rootDir + "/" + name, b);
 }
 

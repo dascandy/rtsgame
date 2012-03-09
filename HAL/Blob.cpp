@@ -1,6 +1,12 @@
 #include "Blob.h"
 #include <string.h>
 
+HALSPEC Blob::Blob(const std::string &str) {
+	size = str.size();
+	data = new char[size];
+	memcpy(data, str.c_str(), size);
+}
+
 HALSPEC Blob::Blob(const char *content) {
 	size = strlen(content);
 	data = new char[size];

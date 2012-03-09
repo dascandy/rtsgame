@@ -29,10 +29,9 @@ HALSPEC Blob File::read() {
 	return data;
 }
 
-File *File::Create(std::string fullPath, Blob newContent) {
+void File::Store(std::string fullPath, Blob newContent) {
 	FILE *f = fopen(fullPath.c_str(), "wb");
 	fwrite(newContent.data, newContent.size, 1, f);
 	fclose(f);
-	return new File(fullPath, newContent.size);
 }
 

@@ -195,6 +195,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\opengl\Font.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\Font.h"
+				>
+			</File>
+			<File
 				RelativePath=".\opengl\Model.cpp"
 				>
 			</File>
@@ -331,6 +339,10 @@
 			Name="resources"
 			>
 			<File
+				RelativePath=".\resources\FontHdl.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\resources\QueuedWork.cpp"
 				>
 			</File>
@@ -339,7 +351,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ResourceManager.cpp"
+				RelativePath=".\resources\ResourceManager.cpp"
 				>
 			</File>
 			<File
@@ -347,7 +359,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ShaderHdl.cpp"
+				RelativePath=".\resources\ShaderHdl.cpp"
 				>
 			</File>
 			<File
@@ -399,11 +411,27 @@
 				>
 			</File>
 			<File
+				RelativePath=".\webhandlers\WebFont.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\webhandlers\WebFont.h"
+				>
+			</File>
+			<File
 				RelativePath=".\webhandlers\WebProfile.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\webhandlers\WebProfile.h"
+				>
+			</File>
+			<File
+				RelativePath=".\webhandlers\WebShader.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\webhandlers\WebShader.h"
 				>
 			</File>
 		</Filter>

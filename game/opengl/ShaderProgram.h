@@ -3,7 +3,8 @@
 
 #include <string>
 #include <exception>
-#include <glm/glm.hpp>
+#include "glm.h"
+#include <map>
 
 class Color;
 
@@ -22,8 +23,9 @@ private:
 class ShaderProgram
 {
 public:
+	static std::map<std::string, ShaderProgram *> shaders;
 	static const char *getDirName() { return "shaders"; }
-	ShaderProgram(const char *vsh, const char *gsh, const char *fsh, const char **invars, const char **varyings = 0);
+	ShaderProgram(const char *vsh, const char *gsh, const char *fsh, const char **invars, const char **varyings, const char *buffer, const char *name);
 	ShaderProgram(const ShaderProgram &other);
 //	void Set(const char *name, const Matrix &mat, bool invert = false);
 	void SetActive();
@@ -39,7 +41,12 @@ private:
 	int *usage;
 	int vs, fs, gs;
 	int prog;
-	friend class Use;
+	const char *vsh, *gsh, *fsh, **invars, **varyings;
+	const char *buffer;
+	friend class ShaderProgramHandler;
+	friend class ShaderProgramStorer;
+	friend class ShaderWebClient;
+	std::string name;
 };
 
 #endif

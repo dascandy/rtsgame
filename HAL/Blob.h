@@ -1,6 +1,7 @@
 #ifndef BLOB_H
 #define BLOB_H
 
+#include <string>
 #include <stddef.h>
 #include "Dll.h"
 
@@ -10,6 +11,7 @@ public:
 	Blob(size_t size = 0, char *content = 0);
 	// null-terminated input, to be copied
 	Blob(const char *content);
+	Blob(const std::string &str);
 	Blob(const Blob &rhs); //Blob &&rhs);
 	Blob &operator=(const Blob &rhs); //Blob &&rhs);
 	~Blob();

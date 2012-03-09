@@ -82,7 +82,7 @@ public:
 template <typename T>
 class ResourceTypeHandler : public BaseTypeHandler {
 public:
-	virtual T *load(Blob &) = 0;
+	virtual T *load(Blob &, const char *name) = 0;
 };
 
 template <typename T>
@@ -117,7 +117,7 @@ public:
 	, rth(rth)
 	{}
 	void run() {
-		T *obj = rth.load(data);
+		T *obj = rth.load(data, name.c_str());
 		if (obj) {
 			res.h->replaceWith(obj);
 			res.h->loadQueued = false;

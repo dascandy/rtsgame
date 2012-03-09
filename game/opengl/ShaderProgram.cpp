@@ -3,8 +3,9 @@
 #include <stdio.h>
 #include "Color.h"
 #include <debug.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/quaternion.hpp>
+#include "glm.h"
+
+std::map<std::string, ShaderProgram *> ShaderProgram::shaders;
 
 static inline void compileShader(int prog, int &shader, const char *source, int type)
 {
@@ -26,13 +27,21 @@ static inline void compileShader(int prog, int &shader, const char *source, int 
 	}
 }
 
-ShaderProgram::ShaderProgram(const char *vsh, const char *gsh, const char *fsh, const char **invars, const char **varyings)
+ShaderProgram::ShaderProgram(const char *vsh, const char *gsh, const char *fsh, const char **invars, const char **varyings, const char *buffer, const char *name)
 : vs(0)
 , gs(0)
 , fs(0)
 , prog(glCreateProgram())
 , usage(new int)
+, name(name)
+, buffer(buffer)
+, vsh(vsh)
+, gsh(gsh)
+, fsh(fsh)
+, invars(invars)
+, varyings(varyings)
 {
+	shaders[name] = this;
 	*usage = 1;
 	if (vsh) compileShader(prog, vs, vsh, GL_VERTEX_SHADER);
 	if (fsh) compileShader(prog, fs, fsh, GL_FRAGMENT_SHADER);
@@ -76,6 +85,13 @@ ShaderProgram::ShaderProgram(const ShaderProgram &other)
 , fs(other.fs)
 , prog(other.prog)
 , usage(other.usage)
+, name(other.name)
+, buffer(other.buffer)
+, vsh(other.vsh)
+, gsh(other.gsh)
+, fsh(other.fsh)
+, invars(other.invars)
+, varyings(other.varyings)
 {
 	(*usage)++;
 }
@@ -90,6 +106,8 @@ ShaderProgram::~ShaderProgram()
 		if (gs) glDeleteShader(gs);
 		if (fs) glDeleteShader(fs);
 		delete usage;
+		shaders.erase(name);
+		delete [] buffer;
 	}
 }
 /*

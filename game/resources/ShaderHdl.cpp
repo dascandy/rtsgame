@@ -7,7 +7,7 @@
 class ShaderProgramHandler : public ResourceTypeHandler<ShaderProgram> {
 public:
 	ShaderProgramHandler();
-	ShaderProgram *load(Blob &b);
+	ShaderProgram *load(Blob &b, const char *name);
 	const char *getExt() { return "glsl"; }
 };
 
@@ -41,7 +41,7 @@ static const char **getArrayPtr(char *str) {
 	return xarr;
 }
 
-ShaderProgram *ShaderProgramHandler::load(Blob &b) {
+ShaderProgram *ShaderProgramHandler::load(Blob &b, const char *name) {
 	char *vs = 0, *fs = 0, *gs = 0, *invars = 0, *varyings = 0;
 	char **cur = &vs;
 	char *data = new char[b.size+1];
@@ -66,8 +66,56 @@ ShaderProgram *ShaderProgramHandler::load(Blob &b) {
 	}
 	*cur = op;
 
-	ShaderProgram *sp = new ShaderProgram(vs, gs, fs, getArrayPtr(invars), getArrayPtr(varyings));
-	delete [] data;
+	ShaderProgram *sp = new ShaderProgram(vs, gs, fs, getArrayPtr(invars), getArrayPtr(varyings), data, name);
 	return sp;
+}
+
+class ShaderProgramStorer : public ResourceStorer<ShaderProgram> {
+public:
+	ShaderProgramStorer();
+	Blob save(ShaderProgram *);
+	const char *getExt() { return "glsl"; }
+};
+
+static ShaderProgramStorer _shaderStorer;
+
+ShaderProgramStorer::ShaderProgramStorer() 
+{
+	ResourceManager::Instance().RegisterResourceStorer<ShaderProgram>(*this);
+}
+
+Blob ShaderProgramStorer::save(ShaderProgram *b) {
+	std::string buffer;
+	if (b->vsh) {
+		buffer += "##Vertex shader\r\n";
+		buffer += b->vsh;
+	}
+	if (b->gsh) {
+		buffer += "##Geometry shader\r\n";
+		buffer += b->gsh;
+	}
+	if (b->fsh) {
+		buffer += "##Fragment shader\r\n";
+		buffer += b->fsh;
+	}
+	if (b->invars) {
+		buffer += "##Invars\r\n";
+		const char **ptr = b->invars;
+		while (*ptr) {
+			buffer += *ptr;
+			buffer += "\r\n";
+			ptr++;
+		}
+	}
+	if (b->varyings) {
+		buffer += "##Y Varyings\r\n";
+		const char **ptr = b->varyings;
+		while (*ptr) {
+			buffer += *ptr;
+			buffer += "\r\n";
+			ptr++;
+		}
+	}
+	return buffer;
 }
 
