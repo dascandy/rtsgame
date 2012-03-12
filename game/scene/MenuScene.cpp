@@ -25,7 +25,7 @@ void MenuScene::Draw(Res<ShaderProgram> &prog) {
 
 void MenuScene::DrawPick(Res<ShaderProgram> &prog, std::vector<MenuObject *> &objs) {
 	for (std::vector<MenuObject *>::iterator it = objects.begin(); it != objects.end(); ++it) {
-		if (!(*it)->clickable()) continue;
+		if (!(*it)->clickable) continue;
 
 		objs.push_back(*it);
 		prog->Set("pickid", objs.size());

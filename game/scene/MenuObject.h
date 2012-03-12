@@ -11,12 +11,12 @@ class ShaderProgram;
 class MenuObject : public Renderable
 {
 public:
-	MenuObject(Res<Model> model, const vec3 &location = vec3(), const quat &rot = quat());
+	MenuObject(Res<Model> model, const vec3 &location = vec3(), const quat &rot = quat(), bool clickable = true);
 	~MenuObject();
 	void Draw(Res<ShaderProgram> &vs);
 	glm::vec3 location;
 	glm::quat rot;
-	bool clickable() { return true; } 
+	bool clickable;
 protected:
 	Res<Model> model;
 private:

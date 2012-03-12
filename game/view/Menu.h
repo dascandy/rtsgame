@@ -32,6 +32,7 @@ private:
 	Res<Font> font;
 	MenuScene scene;
 	vec3 viewposition;
+	mat4 projection, view_proj;
 	bool created;
 	TextureRenderPass pass;
 };

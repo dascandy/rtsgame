@@ -7,6 +7,8 @@ Menu::Menu(RenderTarget &rt)
 , created(false)
 , pass(ResourceManager::Instance().getResource<ShaderProgram>("menu"), scene, rt)
 {
+	projection = glm::ortho( 0.0f, 1000.0f, 1000.0f * rt.height / rt.width, 0.0f,-5.0f, 5.0f);
+	pass.Register("mat_vp", view_proj);
 }
 
 void Menu::update(int ms) {
@@ -14,14 +16,35 @@ void Menu::update(int ms) {
 }
 
 void Menu::create() {
-	char logo[2] = {0};
-	logo[0] = 31;
-	scene.add(new MenuObject(font->getText(logo, 0.4f), vec3(0.9f, -0.6f, 0)));
-	scene.add(new MenuObject(font->getText("Single player", 0.2f), vec3(0.9f, -0.4f, 0)));
-	scene.add(new MenuObject(font->getText("Multiplayer", 0.2f), vec3(0.9f, -0.1f, 0)));
-	scene.add(new MenuObject(font->getText("Settings", 0.2f), vec3(0.9f, 0.2f, 0)));
-	scene.add(new MenuObject(font->getText("Credits", 0.2f), vec3(0.9f, 0.5f, 0)));
-	scene.add(new MenuObject(font->getText("Exit", 0.2f), vec3(0.9f, 0.8f, 0)));
+	// main menu, base 1024/1024
+	char logo[2] = {0}; logo[0] = 31;
+	scene.add(new MenuObject(font->getText(logo, 100.0f), vec3(1200, 1250, 0), quat(), false));
+	scene.add(new MenuObject(font->getText("Single player", 50.0f), vec3(1100, 1375, 0)));
+	scene.add(new MenuObject(font->getText("Multiplayer", 50.0f), vec3(1100, 1450, 0)));
+	scene.add(new MenuObject(font->getText("Settings", 50.0f), vec3(1100, 1525, 0)));
+	scene.add(new MenuObject(font->getText("Credits", 50.0f), vec3(1100, 1600, 0)));
+	scene.add(new MenuObject(font->getText("Exit", 50.0f), vec3(1100, 1675, 0)));
+
+	// single-player menu
+	scene.add(new MenuObject(font->getText(logo, 20.0f), vec3(1800, 1250, 0), quat(), false));
+	scene.add(new MenuObject(font->getText("Single player", 100.0f), vec3(1100, 250, 0), quat(), false));
+	scene.add(new MenuObject(font->getText("New game", 50.0f), vec3(1100, 375, 0)));
+	scene.add(new MenuObject(font->getText("Continue", 50.0f), vec3(1100, 450, 0)));
+	scene.add(new MenuObject(font->getText("Load game", 50.0f), vec3(1100, 525, 0)));
+	scene.add(new MenuObject(font->getText("Save game", 50.0f), vec3(1100, 600, 0)));
+
+	// multi-player menu
+	scene.add(new MenuObject(font->getText(logo, 20.0f), vec3(1800, 1250, 0), quat(), false));
+	scene.add(new MenuObject(font->getText("Multiplayer", 100.0f), vec3(1100, 250, 0), quat(), false));
+	scene.add(new MenuObject(font->getText("Play hosted", 50.0f), vec3(1100, 375, 0)));
+	scene.add(new MenuObject(font->getText("Join LAN game", 50.0f), vec3(1100, 450, 0)));
+	scene.add(new MenuObject(font->getText("Host LAN game", 50.0f), vec3(1100, 525, 0)));
+
+	// exit menu
+	scene.add(new MenuObject(font->getText(logo, 20.0f), vec3(1800, 1250, 0), quat(), false));
+	scene.add(new MenuObject(font->getText("Are you sure you want to quit?", 100.0f), vec3(1100, 250, 0), quat(), false));
+	scene.add(new MenuObject(font->getText("Yes", 50.0f), vec3(1200, 475, 0)));
+	scene.add(new MenuObject(font->getText("No", 50.0f), vec3(1700, 475, 0)));
 }
 
 void Menu::run() {
@@ -30,8 +53,12 @@ void Menu::run() {
 		pass.AddTexture("font", font->texture);
 		created = true;
 	}
+	mat4 view;
+	view[3] = -location;
 
-	if (created)
+	view_proj = view * projection;
+
+	if (created && font.isLoaded() && font->texture.isLoaded())
 		pass.Run();
 }
 

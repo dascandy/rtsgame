@@ -6,10 +6,11 @@
 #include "profile.h"
 #include "glm.h"
 
-MenuObject::MenuObject(Res<Model> model, const glm::vec3 &location, const glm::quat &rot)
+MenuObject::MenuObject(Res<Model> model, const glm::vec3 &location, const glm::quat &rot, bool clickable)
 : model(model)
 , location(location)
-, rot(rot) {
+, rot(rot)
+, clickable(clickable) {
 
 }
 
