@@ -40,8 +40,8 @@ bool Webserver::matches(const std::string &a, const std::string &b) {
 }
 
 HttpReply Webserver::handle(HttpRequest &hr) {
-	std::vector<std::pair<std::string, Webserver::Callback *> >::iterator it = urls.begin();
-	for (; it != urls.end(); ++it) {
+	std::vector<std::pair<std::string, Webserver::Callback *> >::reverse_iterator it = urls.rbegin();
+	for (; it != urls.rend(); ++it) {
 		if (matches(it->first, hr.url)) {
 			try {
 				return it->second->handle(hr);

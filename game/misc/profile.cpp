@@ -80,4 +80,3 @@ void profile_print_graph(void *&buffer, int *&bytecount, int id, bool relative) 
 	
 }
 
-

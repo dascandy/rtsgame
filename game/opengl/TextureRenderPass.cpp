@@ -1,6 +1,5 @@
 #include "TextureRenderPass.h"
 #include "RenderTarget.h"
-#include "RenderView.h"
 #include "Renderable.h"
 #include <GL/glew.h>
 

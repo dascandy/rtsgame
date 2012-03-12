@@ -231,14 +231,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\opengl\RenderView.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\opengl\RenderView.h"
-				>
-			</File>
-			<File
 				RelativePath=".\opengl\ShaderProgram.cpp"
 				>
 			</File>
@@ -424,6 +416,22 @@
 			</File>
 			<File
 				RelativePath=".\webhandlers\WebProfile.h"
+				>
+			</File>
+			<File
+				RelativePath=".\webhandlers\WebRenderPass.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\webhandlers\WebRenderPass.h"
+				>
+			</File>
+			<File
+				RelativePath=".\webhandlers\WebRoot.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\webhandlers\WebRoot.h"
 				>
 			</File>
 			<File
