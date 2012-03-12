@@ -110,25 +110,16 @@ ShaderProgram::~ShaderProgram()
 		delete [] buffer;
 	}
 }
-/*
-void ShaderProgram::Set(const char *name, const Matrix &mat, bool invert)
+
+void ShaderProgram::Set(const char *name, const mat4 &mat)
 {
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
 	glUseProgram(prog);
-	if (invert)
-	{
-		Matrix inv = mat;
-		inv.Invert();
-		glUniformMatrix4fv(uniform, 1, GL_FALSE, inv.matrix);
-	}
-	else
-	{
-		glUniformMatrix4fv(uniform, 1, GL_FALSE, mat.matrix);
-	}
+	glUniformMatrix4fv(uniform, 1, GL_FALSE, &mat[0][0]);
 }
-*/
+
 void ShaderProgram::Set(const char *name, int value)
 {
 	int uniform = glGetUniformLocation(prog, name);

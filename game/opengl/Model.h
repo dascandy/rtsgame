@@ -13,6 +13,7 @@ class stream;
 class Model : public Renderable
 {
 public:
+	~Model() {}
 	void Draw(Res<ShaderProgram> &prog);
 	static Model &Load(const std::string &name);
 	static Model &Raster();
@@ -53,8 +54,9 @@ public:
 	void PreTranslate(PhysicsModel *m);
 private:
 	friend class Ground;
+	friend class Font;
+	friend class Menu;
 	Model(int vertexcount, vertex *vertices);
-	~Model() {}
 	void Reload();
 	static Model &loadFromStream(stream file);
 	VertexBuffer vb;

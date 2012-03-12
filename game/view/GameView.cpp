@@ -12,7 +12,7 @@ static const char *invecs[] =
 
 GameView::GameView(RenderTarget &target)
 : bgTex(ResourceManager::Instance().getResource<Texture>("heightmap"))
-, trp(ResourceManager::Instance().getResource<ShaderProgram>("test"), Model::Square(), target, rv)
+, trp(ResourceManager::Instance().getResource<ShaderProgram>("test"), Model::Square(), target)
 {
 	trp.AddTexture("heightmap", bgTex);
 }

@@ -5,13 +5,18 @@
 #include "Texture.h"
 #include "RenderView.h"
 #include "RenderTarget.h"
+#include "ResourceManager.h"
+#include "Font.h"
+#include "glm.h"
+#include "MenuScene.h"
+#include "TextureRenderPass.h"
 
 class RenderTarget;
-
 class Menu : public InputCallback
 {
 public:
 	Menu(RenderTarget &rt);
+	void create();
 	void update(int ms);
 	void run();
 	virtual void MouseMoveX(int);
@@ -23,9 +28,14 @@ public:
 	virtual void KeyDown(int);
 	virtual void KeyUp(int);
 private:
+	Res<Model> createLogo(float size = 1.0f);
 	RenderTarget &rt;
+	Res<Font> font;
+	MenuScene scene;
+	vec3 viewposition;
+	bool created;
+	TextureRenderPass pass;
 };
 
 #endif
-
 

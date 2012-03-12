@@ -41,6 +41,7 @@ public:
 		const Res<T> *t = dynamic_cast<const Res<T> *>(&r);
 		return (t != NULL && t->h == h);
 	}
+	Res(T*p) : h(new Handle()) { h->replaceWith(p); }
 	Res() : h(new Handle()) { }
 	Res(const Res<T> &obj) : h(obj.h) { 
 		inc();

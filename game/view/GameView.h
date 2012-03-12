@@ -24,7 +24,6 @@ public:
 	void run();
 private:
 	Res<Texture> bgTex;
-	RenderView rv;
 	TextureRenderPass trp;
 };
 

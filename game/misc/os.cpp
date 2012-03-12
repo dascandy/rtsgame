@@ -66,6 +66,7 @@ void Fatal(const char *error) {
 #include "Webserver.h"
 #include "WebShader.h"
 #include "QueuedWork.h"
+#include "WebFont.h"
 
 class QueuedWebserverPoll : public Queued {
 public:
@@ -76,6 +77,7 @@ static void webinit() {
 	web_init_textures();
 	web_init_profile();
 	web_init_shader();
+	web_init_font();
 	QueuedWork::Polls.push_back(new QueuedWebserverPoll());
 }
 

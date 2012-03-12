@@ -12,7 +12,7 @@ GameWindow::GameWindow(int width, int height, bool fullscreen)
 , menu(rt)
 , gameView(rt)
 , isActive(true)
-, inMenu(false)
+, inMenu(true)
 {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);

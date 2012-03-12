@@ -6,24 +6,27 @@
 #include <GL/glew.h>
 #include "ResourceManager.h"
 #include "Texture.h"
+#include "Model.h"
 
 class Font {
 public:
+	Res<Model> getText(const char *text, float size = 12.0f, float maxWidthPerLine = 99999999);
+	~Font();
 	static const char *getDirName() { return "fonts"; }
-	static std::map<std::string, Font* > fonts;
-
-
+	Res<Texture> texture;
 private:
-	friend class FontHandler;
-	friend class FontStorer;
+	static std::map<std::string, Font* > fonts;
+	friend class FontReader;
+	friend class FontWriter;
 	friend class FontWebClient;
-	Font(Res<Texture> texture) : texture(texture) {}
+	Font(const char *name, Res<Texture> texture, const char *texturename);
 	struct entry {
 		entry (int x, int y, int w, int h) : x(x), y(y), w(w), h(h) {}
 		int x, y, w, h;
 	};
 	std::map<char, entry> entries;
-	Res<Texture> texture;
+	const char *fontname;
+	const char *texturename;
 };
 
 #endif

@@ -12,12 +12,11 @@ class RenderView;
 class TextureRenderPass : public GpuRenderPass
 {
 public:
-	TextureRenderPass(Res<ShaderProgram> program, Renderable &input, RenderTarget &target, RenderView &view);
+	TextureRenderPass(Res<ShaderProgram> program, Renderable &input, RenderTarget &target);
 	void DoRun();
 private:
 	Renderable &input;
 	RenderTarget &target;
-	RenderView &view;
 };
 
 #endif

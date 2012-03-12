@@ -7,19 +7,19 @@
 class FontWebClient : public Webserver::Callback {
 public:
     HttpReply handle(HttpRequest &hr) {
-		if (hr.url.size() < 10) {
+		if (hr.url.size() < 8) {
 			std::string accum = "<html><head><title>Fonts</title></head><body>";
 
 			char buffer[1024];
 			for (std::map<std::string, Font *>::iterator it = Font::fonts.begin(); it != Font::fonts.end(); ++it) {
-				sprintf(buffer, "<a href=\"/fonts/%s\">%s.glsl</a><br />", it->first.c_str(), it->first.c_str());
+				sprintf(buffer, "<a href=\"/fonts/%s\">%s.fnt</a><br />", it->first.c_str(), it->first.c_str());
 				accum += buffer;
 			}
 
 			accum += "</body></html>";
 			return HttpReply(200, "Ok", "text/html", accum.c_str());
 		} else {
-			std::string name = hr.url.substr(9);
+			std::string name = hr.url.substr(7);
 			if (Font::fonts.find(name) == Font::fonts.end())
 				return HttpReply::defaultReply(404);
 
@@ -37,6 +37,6 @@ public:
 static FontWebClient &getPwc() { static FontWebClient pwc; return pwc; }
 
 void web_init_font() {
-        Webserver::Instance().registerUrl("/font", &getPwc());
+        Webserver::Instance().registerUrl("/fonts", &getPwc());
 }
 
