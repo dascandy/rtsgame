@@ -5,11 +5,12 @@ in vec3 in_normal;
 in vec2 in_tex0;
 in ivec3 in_arg;
 uniform mat4 mat_model;
+uniform mat4 mat_vp;
 out vec2 f_texcoord;
 
 void main()
 {
-   gl_Position = mat_model * vec4(in_loc, 1);
+   gl_Position = mat_vp * (mat_model * vec4(in_loc, 1));
    f_texcoord = in_tex0;
 }
 ##F

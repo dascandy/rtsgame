@@ -116,7 +116,6 @@ void ShaderProgram::Set(const char *name, const mat4 &mat)
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
-	glUseProgram(prog);
 	glUniformMatrix4fv(uniform, 1, GL_FALSE, &mat[0][0]);
 }
 
@@ -125,7 +124,6 @@ void ShaderProgram::Set(const char *name, int value)
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
-	glUseProgram(prog);
 	glUniform1i(uniform, value);
 }
 
@@ -134,7 +132,6 @@ void ShaderProgram::Set(const char *name, unsigned int value)
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
-	glUseProgram(prog);
 	glUniform1ui(uniform, value);
 }
 
@@ -143,7 +140,6 @@ bool ShaderProgram::SetTexture(const char *name, int value)
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return false;
 
-	glUseProgram(prog);
 	glUniform1i(uniform, value);
 	return true;
 }
@@ -153,7 +149,6 @@ void ShaderProgram::Set(const char *name, float value)
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
-	glUseProgram(prog);
 	glUniform1f(uniform, value);
 }
 
@@ -162,7 +157,6 @@ void ShaderProgram::Set(const char *name, const glm::vec3 &value)
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
-	glUseProgram(prog);
 	glUniform3f(uniform, value.x, value.y, value.z);
 }
 
@@ -171,13 +165,11 @@ void ShaderProgram::Set(const char *name, const Color &value)
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
-	glUseProgram(prog);
 	glUniform3f(uniform, value.r, value.g, value.b);
 }
 
 void ShaderProgram::SetActive() 
 {
 	glUseProgram(prog); 
-//	GameState::Instance().SetVars(prog);
 }
 

@@ -18,6 +18,10 @@ void GpuRenderPass::Run()
 		it->second->Bind(program, it->first);
 	}
 
+	for (std::vector<VarSetter *>::iterator it = setters.begin(); it != setters.end(); ++it) {
+		(*it)->run(program);
+	}
+
 	DoRun(); 
 
 	for (;program->curtex > 0; )

@@ -20,8 +20,8 @@ MenuObject::~MenuObject()
 
 void MenuObject::Draw(Res<ShaderProgram> &prog) 
 {
-	glm::mat4 mat_model = mat4_cast(-rot);
-    mat_model[3] = glm::vec4(-location, 1.0);
+	glm::mat4 mat_model = mat4_cast(rot);
+    mat_model[3] = glm::vec4(location, 1.0);
 	prog->Set("mat_model", mat_model);
 	model->Draw(prog);
 }
