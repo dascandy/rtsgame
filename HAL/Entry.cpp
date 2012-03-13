@@ -19,9 +19,9 @@ HALSPEC Entry *Entry::Create(std::string path) {
 		return 0;
 	}
 	if (data.st_mode & _S_IFREG) {
-		return new File(path, data.st_size);
+		return new File(path, (size_t)data.st_size);
 	} else if (data.st_mode & _S_IFDIR) {
-		return new Directory(path, data.st_size);
+		return new Directory(path, (size_t)data.st_size);
 	} else {
 		return 0;
 	}

@@ -455,6 +455,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\scene\MenuPage.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\scene\MenuPage.h"
+				>
+			</File>
+			<File
 				RelativePath=".\scene\MenuScene.cpp"
 				>
 			</File>

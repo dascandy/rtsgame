@@ -14,7 +14,7 @@ Menu::Menu(RenderTarget &rt)
 }
 
 void Menu::update(int ms) {
-
+	menutime += ms;
 }
 
 void Menu::create() {
@@ -65,45 +65,6 @@ void Menu::run() {
 
 	if (created && font.isLoaded() && font->texture.isLoaded())
 		pass.Run();
-}
-
-void Menu::MouseMoveX(int)
-{
-
-}
-
-void Menu::MouseMoveY(int)
-{
-	
-}
-
-void Menu::MouseScrollUp()
-{
-	
-}
-
-void Menu::MouseScrollDown()
-{
-	
-}
-
-void Menu::MouseButtonUp(int)
-{
-	
-}
-
-void Menu::MouseButtonDown(int)
-{
-	
-}
-
-void Menu::KeyDown(int)
-{
-}
-
-void Menu::KeyUp(int)
-{
-	
 }
 
 

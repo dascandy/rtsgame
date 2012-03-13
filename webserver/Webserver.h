@@ -26,7 +26,7 @@ private:
 	Thread t;
 	void run();
 	static void stop();
-	Webserver(int port);
+	Webserver(unsigned short port);
 	static bool matches(const std::string &a, const std::string &b);
 	std::deque<std::pair<HttpRequest *, ClientSocket *> > queuedRequests;
 public:

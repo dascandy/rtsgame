@@ -36,7 +36,7 @@ void HttpRequest::readFrom(ClientSocket *cs) {
 		std::string args = url.substr(url.find_first_of('?')+1);
 		url = url.substr(0, url.find_first_of('?'));
 		while (args.size() > 0) {
-			int nextAmp = args.find_first_of('&');
+			size_t nextAmp = args.find_first_of('&');
 			std::string nextArg;
 			if (nextAmp == std::string::npos) {
 				nextArg = args;
@@ -46,7 +46,7 @@ void HttpRequest::readFrom(ClientSocket *cs) {
 				args = args.substr(nextAmp+1);
 			}
 			std::string val = "true";
-			int eq = nextArg.find_first_of('=');
+			size_t eq = nextArg.find_first_of('=');
 			if (eq != std::string::npos) {
 				val = nextArg.substr(eq+1);
 				nextArg = nextArg.substr(0, eq);

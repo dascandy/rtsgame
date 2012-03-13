@@ -10,7 +10,7 @@
 #include "HttpReply.h"
 #include "Client.h"
 
-Webserver::Webserver(int port) 
+Webserver::Webserver(unsigned short port) 
 : server(port)
 , stopped(false)
 {
@@ -29,7 +29,7 @@ void Webserver::run() {
 		ClientSocket *cs = server.Accept(port, addr);
 		printf("Getting new client at %s:%d %p\n", addr.c_str(), port, cs);
 		if (cs) 
-			Client *c = new Client(cs);
+			new Client(cs);
 	}
 	printf("Webserver stopped");
 }

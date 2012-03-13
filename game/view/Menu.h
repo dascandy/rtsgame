@@ -11,6 +11,7 @@
 #include "TextureRenderPass.h"
 
 class RenderTarget;
+
 class Menu : public InputCallback
 {
 public:
@@ -18,14 +19,7 @@ public:
 	void create();
 	void update(int ms);
 	void run();
-	virtual void MouseMoveX(int);
-	virtual void MouseMoveY(int);
-	virtual void MouseScrollUp();
-	virtual void MouseScrollDown();
-	virtual void MouseButtonUp(int);
-	virtual void MouseButtonDown(int);
-	virtual void KeyDown(int);
-	virtual void KeyUp(int);
+	int menutime;
 private:
 	Res<Model> createLogo(float size = 1.0f);
 	RenderTarget &rt;
