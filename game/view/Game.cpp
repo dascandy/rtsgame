@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "ResourceManager.h"
+#include "GameState.h"
 
 void Game::run()
 {
@@ -16,7 +17,12 @@ void Game::run()
 		delete q;
 	}
 
+	msec_t time = get_msec();
+
 	for (;;) {
+		msec_t curtime = get_msec();
+		window.update(curtime - time);
+		time = curtime;
 		window.run();
 
 		int i = 0;
@@ -40,7 +46,23 @@ void Game::run()
 }
 
 Game::Game()
-: window(1440, 900, false)
+: window(this, 1440, 900, false)
+, gameState(0)
 {
+}
+
+void Game::NewGame() {
+	gameState = new GameState(get_msec());
+	window.gameView.setGameState(gameState);
+	window.menuOpacity = fade(window.menuOpacity, new VarNum<float>(0), window.time, 1000, **window.time);
+	window.inMenu = false;
+}
+
+void Game::SaveGame(const char *name) {
+	TODO("Add saving game with name %s", name);
+}
+
+void Game::LoadGame(const char *name) {
+	TODO("Add loading game with name %s", name);
 }
 

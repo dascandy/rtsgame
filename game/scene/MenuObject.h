@@ -6,18 +6,22 @@
 #include <vector>
 #include "ResourceManager.h"
 #include "Model.h"
+#include "Var.h"
+#include "Color.h"
 class ShaderProgram;
+class MenuAction;
 
 class MenuObject : public Renderable
 {
 public:
-	MenuObject(Res<Model> model, const vec3 &location = vec3(), const quat &rot = quat(), bool clickable = true);
+	MenuObject(Res<Model> model, const vec3 &location = vec3(), const quat &rot = quat());
 	~MenuObject();
 	void Draw(Res<ShaderProgram> &vs);
 	glm::vec3 location;
 	glm::quat rot;
 	bool clickable;
-protected:
+	MenuAction *OnActivate;
+	Var<Color> *color;
 	Res<Model> model;
 private:
 	MenuObject(const MenuObject &);

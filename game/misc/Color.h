@@ -47,7 +47,13 @@ public:
 		raw[3] = rhs.raw[3];
 		return *this;
 	}
+	Color operator*(double value) 
+	{
+		return Color(r * (float)value, g * (float)value, b * (float)value, a * (float)value);
+	}
 };
+
+Color operator+(const Color &a, const Color &b);
 
 #endif
 

@@ -8,6 +8,8 @@
 #include "ResourceManager.h"
 #include "TextureRenderPass.h"
 
+class GameState;
+
 class GameView : public InputCallback
 {
 public:
@@ -21,9 +23,12 @@ public:
 	virtual void KeyDown(int);
 	virtual void KeyUp(int);
 	void run();
+	void update(int ms);
+	void setGameState(GameState *newstate);
 private:
 	Res<Texture> bgTex;
 	TextureRenderPass trp;
+	GameState *state;
 };
 
 #endif

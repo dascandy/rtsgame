@@ -16,14 +16,15 @@ void main()
 ##F
 #version 330
 uniform sampler2D font;
+uniform vec3 color;
 
 in vec2 f_texcoord;
 
 void main (void)
 {
-    vec4 color = texture(font, f_texcoord);
-    if (color.a == 0) color = vec4(0.0,0.0,0.0,0.0);
-    gl_FragData[0] = color;
+    vec4 texcolor = texture(font, f_texcoord) * vec4(color, 1);
+    if (texcolor.a == 0) texcolor = vec4(0.0,0.0,0.0,0.0);
+    gl_FragData[0] = texcolor;
 }
 ##I
 in_loc

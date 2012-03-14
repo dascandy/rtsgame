@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include "Texture.h"
+#include "Var.h"
 
 class Renderable;
 class Object;
@@ -43,6 +44,21 @@ public:
 	}
 };
 
+template <typename T>
+class TVarRefSetter : public VarSetter {
+private:
+	std::string name;
+	Var<T> **val;
+public:
+	TVarRefSetter(std::string name, Var<T> **val) 
+		: name(name)
+		, val(val)
+	{}
+	void run(Res<ShaderProgram> &prog) {
+		prog->Set(name.c_str(), ***val);
+	}
+};
+
 class GpuRenderPass : public RenderPass
 {
 public:
@@ -52,6 +68,10 @@ public:
 	template <typename T>
 	void Register(std::string name, T &val) {
 		setters.push_back(new TVarSetter<T>(name, &val));
+	}
+	template <typename T>
+	void Register(std::string name, Var<T> **val) {
+		setters.push_back(new TVarRefSetter<T>(name, val));
 	}
 protected:
 	std::vector<std::pair<std::string, Res<Texture> > > textures;

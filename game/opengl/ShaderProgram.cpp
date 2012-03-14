@@ -111,8 +111,13 @@ ShaderProgram::~ShaderProgram()
 	}
 }
 
+static int usedProg = 0;
+
 void ShaderProgram::Set(const char *name, const mat4 &mat)
 {
+	if (usedProg != 0 && usedProg != prog) {
+		TODO("Fix bug!");
+	}
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
@@ -121,6 +126,9 @@ void ShaderProgram::Set(const char *name, const mat4 &mat)
 
 void ShaderProgram::Set(const char *name, int value)
 {
+	if (usedProg != 0 && usedProg != prog) {
+		TODO("Fix bug!");
+	}
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
@@ -129,6 +137,9 @@ void ShaderProgram::Set(const char *name, int value)
 
 void ShaderProgram::Set(const char *name, unsigned int value)
 {
+	if (usedProg != 0 && usedProg != prog) {
+		TODO("Fix bug!");
+	}
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
@@ -137,6 +148,9 @@ void ShaderProgram::Set(const char *name, unsigned int value)
 
 bool ShaderProgram::SetTexture(const char *name, int value)
 {
+	if (usedProg != 0 && usedProg != prog) {
+		TODO("Fix bug!");
+	}
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return false;
 
@@ -146,6 +160,9 @@ bool ShaderProgram::SetTexture(const char *name, int value)
 
 void ShaderProgram::Set(const char *name, float value)
 {
+	if (usedProg != 0 && usedProg != prog) {
+		TODO("Fix bug!");
+	}
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
@@ -154,6 +171,9 @@ void ShaderProgram::Set(const char *name, float value)
 
 void ShaderProgram::Set(const char *name, const glm::vec3 &value)
 {
+	if (usedProg != 0 && usedProg != prog) {
+		TODO("Fix bug!");
+	}
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
@@ -162,6 +182,9 @@ void ShaderProgram::Set(const char *name, const glm::vec3 &value)
 
 void ShaderProgram::Set(const char *name, const Color &value)
 {
+	if (usedProg != 0 && usedProg != prog) {
+		TODO("Fix bug!");
+	}
 	int uniform = glGetUniformLocation(prog, name);
 	if (uniform == -1) return;
 
@@ -170,6 +193,7 @@ void ShaderProgram::Set(const char *name, const Color &value)
 
 void ShaderProgram::SetActive() 
 {
+	usedProg = prog;
 	glUseProgram(prog); 
 }
 

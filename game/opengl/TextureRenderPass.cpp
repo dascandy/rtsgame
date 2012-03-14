@@ -14,7 +14,6 @@ TextureRenderPass::TextureRenderPass(Res<ShaderProgram> program, Renderable &inp
 void TextureRenderPass::DoRun()
 {
 	target.Activate();
-	program->SetActive();
 	input.Draw(program);
 }
 

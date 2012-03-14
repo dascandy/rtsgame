@@ -12,6 +12,7 @@ void GpuRenderPass::Run()
 { 
 	if (!enabled) return;
 	
+	program->SetActive();
 	program->curtex = 0;
 	for (std::vector<std::pair<std::string, Res<Texture> > >::iterator it = textures.begin(); it != textures.end(); ++it)
 	{

@@ -37,7 +37,7 @@ RenderTarget::RenderTarget(int width, int height, bool depth)
 {
 }
 
-void RenderTarget::AddTarget(Texture &target)
+void RenderTarget::AddTarget(Res<Texture> &target)
 {
 	if (targets.size())
 	{
@@ -45,8 +45,8 @@ void RenderTarget::AddTarget(Texture &target)
 	}
 	else
 	{
-		width = target.width();
-		height = target.height();
+		width = target->width();
+		height = target->height();
 
 		glGenFramebuffers(1, &fbo);
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
@@ -61,7 +61,7 @@ void RenderTarget::AddTarget(Texture &target)
 		}
 	}
 
-	target.SetAsAttachment(targets.size());
+	target->SetAsAttachment(targets.size());
 	int err = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	switch(err)
 	{
@@ -76,7 +76,7 @@ void RenderTarget::AddTarget(Texture &target)
 	default: Fatal("Unknown framebuffer error"); break;
 	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	targets.push_back(&target);
+	targets.push_back(target);
 }
 
 RenderTarget::~RenderTarget()

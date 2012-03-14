@@ -13,15 +13,15 @@ void main()
 }
 ##F
 #version 330
-uniform sampler2D heightmap;
+uniform sampler2D menu;
+uniform sampler2D gameview;
+uniform float menuOpacity;
 
 in vec2 f_texcoord;
 
 void main (void)
 {
-    vec4 color = texture(heightmap, f_texcoord);
-    gl_FragData[0] = vec4(color.xyz, 0.0);
-
+    gl_FragData[0] = texture(menu, f_texcoord) * menuOpacity + texture(gameview, f_texcoord) * (1.0 - menuOpacity);
 }
 ##I
 in_loc

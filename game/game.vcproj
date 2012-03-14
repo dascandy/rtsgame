@@ -267,6 +267,10 @@
 			Name="misc"
 			>
 			<File
+				RelativePath=".\misc\Color.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\misc\Color.h"
 				>
 			</File>
@@ -326,6 +330,10 @@
 				RelativePath=".\misc\swap.h"
 				>
 			</File>
+			<File
+				RelativePath=".\misc\Var.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="resources"
@@ -362,6 +370,14 @@
 		<Filter
 			Name="view"
 			>
+			<File
+				RelativePath=".\view\Game.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\view\Game.h"
+				>
+			</File>
 			<File
 				RelativePath=".\view\GameView.cpp"
 				>
@@ -447,6 +463,14 @@
 			Name="scene"
 			>
 			<File
+				RelativePath=".\scene\GameState.h"
+				>
+			</File>
+			<File
+				RelativePath=".\scene\MenuAction.h"
+				>
+			</File>
+			<File
 				RelativePath=".\scene\MenuObject.cpp"
 				>
 			</File>
@@ -471,14 +495,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\Game.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\Game.h"
-			>
-		</File>
 		<File
 			RelativePath=".\main.cpp"
 			>

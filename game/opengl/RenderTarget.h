@@ -2,8 +2,8 @@
 #define RENDERTARGET_H
 
 #include <vector>
-
-class Texture;
+#include "ResourceManager.h"
+#include "Texture.h"
 
 class RenderTarget
 {
@@ -12,7 +12,7 @@ public:
 	void Clear();
 	void ClearDepth();
 	void Activate();
-	void AddTarget(Texture &target);
+	void AddTarget(Res<Texture> &target);
 	~RenderTarget();
 	int width, height;
 	bool depth;
@@ -24,7 +24,7 @@ public:
 	} blendmode;
 private:
 	unsigned int fbo, rb;
-	std::vector<Texture *> targets;
+	std::vector<Res<Texture> > targets;
 };
 
 #endif
