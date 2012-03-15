@@ -55,7 +55,7 @@
 				WarningLevel="4"
 				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="3"
-				DisableSpecificWarnings="4996;4512;4355;4201;4251"
+				DisableSpecificWarnings="4996;4512;4355;4201;4251;4121"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -315,6 +315,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\scene\Simplex.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\scene\Simplex.h"
+				>
+			</File>
+			<File
 				RelativePath=".\misc\stringutil.cpp"
 				>
 			</File>
@@ -462,6 +470,10 @@
 		<Filter
 			Name="scene"
 			>
+			<File
+				RelativePath=".\scene\GameState.cpp"
+				>
+			</File>
 			<File
 				RelativePath=".\scene\GameState.h"
 				>
