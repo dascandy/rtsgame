@@ -204,6 +204,30 @@
 			>
 		</File>
 		<File
+			RelativePath=".\Mutex.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\Mutex.h"
+			>
+		</File>
+		<File
+			RelativePath=".\QueuedWork.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\QueuedWork.h"
+			>
+		</File>
+		<File
+			RelativePath=".\Semaphore.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\Semaphore.h"
+			>
+		</File>
+		<File
 			RelativePath=".\ServerSocket.cpp"
 			>
 		</File>
@@ -221,6 +245,10 @@
 		</File>
 		<File
 			RelativePath=".\Thread.h"
+			>
+		</File>
+		<File
+			RelativePath=".\ThreadPool.h"
 			>
 		</File>
 	</Files>

@@ -20,8 +20,7 @@ in vec2 f_texcoord;
 void main (void)
 {
     vec4 color = texture(heightmap, f_texcoord);
-    gl_FragData[0] = vec4(color.xyz, 0.0);
-
+    gl_FragData[0] = vec4(color.xx/10, color.x / 10 + color.y / 10, 0.0);
 }
 ##I
 in_loc

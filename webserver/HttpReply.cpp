@@ -115,9 +115,11 @@ const char *HttpReply::getMimetype(std::string ext) {
 HttpReply::HttpReply(int code, std::string text, const char *contentType, Blob content) 
 : statusCode(code)
 , statusText(text)
-, contentType(contentType)
 , content(content)
 {
+	attributes["Content-Type"] = contentType;
+	attributes["Host"] = "localhost";
+	attributes["Server"] = "libWebserver 0.1";
 }
 
 HttpReply::HttpReply(ClientSocket *cs) {
@@ -130,17 +132,18 @@ void HttpReply::readFrom(ClientSocket *cs) {
 
 void HttpReply::writeTo(ClientSocket *cs) {
 	char buffer[2048];
-	char linebuffer[255];
-	sprintf(buffer, "HTTP/1.0 %d %s\r\n", statusCode, statusText.c_str());
-	if (contentType) {
-		sprintf(linebuffer, "Content-Type: %s\r\n", contentType);
-		strcat(buffer, linebuffer);
+	char *bufptr = buffer;
+	sprintf(bufptr, "HTTP/1.1 %d %s\r\n", statusCode, statusText.c_str());
+	bufptr += strlen(bufptr);
+	for (std::map<std::string, std::string>::iterator it = attributes.begin(); it != attributes.end(); ++it) {
+		sprintf(bufptr, "%s: %s\r\n", it->first.c_str(), it->second.c_str());
+		bufptr += strlen(bufptr);
 	}
 	if (content.size >= 0) {
-		sprintf(linebuffer, "Content-Length: %d\r\n", (unsigned int)content.size);
-		strcat(buffer, linebuffer);
+		sprintf(bufptr, "Content-Length: %d\r\n", (unsigned int)content.size);
+		bufptr += strlen(bufptr);
 	}
-	strcat(buffer, "\r\n");
+	strcat(bufptr, "\r\n");
 	cs->write(buffer, strlen(buffer));
 	if (content.size) {
 		cs->write(content.data, content.size);

@@ -58,7 +58,10 @@ void Menu::run() {
 	view_proj = projection * view;
 
 	if (created && font.isLoaded() && font->texture.isLoaded())
+	{
+		rt.Clear();
 		pass.Run();
+	}
 }
 
 InputCallback *Menu::getActivePage() 

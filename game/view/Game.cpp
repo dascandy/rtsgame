@@ -4,18 +4,7 @@
 
 void Game::run()
 {
-	for (; QueuedWork::Background.size();) {
-		Queued *q = QueuedWork::Background.front();
-		QueuedWork::Background.pop_front();
-		q->run();
-		delete q;
-	}
-	for (; QueuedWork::ResourceLoading.size();) {
-		Queued *q = QueuedWork::ResourceLoading.front();
-		QueuedWork::ResourceLoading.pop_front();
-		q->run();
-		delete q;
-	}
+	QueuedWork::Run(QueuedWork::OpenGL, 50);
 
 	msec_t time = get_msec();
 
@@ -25,23 +14,8 @@ void Game::run()
 		time = curtime;
 		window.run();
 
-		int i = 0;
-		for (; i < 5 && QueuedWork::ResourceLoading.size(); i++) {
-			Queued *q = QueuedWork::ResourceLoading.front();
-			QueuedWork::ResourceLoading.pop_front();
-			q->run();
-			delete q;
-		}
-		for (; i < 8 && QueuedWork::Background.size(); i++) {
-			Queued *q = QueuedWork::Background.front();
-			QueuedWork::Background.pop_front();
-			q->run();
-			delete q;
-		}
-
-		for (std::vector<Queued *>::iterator it = QueuedWork::Polls.begin(); it != QueuedWork::Polls.end(); ++it) {
-			(*it)->run();
-		}
+		QueuedWork::Run(QueuedWork::OpenGL, 5);
+		QueuedWork::Run(QueuedWork::Polling, -1);
 	}
 }
 
@@ -52,7 +26,7 @@ Game::Game()
 }
 
 void Game::NewGame() {
-	gameState = new GameState(get_msec());
+	gameState = new GameState(6516518);
 	window.gameView.setGameState(gameState);
 	window.menuOpacity = fade(window.menuOpacity, new VarNum<float>(0), window.time, 1000, **window.time);
 	window.inMenu = false;

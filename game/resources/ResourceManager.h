@@ -158,7 +158,7 @@ public:
 	Res<T> getResource(const std::string &name) {
 		Res<T> hdl = ResourceStorage<T>::Instance().resources[name];
 		if (!hdl.h->loadQueued) {
-			QueuedWork::Background.push_back(new QueuedLoad<T>(name, hdl));
+			QueuedWork::Queue(new QueuedLoad<T>(name, hdl), QueuedWork::Blocking);
 			hdl.h->loadQueued = true;
 		}
 		return hdl;
@@ -193,7 +193,7 @@ void QueuedLoad<T>::run() {
 		ResourceTypeHandler<T> *rth = (ResourceTypeHandler<T> *)*it;
 		Blob b = ResourceManager::Instance().loadblob(dirName + "/" + name + "." + rth->getExt());
 		if (b.size) {
-			QueuedWork::ResourceLoading.push_back(new QueuedOpen<T>(name, b, res, *rth));
+			QueuedWork::Queue(new QueuedOpen<T>(name, b, res, *rth), QueuedWork::OpenGL);
 			return;
 		}
 	}

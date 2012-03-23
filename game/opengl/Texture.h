@@ -17,6 +17,7 @@ public:
 	int width() { return w; }
 	int height() { return h; }
 	void SetContent(unsigned char *data);
+	void SetContent1ch(float *data);
 	void SetContent(float *data);
 	virtual void SetMipmapped(bool mipmapped);
 	virtual void GenMipmap();
@@ -25,6 +26,7 @@ public:
 	unsigned int textureId;
 	virtual void swap(Texture &other);
 	unsigned char *read();
+	float *readF();
 	void Clear();
 	int w, h;
 protected:
@@ -32,6 +34,7 @@ protected:
 	bool mipmap;
 	int format;
 	friend class Texture3d;
+	bool lastLoadedFloat;
 public:
 	static std::map<int, Texture* > textures;
 };

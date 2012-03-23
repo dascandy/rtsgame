@@ -58,20 +58,8 @@ HttpReply Webserver::handle(HttpRequest &hr) {
 	return HttpReply::defaultReply(404);
 }
 
-void Webserver::DoPoll() {
-	Webserver::Instance().Poll();
-}
-
-void Webserver::Poll() {
-	while (queuedRequests.size()) {
-		std::pair<HttpRequest *, ClientSocket *> p = queuedRequests.front();
-		queuedRequests.pop_front();
-		handle(*p.first).writeTo(p.second);
-	}
-}
-
-void Webserver::Queue(HttpRequest *req, ClientSocket *cs) {
-	queuedRequests.push_back(std::make_pair(req, cs));
+void Webserver::Handle(HttpRequest *req, ClientSocket *cs) {
+	handle(*req).writeTo(cs);
 }
 
 void Webserver::registerUrl(std::string match, Webserver::Callback *callback) {

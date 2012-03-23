@@ -118,10 +118,21 @@ void ShaderProgram::Set(const char *name, const mat4 &mat)
 	if (usedProg != 0 && usedProg != prog) {
 		TODO("Fix bug!");
 	}
-	int uniform = glGetUniformLocation(prog, name);
+	int uniform = getUniformLocation(name);
 	if (uniform == -1) return;
 
 	glUniformMatrix4fv(uniform, 1, GL_FALSE, &mat[0][0]);
+}
+
+void ShaderProgram::Set(const char *name, const vec2 &vec)
+{
+	if (usedProg != 0 && usedProg != prog) {
+		TODO("Fix bug!");
+	}
+	int uniform = getUniformLocation(name);
+	if (uniform == -1) return;
+
+	glUniform2fv(uniform, 1, &vec[0]);
 }
 
 void ShaderProgram::Set(const char *name, int value)
@@ -129,7 +140,7 @@ void ShaderProgram::Set(const char *name, int value)
 	if (usedProg != 0 && usedProg != prog) {
 		TODO("Fix bug!");
 	}
-	int uniform = glGetUniformLocation(prog, name);
+	int uniform = getUniformLocation(name);
 	if (uniform == -1) return;
 
 	glUniform1i(uniform, value);
@@ -140,7 +151,7 @@ void ShaderProgram::Set(const char *name, unsigned int value)
 	if (usedProg != 0 && usedProg != prog) {
 		TODO("Fix bug!");
 	}
-	int uniform = glGetUniformLocation(prog, name);
+	int uniform = getUniformLocation(name);
 	if (uniform == -1) return;
 
 	glUniform1ui(uniform, value);
@@ -151,7 +162,7 @@ bool ShaderProgram::SetTexture(const char *name, int value)
 	if (usedProg != 0 && usedProg != prog) {
 		TODO("Fix bug!");
 	}
-	int uniform = glGetUniformLocation(prog, name);
+	int uniform = getUniformLocation(name);
 	if (uniform == -1) return false;
 
 	glUniform1i(uniform, value);
@@ -163,7 +174,7 @@ void ShaderProgram::Set(const char *name, float value)
 	if (usedProg != 0 && usedProg != prog) {
 		TODO("Fix bug!");
 	}
-	int uniform = glGetUniformLocation(prog, name);
+	int uniform = getUniformLocation(name);
 	if (uniform == -1) return;
 
 	glUniform1f(uniform, value);
@@ -174,7 +185,7 @@ void ShaderProgram::Set(const char *name, const glm::vec3 &value)
 	if (usedProg != 0 && usedProg != prog) {
 		TODO("Fix bug!");
 	}
-	int uniform = glGetUniformLocation(prog, name);
+	int uniform = getUniformLocation(name);
 	if (uniform == -1) return;
 
 	glUniform3f(uniform, value.x, value.y, value.z);
@@ -185,7 +196,7 @@ void ShaderProgram::Set(const char *name, const Color &value)
 	if (usedProg != 0 && usedProg != prog) {
 		TODO("Fix bug!");
 	}
-	int uniform = glGetUniformLocation(prog, name);
+	int uniform = getUniformLocation(name);
 	if (uniform == -1) return;
 
 	glUniform3f(uniform, value.r, value.g, value.b);
@@ -195,5 +206,12 @@ void ShaderProgram::SetActive()
 {
 	usedProg = prog;
 	glUseProgram(prog); 
+}
+
+int ShaderProgram::getUniformLocation(const char *name) {
+	std::map<std::string, int>::iterator it = uniforms.find(name);
+	if (it != uniforms.end()) return it->second;
+	int value = uniforms[name] = glGetUniformLocation(prog, name);
+	return value;
 }
 

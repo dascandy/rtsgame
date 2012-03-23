@@ -195,6 +195,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\opengl\EffectRenderPass.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\opengl\EffectRenderPass.h"
+				>
+			</File>
+			<File
 				RelativePath=".\opengl\Font.cpp"
 				>
 			</File>
@@ -266,6 +274,14 @@
 		<Filter
 			Name="misc"
 			>
+			<File
+				RelativePath=".\misc\Coherent.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\misc\Coherent.h"
+				>
+			</File>
 			<File
 				RelativePath=".\misc\Color.cpp"
 				>
@@ -348,14 +364,6 @@
 			>
 			<File
 				RelativePath=".\resources\FontHdl.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\QueuedWork.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\resources\QueuedWork.h"
 				>
 			</File>
 			<File

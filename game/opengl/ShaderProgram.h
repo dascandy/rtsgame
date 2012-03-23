@@ -28,6 +28,7 @@ public:
 	ShaderProgram(const char *vsh, const char *gsh, const char *fsh, const char **invars, const char **varyings, const char *buffer, const char *name);
 	ShaderProgram(const ShaderProgram &other);
 	void Set(const char *name, const mat4 &mat);
+	void Set(const char *name, const vec2 &vec);
 	void SetActive();
 	void Set(const char *name, int value);
 	void Set(const char *name, unsigned int value);
@@ -38,6 +39,7 @@ public:
 	~ShaderProgram();
 	int curtex;
 private:
+	int getUniformLocation(const char *name);
 	int *usage;
 	int vs, fs, gs;
 	int prog;
@@ -47,6 +49,7 @@ private:
 	friend class ShaderProgramStorer;
 	friend class ShaderWebClient;
 	std::string name;
+	std::map<std::string, int> uniforms;
 };
 
 #endif

@@ -16,7 +16,10 @@ Texture::Texture(int w, int h, int format)
 , h(h)
 , mipmap(false)
 , format(format)
+, lastLoadedFloat(false)
 {
+	if (format == GL_R32F ||
+		format == GL_RGBA32F) lastLoadedFloat = true;
 	type = GL_TEXTURE_2D;
 	Reload();
 }
@@ -49,6 +52,15 @@ void Texture::SetContent(unsigned char *data)
 	glBindTexture( type, textureId );
 	glTexImage2D(type, 0, format, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glBindTexture( type, 0);
+	lastLoadedFloat = false;
+}
+
+void Texture::SetContent1ch(float *data)
+{
+	glBindTexture( type, textureId );
+	glTexImage2D(type, 0, format, w, h, 0, GL_RED, GL_FLOAT, data);
+	glBindTexture( type, 0);
+	lastLoadedFloat = true;
 }
 
 void Texture::SetContent(float *data)
@@ -56,14 +68,44 @@ void Texture::SetContent(float *data)
 	glBindTexture( type, textureId );
 	glTexImage2D(type, 0, format, w, h, 0, GL_RGBA, GL_FLOAT, data);
 	glBindTexture( type, 0);
+	lastLoadedFloat = true;
 }
 
 unsigned char *Texture::read() {
-	unsigned char *buffer = new unsigned char[w * h * 4];
+	if (lastLoadedFloat) {
+		float *buf2 = new float[w*h*4];
+		glBindTexture( type, textureId );
+		glGetTexImage(type, 0, GL_RGBA, GL_FLOAT, buf2);
+		glBindTexture( type, 0);
+		float min = 0, max = 0;
+		for (int i = 0; i < w*h*4; i+=4) {
+			if (buf2[i] < min) min = buf2[i];
+			if (buf2[i] > max) max = buf2[i];
+		}
+		unsigned char *buffer = new unsigned char[w * h * 4];
+		for (int i = 0; i < w*h*4; i+=4) {
+			buffer[i] = (unsigned char)((buf2[i] - min) * 255.45 / max);
+			buffer[i+1] = buffer[i];
+			buffer[i+2] = buffer[i];
+			buffer[i+3] = 255;
+		}
+		delete [] buf2;
+		return buffer;
+	} else {
+		unsigned char *buffer = new unsigned char[w * h * 4];
+		glBindTexture( type, textureId );
+		glGetTexImage(type, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+		glBindTexture( type, 0);
+		return buffer;
+	}
+}
+
+float *Texture::readF() {
+	float *buf2 = new float[w*h];
 	glBindTexture( type, textureId );
-	glGetTexImage(type, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+	glGetTexImage( type, 0, GL_RED, GL_FLOAT, buf2);
 	glBindTexture( type, 0);
-	return buffer;
+	return buf2;
 }
 
 void Texture::SetMipmapped(bool mipmapped)

@@ -3,27 +3,61 @@
 #include "ClientSocket.h"
 #include "HttpRequest.h"
 #include "Webserver.h"
+#include "QueuedWork.h"
+
+class QueuedClientBlocking : public Queued {
+	Client *c;
+public:
+	QueuedClientBlocking(Client *c) : c(c) {}
+	void run() {
+		c->enterBlocking();
+	}
+};
+
+class QueuedClientHandling : public Queued {
+	Client *c;
+public:
+	QueuedClientHandling(Client *c) : c(c) {}
+	void run() {
+		c->enterHandle();
+	}
+};
 
 Client::Client(ClientSocket *cs) 
 : cs(cs)
+, reply(0)
+, req(0)
 {
-	t = new Thread();
-	t->start(this, &Client::handle);
+	QueuedWork::Queue(new QueuedClientBlocking(this), QueuedWork::Blocking);
 }
 
-Client::~Client() {
+Client::~Client() 
+{
 	delete cs;
-	delete t;
+	delete req;
+	delete reply;
 }
 
-void Client::handle() {
-	bool keepalive = false;
-	do {
-		HttpRequest req(cs);
-//		if (req.arguments["Connection"] == "Keep-Alive") keepalive = true;
-		Webserver::Instance().Queue(&req, cs);
-		Sleep(10000);
-	} while (keepalive);
-	delete this;
+void Client::enterBlocking() 
+{
+	if (reply) {
+		if (req->attributes["Connection"] == "Keep-Alive") {
+			reply->attributes["Connection"] = "Keep-Alive";
+			reply->writeTo(cs);
+		} else {
+			reply->writeTo(cs);
+			delete this;
+			return;
+		}
+	}
+	delete req;
+	delete reply;
+	req = new HttpRequest(cs);
+	QueuedWork::Queue(new QueuedClientHandling(this), QueuedWork::OpenGL);
+}
+
+void Client::enterHandle() {
+	reply = new HttpReply(Webserver::Instance().handle(*req));
+	QueuedWork::Queue(new QueuedClientBlocking(this), QueuedWork::Blocking);
 }
 

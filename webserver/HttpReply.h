@@ -4,6 +4,7 @@
 #include <string>
 #include "Blob.h"
 #include "Dll.h"
+#include <map>
 
 class ClientSocket;
 
@@ -19,8 +20,8 @@ public:
 	HttpReply &setContent(Blob content);
 	int statusCode;
 	std::string statusText;
-	const char *contentType;
 	Blob content;
+	std::map<std::string, std::string> attributes;
 };
 
 #endif

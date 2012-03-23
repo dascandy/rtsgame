@@ -70,11 +70,6 @@ void Fatal(const char *error) {
 #include "WebRoot.h"
 #include "WebRenderPass.h"
 
-class QueuedWebserverPoll : public Queued {
-public:
-	void run() { Webserver::Instance().Poll(); }
-};
-
 static void webinit() {
 	web_init_root();
 	web_init_renderpass();
@@ -82,6 +77,5 @@ static void webinit() {
 	web_init_profile();
 	web_init_shader();
 	web_init_font();
-	QueuedWork::Polls.push_back(new QueuedWebserverPoll());
 }
 

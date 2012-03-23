@@ -26,13 +26,15 @@ void GameView::run()
 
 void GameView::update(int ms)
 {
-
+	if (state)
+		state->update(ms);
 }
 
 void GameView::setGameState(GameState *newstate) {
 	if (state)
 		delete state;
 	state = newstate;
+	trp.AddTexture("heightmap", state->texture);
 }
 
 void GameView::MouseMoveX(int)

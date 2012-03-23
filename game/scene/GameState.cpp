@@ -2,38 +2,75 @@
 #include "Thread.h"
 #include "Texture.h"
 #include "Simplex.h"
+#include <math.h>
+
+static const int splits = 4;
 
 GameState::GameState(int seed) 
-: isReady(false) 
-, rand(seed)
+: rt(2048, 2048, false)
+, rt2(2048, 2048, false)
+, texture(new Texture(2048, 2048, GL_RGBA32F))
+, texture2(new Texture(2048, 2048, GL_RGBA32F))
+, outflow(new Texture(2048, 2048, GL_RGBA32F))
+, outflow2(new Texture(2048, 2048, GL_RGBA32F))
+, trp(ResourceManager::Instance().getResource<ShaderProgram>("terrain"), rt)
+, rain1(ResourceManager::Instance().getResource<ShaderProgram>("rain"), rt)
+, rain2(ResourceManager::Instance().getResource<ShaderProgram>("rain"), rt2)
+, renderstep(0)
+, phase(GenerateGround)
 {
-	createThread = new Thread();
-	createThread->start(this, &GameState::create);
+	trp.Register("seed1", seed);
+	trp.Register("seed2", seed^0x5238765F);
+	trp.Register("seed3", seed^0x7ba65093);
+	trp.Register("seed4", seed^0x40a25918);
+	trp.Register("seed5", seed^0x3929a20a);
+	trp.Register("seed6", seed^0x297346C4);
+	trp.Register("seed7", seed^0x12787a32);
+	trp.Register("seed8", seed^0x29843E76);
+	trp.Register("levels", 21);
+	trp.Register("xy", xy);
+	trp.Register("wh", wh);
+	trp.Register("setwater", initwaterlevel);
+	setupPhase(GenerateGround);
 }
 
-static double getTerrainVal(int i, int j) {
-	float offset = 500 / 2048.0;
-	double sum = 0;
-	for (int k = 0; k < 11; k++) {
-		sum += offset * simplex(i, j, 0);
+void GameState::setupPhase(RenderPhase newPhase) {
+	switch(newPhase) {
+		case GenerateGround:
+			rt.AddTarget(texture);
+			break;
+		case SimulateRain:
+			rt.AddTarget(outflow);
+			rt2.AddTarget(texture2);
+			rt2.AddTarget(outflow2);
+			break;
 	}
-	return sum;
+	phase = newPhase;
 }
 
-void GameState::create() {
-	terrainArr = new float[2048*2048];
-
-	for (int i = 0; i < 2048; i++) {
-		for (int j = 0; j < 2048; j++) {
-			terrain(i, j) = (float)getTerrainVal(i, j);
-		}
+void GameState::update(int ms) {
+	switch(phase) {
+		case GenerateGround:
+			if (trp.program.isLoaded()) {
+				wh = vec2((1.0 / (1<<splits)), (1.0 / (1 << splits)));
+				xy = vec2((1.0 / (1<<splits)) * (renderstep & ((1 << splits) - 1)), (1.0 / (1<<splits)) * (renderstep >> splits));
+				trp.Run();
+				renderstep++;
+				if (renderstep >= (1 << (2*splits)))
+					setupPhase(SimulateRain);
+			}
+			break;
+		case SimulateRain:
+			setupPhase(Done);
+			break;
+			if (renderstep & 1) {
+				rain1.Run();
+			} else {
+				rain2.Run();
+			}
+			renderstep++;
+//			if (renderstep >= rainphases) phase++;
+			break;
 	}
-
-	isReady = true;
-}
-
-void GameState::createTexture() {
-	texture = new Texture(2048, 2048, GL_RG32F);
-	texture->SetContent(terrainArr);
 }
 
