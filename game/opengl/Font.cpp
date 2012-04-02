@@ -20,12 +20,12 @@ Res<Model> Font::getText(const char *text, float size, float maxWidthPerLine) {
 
 		if (x + relW > maxWidthPerLine) { x = 0; y += relH; }
 
-		cp->x = x;        cp->y = y + relH; cp->z = z; cp->s0 = texX;        cp->t0 = texY;        cp++;
-		cp->x = x + relW; cp->y = y + relH; cp->z = z; cp->s0 = texX + texW; cp->t0 = texY;        cp++;
-		cp->x = x + relW; cp->y = y;        cp->z = z; cp->s0 = texX + texW; cp->t0 = texY + texH; cp++;
-		cp->x = x + relW; cp->y = y;        cp->z = z; cp->s0 = texX + texW; cp->t0 = texY + texH; cp++;
-		cp->x = x;        cp->y = y;        cp->z = z; cp->s0 = texX;        cp->t0 = texY + texH; cp++;
-		cp->x = x;        cp->y = y + relH; cp->z = z; cp->s0 = texX;        cp->t0 = texY;        cp++;
+		cp->x = x;        cp->y = y + relH; cp->z = z; cp->s0 = (unsigned short)((texX) * 65535);        cp->t0 = (unsigned short)((texY) * 65535);        cp++;
+		cp->x = x + relW; cp->y = y + relH; cp->z = z; cp->s0 = (unsigned short)((texX + texW) * 65535); cp->t0 = (unsigned short)((texY) * 65535);        cp++;
+		cp->x = x + relW; cp->y = y;        cp->z = z; cp->s0 = (unsigned short)((texX + texW) * 65535); cp->t0 = (unsigned short)((texY + texH) * 65535); cp++;
+		cp->x = x + relW; cp->y = y;        cp->z = z; cp->s0 = (unsigned short)((texX + texW) * 65535); cp->t0 = (unsigned short)((texY + texH) * 65535); cp++;
+		cp->x = x;        cp->y = y;        cp->z = z; cp->s0 = (unsigned short)((texX) * 65535);        cp->t0 = (unsigned short)((texY + texH) * 65535); cp++;
+		cp->x = x;        cp->y = y + relH; cp->z = z; cp->s0 = (unsigned short)((texX) * 65535);        cp->t0 = (unsigned short)((texY) * 65535);        cp++;
 
 		x += relW;
 	}

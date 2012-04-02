@@ -38,3 +38,12 @@ void GpuRenderPass::AddTexture(std::string name, Res<Texture> tex)
 	textures.push_back(make_pair(name, tex));
 }
 
+void GpuRenderPass::WipeVal(const char *name) {
+	for (std::vector<VarSetter *>::iterator it = setters.begin(); it != setters.end(); ++it) {
+		if ((*it)->getName() == std::string(name)) {
+			setters.erase(it);
+			return;
+		}
+	}
+}
+

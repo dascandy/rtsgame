@@ -2,7 +2,7 @@
 #version 330
 in vec3 in_loc;
 in vec3 in_normal;
-in vec2 in_tex0;
+in ivec2 in_tex0;
 in ivec3 in_arg;
 out vec2 f_texcoord;
 uniform vec2 xy;
@@ -12,7 +12,7 @@ void main()
 {
    vec2 loc = (in_loc.xy + vec2(1,1)) / 2 * wh + xy;
    gl_Position = vec4(loc * 2 - vec2(1.0, 1.0), 0, 1);
-   f_texcoord = in_tex0 * wh + xy;
+   f_texcoord = in_tex0 / 65535 * wh + xy;
 }
 ##I
 in_loc

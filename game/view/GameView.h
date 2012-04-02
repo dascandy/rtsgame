@@ -7,6 +7,7 @@
 #include "RenderTarget.h"
 #include "ResourceManager.h"
 #include "TextureRenderPass.h"
+#include "MenuScene.h"
 
 class GameState;
 
@@ -26,8 +27,14 @@ public:
 	void update(int ms);
 	void setGameState(GameState *newstate);
 private:
-	Res<Texture> bgTex;
-	TextureRenderPass trp;
+	RenderTarget &target;
+	MenuScene hudscene;
+	MenuScene loadingscene;
+	TextureRenderPass ground;
+	TextureRenderPass water;
+	TextureRenderPass gameObjects;
+	TextureRenderPass hud;
+	TextureRenderPass loading;
 	GameState *state;
 };
 

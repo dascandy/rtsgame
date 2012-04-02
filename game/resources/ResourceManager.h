@@ -197,6 +197,15 @@ void QueuedLoad<T>::run() {
 			return;
 		}
 	}
+	Log("Create non-copyrighted file for resource %s of type %s", name.c_str(), typeid(T).name());
+	for (std::vector<BaseTypeHandler *>::iterator it = rths.begin(); it != rths.end(); ++it) {
+		ResourceTypeHandler<T> *rth = (ResourceTypeHandler<T> *)*it;
+		Blob b = ResourceManager::Instance().loadblob(dirName + "/C_" + name + "." + rth->getExt());
+		if (b.size) {
+			QueuedWork::Queue(new QueuedOpen<T>(name, b, res, *rth), QueuedWork::OpenGL);
+			return;
+		}
+	}
 	Log("Cannot find file to load for resource %s of type %s", name.c_str(), typeid(T).name());
 }
 

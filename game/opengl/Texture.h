@@ -19,6 +19,9 @@ public:
 	void SetContent(unsigned char *data);
 	void SetContent1ch(float *data);
 	void SetContent(float *data);
+	void SetSubimage(int x, int y, int w, int h, float *data);
+	void SetSubimage(int x, int y, int w, int h, int *data);
+	void SetSubimage(int x, int y, int w, int h, unsigned char *data);
 	virtual void SetMipmapped(bool mipmapped);
 	virtual void GenMipmap();
 	virtual void SetAsAttachment(int i);

@@ -18,7 +18,9 @@ GameState::GameState(int seed)
 , rain2(ResourceManager::Instance().getResource<ShaderProgram>("rain"), rt2)
 , renderstep(0)
 , phase(GenerateGround)
+, progress(new VarNum<float>(54))
 {
+	trp.Register("seed1", seed);
 	trp.Register("seed1", seed);
 	trp.Register("seed2", seed^0x5238765F);
 	trp.Register("seed3", seed^0x7ba65093);
@@ -28,10 +30,17 @@ GameState::GameState(int seed)
 	trp.Register("seed7", seed^0x12787a32);
 	trp.Register("seed8", seed^0x29843E76);
 	trp.Register("levels", 21);
-	trp.Register("xy", xy);
-	trp.Register("wh", wh);
 	trp.Register("setwater", initwaterlevel);
+	trp.Register("wh", wh);
+	trp.Register("xy", xy);
 	setupPhase(GenerateGround);
+}
+
+unsigned short GameState::lastObjId = 0;
+
+unsigned short GameState::getObjectId() 
+{
+	return lastObjId++;
 }
 
 void GameState::setupPhase(RenderPhase newPhase) {
@@ -56,6 +65,8 @@ void GameState::update(int ms) {
 				xy = vec2((1.0 / (1<<splits)) * (renderstep & ((1 << splits) - 1)), (1.0 / (1<<splits)) * (renderstep >> splits));
 				trp.Run();
 				renderstep++;
+				delete progress;
+				progress = new VarNum<float>(100.0f * renderstep / (1 << (2 * splits)));
 				if (renderstep >= (1 << (2*splits)))
 					setupPhase(SimulateRain);
 			}
@@ -63,14 +74,16 @@ void GameState::update(int ms) {
 		case SimulateRain:
 			setupPhase(Done);
 			break;
+			/*
 			if (renderstep & 1) {
 				rain1.Run();
 			} else {
 				rain2.Run();
 			}
 			renderstep++;
-//			if (renderstep >= rainphases) phase++;
+			if (renderstep >= rainphases) setupPhase(Done);
 			break;
+			*/
 	}
 }
 

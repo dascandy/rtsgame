@@ -13,19 +13,20 @@ class stream;
 class Model : public Renderable
 {
 public:
+	friend class ModelReaderMs3d;
+	static const char *getDirName() { return "models"; }
 	~Model() {}
 	void Draw(Res<ShaderProgram> &prog);
 	static Model &Load(const std::string &name);
-	static Model &Raster();
 	static Model &Square();
 	static Model &Cube();
+	static Model &TesselatedSquare(int tess);
 	struct vertex
 	{
 		float x, y, z;
 		float nx, ny, nz;
-		float s0, t0;
+		unsigned short s0, t0;
 		unsigned char boneId, materialType, smoothId, pad;
-		int pad2[7];	// this is such a waste...
 		bool operator<(const vertex &o) const
 		{
 			if (o.x > x) return true;

@@ -6,6 +6,8 @@
 #include "Coherent.h"
 #include "EffectRenderPass.h"
 #include "RenderTarget.h"
+#include "GameScene.h"
+#include "Physics.h"
 
 class Thread;
 
@@ -21,7 +23,11 @@ public:
 	EffectRenderPass trp;
 	EffectRenderPass rain1, rain2;
 	int initwaterlevel;
+	GameScene scene;
+	Physics physics;
+	static unsigned short lastObjId;
 public:
+	Var<float> *progress;
 	GameState(int seed);
 	void update(int ms);
 	float *terrainArr;
@@ -33,6 +39,7 @@ public:
 		Done
 	};
 	RenderPhase phase;
+	unsigned short getObjectId();
 private:
 	void setupPhase(RenderPhase phase);
 };

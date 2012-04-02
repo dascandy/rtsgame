@@ -71,6 +71,25 @@ void Texture::SetContent(float *data)
 	lastLoadedFloat = true;
 }
 
+void Texture::SetSubimage(int x, int y, int w, int h, float *data) {
+	glBindTexture( type, textureId );
+	glTexSubImage2D(type, 0, x, y, w, h, GL_RGBA, GL_FLOAT, data);
+	glBindTexture( type, 0);
+	lastLoadedFloat = true;
+}
+
+void Texture::SetSubimage(int x, int y, int w, int h, int *data) {
+	glBindTexture( type, textureId );
+	glTexSubImage2D(type, 0, x, y, w, h, GL_RGBA, GL_INT, data);
+	glBindTexture( type, 0);
+}
+
+void Texture::SetSubimage(int x, int y, int w, int h, unsigned char *data) {
+	glBindTexture( type, textureId );
+	glTexSubImage2D(type, 0, x, y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	glBindTexture( type, 0);
+}
+
 unsigned char *Texture::read() {
 	if (lastLoadedFloat) {
 		float *buf2 = new float[w*h*4];

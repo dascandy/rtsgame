@@ -27,51 +27,55 @@ class VarSetter {
 public:
 	virtual ~VarSetter() {}
 	virtual void run(Res<ShaderProgram> &prog) = 0;
+	virtual const char *getName() = 0;
 };
 
 template <typename T>
 class TVarSetter : public VarSetter {
 private:
-	std::string name;
+	const char *name;
 	T *val;
 public:
-	TVarSetter(std::string name, T *val) 
+	TVarSetter(const char *name, T *val) 
 		: name(name)
 		, val(val)
 	{}
 	void run(Res<ShaderProgram> &prog) {
-		prog->Set(name.c_str(), *val);
+		prog->Set(name, *val);
 	}
+	const char *getName() { return name; }
 };
 
 template <typename T>
 class TFixedVarSetter : public VarSetter {
 private:
-	std::string name;
+	const char *name;
 	T val;
 public:
-	TFixedVarSetter(std::string name, T val) 
+	TFixedVarSetter(const char *name, T val) 
 		: name(name)
 		, val(val)
 	{}
 	void run(Res<ShaderProgram> &prog) {
-		prog->Set(name.c_str(), val);
+		prog->Set(name, val);
 	}
+	const char *getName() { return name; }
 };
 
 template <typename T>
 class TVarRefSetter : public VarSetter {
 private:
-	std::string name;
+	const char *name;
 	Var<T> **val;
 public:
-	TVarRefSetter(std::string name, Var<T> **val) 
+	TVarRefSetter(const char *name, Var<T> **val) 
 		: name(name)
 		, val(val)
 	{}
 	void run(Res<ShaderProgram> &prog) {
-		prog->Set(name.c_str(), ***val);
+		prog->Set(name, ***val);
 	}
+	const char *getName() { return name; }
 };
 
 class GpuRenderPass : public RenderPass
@@ -80,17 +84,27 @@ public:
 	GpuRenderPass(Res<ShaderProgram> prog) : program(prog) {}
 	void Run();
 	void AddTexture(std::string name, Res<Texture> tex);
+	void WipeVal(const char *name);
 	template <typename T>
-	void Register(std::string name, const T &val) {
+	void Register(const char *name, const T &val) {
+		WipeVal(name);
 		setters.push_back(new TFixedVarSetter<T>(name, val));
 	}
 	template <typename T>
-	void Register(std::string name, T &val) {
+	void Register(const char *name, T &val) {
+		WipeVal(name);
 		setters.push_back(new TVarSetter<T>(name, &val));
 	}
 	template <typename T>
-	void Register(std::string name, Var<T> **val) {
+	void Register(const char *name, Var<T> **val) {
+		WipeVal(name);
 		setters.push_back(new TVarRefSetter<T>(name, val));
+	}
+	template <typename T>
+	void Set(const char *name, const T &val) {
+		WipeVal(name);
+		program->SetActive();
+		program->Set(name, val);
 	}
 	Res<ShaderProgram> program;
 protected:
